@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Routes,
@@ -6,67 +6,85 @@ import {
   useLocation,
   Navigate
 } from "react-router-dom";
-import  { ThemeProvider } from "styled-components";
-import AccountSetup from "./pages/AccountSetup";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Verify from "./pages/Verify";
-import { getCurrentUser } from "./redux/apiCalls";
-import GlobalStyle, { DefaultTheme } from './theme/globalStyle';
-import { IState, IUser, IUserInfo } from "./types";
+import { ThemeProvider } from "styled-components";
 
+import Home from "./App/Home/index";
+import Login from "./App/Login/index";
+import Register from "./App/Register/index";
+import Verify from "./App/Verify/index";
+import GlobalStyle from './theme/globalStyle';
+import { getTheme } from "./redux/calls/theme_calls";
+import { getMe } from "./redux/calls/me_calls";
+import { IState, IMe, ITheme } from "./types";
+import ResetPass from "./App/ResetPass";
 
 
 function App() {
   const dispatch = useDispatch()
-  const user = useSelector<IState, IUser>(state => state.user)
+  const me = useSelector<IState, IMe>(state => state.me)
+  const theme = useSelector<IState, ITheme>(state => state.theme)
 
   useEffect(() => {
-    getCurrentUser(dispatch)
+    getMe(dispatch)
+    getTheme(dispatch)
   }, [dispatch])
 
-  if (!user.getCurrentUser.finished) {
+  if (me.finished === false || !theme.theme) {
     return null
   }
 
-  // Have a component indicate that the page is loading
   return (
-    <ThemeProvider theme={DefaultTheme}>
+    <ThemeProvider theme={theme.theme}>
       <GlobalStyle />
       <Routes>
-        <Route path="/" element={<RequireAuth><Home /></RequireAuth>}>
+        <Route path="/" element={<RequireVerified><Home /></RequireVerified>}>
           <Route path="notes" element={<h1>Notes</h1>} />
           <Route path="days" element={<h1>Days</h1>} />
         </Route>
         <Route path="login" element={<ExcludeAuth><Login /></ExcludeAuth>} />
         <Route path="register" element={<ExcludeAuth><Register /></ExcludeAuth>} />
         <Route path="verify" element={<RequireAuth><Verify /></RequireAuth>} />
-        <Route path='account_setup' element={<RequireAuth><AccountSetup /></RequireAuth>} />
+        <Route path='reset_password/:uri' element={<ExcludeAuth><ResetPass /></ExcludeAuth>} />
       </Routes>
     </ThemeProvider>
   );
 }
 
 
-const RequireAuth = ({ children }: {children: any}) => {
-  const user = useSelector<IState, IUserInfo | null>(state => state.user.userInfo)
+const RequireAuth = ({ children }: { children: any }) => {
+  const me = useSelector<IState, IMe>(state => state.me)
   let location = useLocation();
 
-  console.log(user)
-  if (!user) {
+  if (!me?.meInfo) {
     return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+  else if (me.meInfo?.is_verified) {
+    return <Navigate to='/' state={{ from: location }} replace />;
   }
 
   return children;
 }
 
 
-function ExcludeAuth({ children }: {children: any}) {
-  const user = useSelector<IState, IUserInfo | null>(state => state.user.userInfo)
+const RequireVerified = ({ children }: { children: any }) => {
+  const me = useSelector<IState, IMe>(state => state.me)
+  let location = useLocation();
 
-  if (user) {
-    if (!user.verified) {
+  if (!me.meInfo) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+  else if (!me.meInfo.is_verified) {
+    return <Navigate to="/verify" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
+
+
+function ExcludeAuth({ children }: { children: any }) {
+  const me = useSelector<IState, IMe>(state => state.me)
+  if (me?.meInfo) {
+    if (!me.meInfo.is_verified) {
       return <Navigate to='/verify' replace />
     }
     return <Navigate to='/' />

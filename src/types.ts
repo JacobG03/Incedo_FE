@@ -1,23 +1,49 @@
-export interface IUserInfo {
+export interface IMeInfo {
   username: string,
-  email: string,
-  verified: boolean,
-  avatar: string
+  is_verified: boolean,
+  avatar_id: string
 }
 
-export interface IUser {
-  userInfo: IUserInfo | null,
-  getCurrentUser: {
-    pending: boolean,
-    finished: boolean
-  }
+export interface IMe {
+  meInfo: IMeInfo | null,
+  pending: boolean,
+  finished: boolean
 }
 
 export interface IState {
-  user: IUser
+  me: IMe,
+  theme: ITheme,
+  alerts: IAlerts
 }
 
 export interface IFormError {
+  type: string,
   loc: string[],
   msg: string
+}
+
+export interface IFormData {
+  [x: string]: any;
+}
+
+export interface ITheme {
+  theme: {
+    id: number,
+    name: string,
+    bg: string,
+    main: string,
+    sub: string,
+    info: string,
+    text: string,
+    error: string
+  } | null,
+  pending: boolean
+}
+
+export interface IAlert {
+  message: string
+}
+
+export interface IAlerts {
+  alerts: IAlert[]
 }

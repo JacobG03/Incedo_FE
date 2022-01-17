@@ -1,8 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
-import userReducer from './userSlice'
+
+import meReducer from './slices/meSlice'
+import themeReducer from './slices/themeSlice'
+import alertsReducer from './slices/alertsReducer'
+
 
 export default configureStore({
 	reducer: {
-		user: userReducer
+		me: meReducer,
+		theme: themeReducer,
+		alerts: alertsReducer
 	}
 })
