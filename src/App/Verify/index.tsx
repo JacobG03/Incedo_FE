@@ -9,7 +9,7 @@ import VerifyForm from "./VerifyForm";
 import { Content, Cover, FixedContainer, Option, Options, Title } from "../../shared/styles";
 
 
-const Verify = () => {
+const VerifyPage = () => {
 	const dispatch = useDispatch()
 	// change theme/avatar here
 	const resendCode = useCallback(() => {
@@ -57,4 +57,4 @@ const Verify = () => {
 	)
 }
 
-export default Verify;
+export default VerifyPage;

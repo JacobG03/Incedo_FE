@@ -10,7 +10,7 @@ import { ReactComponent as UserSVG } from '../../assets/svg/user-add.svg';
 import { Content, Cover, FixedContainer, Option, Options, Title } from "../../shared/styles";
 
 
-const Login = () => {
+const LoginPage = () => {
 	const [redirect, setRedirect] = useState(false)
 	const [reset, setReset] = useState(false)
 	const navigate = useNavigate()
@@ -30,7 +30,7 @@ const Login = () => {
 			if (redirectRef.current) {
 				navigate('/register')
 			}
-		}, 600)
+		}, 500)
 	}
 
 	return (
@@ -42,7 +42,7 @@ const Login = () => {
 							<Cover
 								as={motion.div}
 								key={'login-cover'}
-								transition= {{ duration: 0.6 }}
+								transition= {{ duration: 0.5 }}
 								animate={{ y: "-76px", height: '60px' }}
 								exit={{ y: "0px", height: '100%' }}
 							>
@@ -82,4 +82,4 @@ const Login = () => {
 	)
 }
 
-export default Login;
+export default LoginPage;

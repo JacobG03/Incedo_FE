@@ -6,9 +6,15 @@ import Wrapper from "../../shared/Wrapper";
 import Alerts from "../../shared/Alerts";
 import { ReactComponent as LoginSVG } from '../../assets/svg/key-square.svg';
 import { Content, Cover, FixedContainer, Option, Options, Title } from "../../shared/styles";
+import styled from 'styled-components';
 
 
-const Register = () => {
+const Content2 = styled(Content)`
+	gap: 0.5rem;
+`
+
+
+const RegisterPage = () => {
 	const [redirect, setRedirect] = useState(false)
 	const navigate = useNavigate()
 
@@ -25,7 +31,7 @@ const Register = () => {
 			if (redirectRef.current) {
 				navigate('/login')
 			}
-		}, 600)
+		}, 500)
 	}
 
 	return (
@@ -33,11 +39,11 @@ const Register = () => {
 			<Wrapper width={480}>
 				<AnimatePresence>
 					{!redirect && (
-						<Content>
+						<Content2>
 							<Cover
 								as={motion.div}
 								key={'register-cover'}
-								transition= {{ duration: 0.6 }}
+								transition= {{ duration: 0.5 }}
 								animate={{ y: "-76px", height: '60px' }}
 								exit={{ y: "0px", height: '100%' }}
 							>
@@ -56,7 +62,7 @@ const Register = () => {
 									<span>Login</span>
 								</Option>
 							</Options>
-						</Content>
+						</Content2>
 					)}
 				</AnimatePresence>
 				<Alerts />
@@ -65,4 +71,4 @@ const Register = () => {
 	)
 }
 
-export default Register;
+export default RegisterPage;

@@ -1,33 +1,47 @@
-import axios from 'axios';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux'
 import Alerts from '../../shared/Alerts';
-import { getMe } from '../../redux/calls/me_calls';
-import { addAlert } from '../../redux/slices/alertsReducer';
+import styled from 'styled-components';
+import { Content } from '../../shared/styles';
+import Wrapper from '../../shared/Wrapper';
+import Navbar from './Navbar';
+import { Outlet } from 'react-router-dom';
 
 
-const Home = () => {
-	const dispatch = useDispatch()
+const Container = styled.div`
+	position: relative;
+	width: 100vw;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+`
+
+const WrapperPage = styled(Wrapper)`
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+`
+
+
+const HomePage = () => {
 	useEffect(() => {
 		document.title = 'Home | Incedo'
 	}, [])
 
-	const Logout = () => {
-		axios.delete('/auth/logout')
-			.then(res => {
-				dispatch(addAlert({ message: res.data.message }))
-				getMe(dispatch)
-			})
-			.catch(err => console.log(err))
-	}
 
 	return (
-		<>
-			<Alerts />
-			<h1>Home</h1>
-			<span onClick={() => Logout()}>Logout</span>
-		</>
+		<Container>
+			<WrapperPage width={800}>
+				<Navbar />
+				<div>
+					<Alerts />
+					<Content>
+						<Outlet />
+					</Content>
+				</div>
+			</WrapperPage>
+		</Container>
 	)
 }
 
-export default Home;
+export default HomePage;

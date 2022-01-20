@@ -8,15 +8,17 @@ import {
 } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
-import Home from "./App/Home/index";
-import Login from "./App/Login/index";
-import Register from "./App/Register/index";
-import Verify from "./App/Verify/index";
-import GlobalStyle from './theme/globalStyle';
+import HomePage from "./App/Home/index";
+import LoginPage from "./App/Login/index";
+import RegisterPage from "./App/Register/index";
+import VerifyPage from "./App/Verify/index";
+import ResetPassPage from "./App/ResetPass";
+import GlobalStyle from './shared/globalStyle';
 import { getTheme } from "./redux/calls/theme_calls";
 import { getMe } from "./redux/calls/me_calls";
 import { IState, IMe, ITheme } from "./types";
-import ResetPass from "./App/ResetPass";
+import Home from "./App/Home/Home";
+import Settings from "./App/Home/Settings";
 
 
 function App() {
@@ -29,6 +31,10 @@ function App() {
     getTheme(dispatch)
   }, [dispatch])
 
+  useEffect(() => {
+    getTheme(dispatch)
+  }, [dispatch, me.meInfo])
+
   if (me.finished === false || !theme.theme) {
     return null
   }
@@ -37,14 +43,17 @@ function App() {
     <ThemeProvider theme={theme.theme}>
       <GlobalStyle />
       <Routes>
-        <Route path="/" element={<RequireVerified><Home /></RequireVerified>}>
+        <Route path="/" element={<RequireVerified><HomePage /></RequireVerified>}>
+          <Route index element={<Home />} />
+          <Route path="profile" element={<h1>Profile</h1>} />
+          <Route path="settings" element={<Settings />} />
           <Route path="notes" element={<h1>Notes</h1>} />
           <Route path="days" element={<h1>Days</h1>} />
         </Route>
-        <Route path="login" element={<ExcludeAuth><Login /></ExcludeAuth>} />
-        <Route path="register" element={<ExcludeAuth><Register /></ExcludeAuth>} />
-        <Route path="verify" element={<RequireAuth><Verify /></RequireAuth>} />
-        <Route path='reset_password/:uri' element={<ExcludeAuth><ResetPass /></ExcludeAuth>} />
+        <Route path="login" element={<ExcludeAuth><LoginPage /></ExcludeAuth>} />
+        <Route path="register" element={<ExcludeAuth><RegisterPage /></ExcludeAuth>} />
+        <Route path="verify" element={<RequireAuth><VerifyPage /></RequireAuth>} />
+        <Route path='reset_password/:uri' element={<ExcludeAuth><ResetPassPage /></ExcludeAuth>} />
       </Routes>
     </ThemeProvider>
   );

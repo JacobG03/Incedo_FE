@@ -5,7 +5,7 @@ import Wrapper from '../../shared/Wrapper';
 import ResetPassForm from './ResetPassForm';
 
 
-const ResetPass = () => {
+const ResetPassPage = () => {
   useEffect(() => {
     document.title = 'Reset Password | Incedo'
   }, [])
@@ -28,4 +28,4 @@ const ResetPass = () => {
   )
 }
 
-export default ResetPass;
+export default ResetPassPage;
