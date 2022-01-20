@@ -7,6 +7,17 @@ import FormError from "../../shared/FormError";
 import { motion } from "framer-motion";
 import { addAlert } from "../../redux/slices/alertsReducer";
 import { Form, FormInput, FormSubmit } from "../../shared/styles";
+import styled from "styled-components";
+
+
+const FormInput2 = styled(FormInput)`
+  font-size: 1.1rem;
+  padding: 0.5rem;
+`
+
+const FormSubmit2 = styled(FormSubmit)`
+  padding: 0.25rem 0.5rem;
+`
 
 
 const RegisterForm = () => {
@@ -35,15 +46,15 @@ const RegisterForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormInput autoFocus {...register('username', { required: 'Field is required.' })} placeholder='Username' />
+      <FormInput2 autoFocus {...register('username', { required: 'Field is required.' })} placeholder='Username' />
       <FormError error={errors.username} id={'register-usename-error'} />
-      <FormInput {...register('email', { required: 'Field is required.' })} placeholder='Email' />
+      <FormInput2 {...register('email', { required: 'Field is required.' })} placeholder='Email' />
       <FormError error={errors.email} id={'register-email-error'} />
-      <FormInput {...register('password', { required: 'Field is required.' })} placeholder='Password' type='password' />
+      <FormInput2 {...register('password', { required: 'Field is required.' })} placeholder='Password' type='password' />
       <FormError error={errors.password} id={'register-password-error'} />
-      <FormInput {...register('password2', { required: 'Field is required.' })} placeholder='Repeat Password' type='password' />
+      <FormInput2 {...register('password2', { required: 'Field is required.' })} placeholder='Repeat Password' type='password' />
       <FormError error={errors.password2} id={'register-password2-error'} />
-      <FormSubmit
+      <FormSubmit2
         as={motion.input}
         whileHover={{ scale: 1.1, cursor: 'pointer' }}
         whileTap={{ scale: 0.9 }}

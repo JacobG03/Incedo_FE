@@ -18,6 +18,9 @@ axios.interceptors.request.use(function (config) {
 	return config;
 });
 
+// Session sliding
+// https://github.com/IndominusByte/fastapi-jwt-auth/issues/38
+
 
 ReactDOM.render(
   <BrowserRouter>

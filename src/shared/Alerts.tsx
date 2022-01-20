@@ -12,8 +12,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   z-index: 5;
-  padding: 0.5rem;
   gap: 0.5rem;
+  overflow-x: hidden;
 `
 
 const Alerts = () => {
@@ -101,7 +101,7 @@ const Alert = ({ data }: { data: IAlert }) => {
       <Loader
         as={motion.div}
         transition={{ duration: 5, ease: 'linear' }}
-        animate={{ width: '100%' }}
+        animate={{ width: '99%' }}
       />
     </AlertContainer>
   )

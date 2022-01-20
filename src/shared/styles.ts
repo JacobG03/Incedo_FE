@@ -9,7 +9,6 @@ export const FixedContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: 1rem;
 `
 
 export const Content = styled.div`
@@ -42,6 +41,7 @@ export const Title = styled.h1`
 	font-weight: 900;
 	font-style: italic;
 	color: ${props => props.theme.sub};
+	margin: 0;
 `
 
 export const Options = styled.div`
@@ -52,7 +52,7 @@ export const Options = styled.div`
 	align-items: stretch;
 `
 
-export const Option = styled.div`
+export const Option = styled.button`
 	flex-grow: 1;
 	flex-basis: 0;
 	display: flex;
@@ -92,12 +92,6 @@ export const FormInput = styled.input`
   border-radius: var(--border-radius);
   color: ${props => props.theme.text};
   transition: 100ms ease-in-out;
-
-  &:focus {
-    filter: var(--shadow);
-    box-shadow: none;
-    background-color: ${props => props.theme.bg};
-  }
 `
 
 export const FormSubmit = styled.input`

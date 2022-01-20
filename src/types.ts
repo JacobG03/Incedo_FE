@@ -1,7 +1,7 @@
 export interface IMeInfo {
   username: string,
   is_verified: boolean,
-  avatar_id: string
+  avatar_url: string
 }
 
 export interface IMe {

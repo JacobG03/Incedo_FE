@@ -3,8 +3,8 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   :root {
-    --shadow: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.40));
-    --shadow-inner: inset 0px 4px 8px 5px rgba(0, 0, 0, 0.25);
+    --shadow: drop-shadow(0px 4px 4px rgba(0,0,0,0.30));
+    --shadow-inner: inset 0px 4px 10px 4px rgba(0,0,0,0.2);
 
     --border-radius: 4px;
     --border-radius2: 8px;
