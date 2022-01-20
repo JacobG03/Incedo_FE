@@ -14,12 +14,13 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
-`
+	`
 
 const WrapperPage = styled(Wrapper)`
 	display: flex;
 	flex-direction: column;
-	gap: 2rem;
+	gap: 1rem;
+	overflow-x: hidden;
 `
 
 

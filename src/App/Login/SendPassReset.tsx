@@ -97,7 +97,7 @@ const SendPassReset = ({ setReset }: Props) => {
         <Options>
           <FormSubmit
             as={motion.input}
-            whileHover={{ scale: 1.1, cursor: 'pointer', zIndex: 2 }}
+            whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 2 }}
             whileTap={{ scale: 0.9 }}
             type='submit'
             value='Send Email'
