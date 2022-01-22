@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from '../../services/index'
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";

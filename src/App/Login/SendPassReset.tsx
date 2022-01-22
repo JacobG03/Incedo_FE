@@ -7,7 +7,7 @@ import { addAlert } from "../../redux/slices/alertsReducer";
 import { IFormData } from "../../types";
 import { ReactComponent as CloseSVG } from '../../assets/svg/close-square.svg';
 import FormError from '../../shared/FormError';
-import axios from 'axios';
+import axios from '../../services/index'
 import { FormInput, FormSubmit } from "../../shared/styles";
 
 

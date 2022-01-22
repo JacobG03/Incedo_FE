@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from '../../../services/index'
 import { useDispatch } from "react-redux"
 import { getMe } from "../../../redux/calls/me_calls"
 import { addAlert } from "../../../redux/slices/alertsReducer"

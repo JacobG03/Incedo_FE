@@ -28,12 +28,13 @@ function App() {
 
   useEffect(() => {
     getMe(dispatch)
-    getTheme(dispatch)
   }, [dispatch])
 
   useEffect(() => {
-    getTheme(dispatch)
-  }, [dispatch, me.meInfo])
+    if (me.finished) {
+      getTheme(dispatch)
+    }
+  }, [dispatch, me.finished])
 
   if (me.finished === false || !theme.theme) {
     return null

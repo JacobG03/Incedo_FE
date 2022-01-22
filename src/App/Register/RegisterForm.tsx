@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from '../../services/index'
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { getMe } from '../../redux/calls/me_calls'
