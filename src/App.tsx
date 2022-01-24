@@ -16,7 +16,7 @@ import ResetPassPage from "./App/ResetPass";
 import GlobalStyle from './shared/globalStyle';
 import { getTheme } from "./redux/calls/theme_calls";
 import { getMe } from "./redux/calls/me_calls";
-import { IState, IMe, ITheme } from "./types";
+import { IState, IMe, ITheme, IThemeState } from "./types";
 import Home from "./App/Home/Home";
 import Settings from "./App/Home/Settings";
 import Profile from "./App/Home/Profile";
@@ -25,7 +25,7 @@ import Profile from "./App/Home/Profile";
 function App() {
   const dispatch = useDispatch()
   const me = useSelector<IState, IMe>(state => state.me)
-  const theme = useSelector<IState, ITheme>(state => state.theme)
+  const theme = useSelector<IState, IThemeState>(state => state.theme)
 
   useEffect(() => {
     getMe(dispatch)

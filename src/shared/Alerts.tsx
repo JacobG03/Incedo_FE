@@ -79,7 +79,7 @@ const Alert = ({ data }: { data: IAlert }) => {
       if (!deletedRef.current) {
         dispatch(removeAlert(data))
       }
-    }, 5000)
+    }, 3000)
     return () => {
       clearTimeout(auto_remove)
     }
@@ -88,7 +88,7 @@ const Alert = ({ data }: { data: IAlert }) => {
   return (
     <AlertContainer
       as={motion.div}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.3 }}
       initial={{ x: -600, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: 600, opacity: 0 }}
@@ -100,7 +100,7 @@ const Alert = ({ data }: { data: IAlert }) => {
       <Message>{data.message}</Message>
       <Loader
         as={motion.div}
-        transition={{ duration: 5, ease: 'linear' }}
+        transition={{ duration: 2.99, ease: 'linear' }}
         animate={{ width: '99.9%' }}
       />
     </AlertContainer>

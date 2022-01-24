@@ -52,7 +52,7 @@ const UpdateUsername = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormInput type='text' {...register('username', { required: true })} />
+      <FormInput type='text' {...register('username', { required: 'Field is required.' })} />
       <FormError error={errors.username} id='update-username-error' />
       {watch('username') !== meInfo!.username
         ? <FormSubmit type='submit'>

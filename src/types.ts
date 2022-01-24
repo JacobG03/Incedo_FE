@@ -14,7 +14,7 @@ export interface IMe {
 
 export interface IState {
   me: IMe,
-  theme: ITheme,
+  theme: IThemeState,
   alerts: IAlerts
 }
 
@@ -29,16 +29,18 @@ export interface IFormData {
 }
 
 export interface ITheme {
-  theme: {
-    id: number,
-    name: string,
-    bg: string,
-    main: string,
-    sub: string,
-    info: string,
-    text: string,
-    error: string
-  } | null,
+  id: number,
+  name: string,
+  bg: string,
+  main: string,
+  sub: string,
+  info: string,
+  text: string,
+  error: string
+}
+
+export interface IThemeState {
+  theme: ITheme | null,
   pending: boolean
 }
 
