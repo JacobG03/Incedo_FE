@@ -19,6 +19,7 @@ import { getMe } from "./redux/calls/me_calls";
 import { IState, IMe, ITheme } from "./types";
 import Home from "./App/Home/Home";
 import Settings from "./App/Home/Settings";
+import Profile from "./App/Home/Profile";
 
 
 function App() {
@@ -31,10 +32,8 @@ function App() {
   }, [dispatch])
 
   useEffect(() => {
-    if (me.finished) {
-      getTheme(dispatch)
-    }
-  }, [dispatch, me.finished])
+    getTheme(dispatch)
+  }, [dispatch, me.meInfo])
 
   if (me.finished === false || !theme.theme) {
     return null
@@ -46,7 +45,7 @@ function App() {
       <Routes>
         <Route path="/" element={<RequireVerified><HomePage /></RequireVerified>}>
           <Route index element={<Home />} />
-          <Route path="profile" element={<h1>Profile</h1>} />
+          <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
           <Route path="notes" element={<h1>Notes</h1>} />
           <Route path="days" element={<h1>Days</h1>} />

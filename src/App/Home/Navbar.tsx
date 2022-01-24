@@ -97,7 +97,7 @@ const Navbar = () => {
           <Avatar src={meInfo?.avatar_url} />
         </Item>
       </Items>
-    </Container>
+    </Container >
   )
 }
 

@@ -21,7 +21,11 @@ const GlobalStyle = createGlobalStyle`
     background: ${props => props.theme.bg};
     color: ${props => props.theme.text};
     font-family: 'Overlock', cursive;
+    overflow-x: hidden;
   };
+  a {
+    text-decoration: none;
+  }
 `;
 
 export default GlobalStyle;

@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { removeAlert } from "../redux/slices/alertsReducer";
+import { removeAlert } from "../redux/slices/alertsSlice";
 import { IState, IAlert } from "../types";
 
 

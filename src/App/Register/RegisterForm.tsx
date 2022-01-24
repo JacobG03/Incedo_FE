@@ -5,9 +5,10 @@ import { getMe } from '../../redux/calls/me_calls'
 import { IFormError, IFormData } from "../../types";
 import FormError from "../../shared/FormError";
 import { motion } from "framer-motion";
-import { addAlert } from "../../redux/slices/alertsReducer";
+import { addAlert } from "../../redux/slices/alertsSlice";
 import { Form, FormInput, FormSubmit } from "../../shared/styles";
 import styled from "styled-components";
+import { ReactComponent as RegisterSVG } from '../../assets/svg/user-add.svg';
 
 
 const FormInput2 = styled(FormInput)`
@@ -55,12 +56,14 @@ const RegisterForm = () => {
       <FormInput2 {...register('password2', { required: 'Field is required.' })} placeholder='Repeat Password' type='password' />
       <FormError error={errors.password2} id={'register-password2-error'} />
       <FormSubmit2
-        as={motion.input}
+        as={motion.button}
         whileHover={{ scale: 1.1, cursor: 'pointer' }}
         whileTap={{ scale: 0.9 }}
         type='submit'
-        value='Sign up'
-      />
+      >
+        <RegisterSVG width={24} height={24} />
+        <span>Sign up</span>
+      </FormSubmit2>
     </Form>
   )
 }

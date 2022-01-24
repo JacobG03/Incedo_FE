@@ -1,6 +1,9 @@
 import { Dispatch } from '@reduxjs/toolkit'
 import axios from '../../services/index'
-import { fetchUser, setUser, nullUser } from '../slices/meSlice'
+import {
+	fetchUser, setUser, nullUser,
+
+} from '../slices/meSlice'
 
 
 export const getMe = async (dispatch: Dispatch) => {
@@ -10,7 +13,7 @@ export const getMe = async (dispatch: Dispatch) => {
 		.catch(err => {
 			// If old signature try again
 			axios.get('/me')
-			.then(res => dispatch(setUser(res.data)))
-			.catch(err => dispatch(nullUser()))
+				.then(res => dispatch(setUser(res.data)))
+				.catch(err => dispatch(nullUser()))
 		})
 }

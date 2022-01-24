@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Alerts from "../../shared/Alerts";
-import { addAlert } from "../../redux/slices/alertsReducer";
+import { addAlert } from "../../redux/slices/alertsSlice";
 import Wrapper from "../../shared/Wrapper";
 import VerifyForm from "./VerifyForm";
 import { Content, Cover, FixedContainer, Option, Options, Title } from "../../shared/styles";

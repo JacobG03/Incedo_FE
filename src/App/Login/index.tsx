@@ -6,7 +6,7 @@ import Wrapper from "../../shared/Wrapper";
 import Alerts from "../../shared/Alerts";
 import SendPassReset from "./SendPassReset";
 import { ReactComponent as MailSVG } from '../../assets/svg/send-2.svg';
-import { ReactComponent as UserSVG } from '../../assets/svg/user-add.svg';
+import { ReactComponent as RegisterSVG } from '../../assets/svg/user-add.svg';
 import { Content, Cover, FixedContainer, Option, Options, Title } from "../../shared/styles";
 
 
@@ -42,7 +42,7 @@ const LoginPage = () => {
 							<Cover
 								as={motion.div}
 								key={'login-cover'}
-								transition= {{ duration: 0.5 }}
+								transition={{ duration: 0.5 }}
 								animate={{ y: "-76px", height: '60px' }}
 								exit={{ y: "0px", height: '100%' }}
 							>
@@ -69,7 +69,7 @@ const LoginPage = () => {
 									whileHover={{ cursor: 'pointer' }}
 									whileTap={{ scale: 0.9 }}
 								>
-									<UserSVG width={24} height={24} />
+									<RegisterSVG width={24} height={24} />
 									<span>Register</span>
 								</Option>
 							</Options>

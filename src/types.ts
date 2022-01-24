@@ -1,13 +1,15 @@
 export interface IMeInfo {
   username: string,
   is_verified: boolean,
-  avatar_url: string
+  avatar_url: string,
+  email: string
 }
 
 export interface IMe {
   meInfo: IMeInfo | null,
   pending: boolean,
   finished: boolean
+  errors: string[] | null
 }
 
 export interface IState {

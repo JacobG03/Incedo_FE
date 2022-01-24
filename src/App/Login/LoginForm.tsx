@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { getMe } from '../../redux/calls/me_calls'
-import { addAlert } from "../../redux/slices/alertsReducer";
+import { addAlert } from "../../redux/slices/alertsSlice";
 import FormError from "../../shared/FormError";
 import { IFormError, IFormData } from "../../types";
 import { FormInput, FormSubmit, Form } from "../../shared/styles";
-
+import { ReactComponent as LoginSVG } from '../../assets/svg/login-1.svg';
 
 
 const LoginForm = () => {
@@ -38,12 +38,14 @@ const LoginForm = () => {
       <FormInput {...register('password', { required: 'Field is required.' })} placeholder='Password' type='password' />
       <FormError error={errors.password} id={'login-password-error'} />
       <FormSubmit
-        as={motion.input}
+        as={motion.button}
         whileHover={{ scale: 1.1, cursor: 'pointer' }}
         whileTap={{ scale: 0.9 }}
         type='submit'
-        value='Sign in'
-      />
+      >
+        <LoginSVG width={24} height={24} />
+        <span>Sign in</span>
+      </FormSubmit>
     </Form>
   )
 }

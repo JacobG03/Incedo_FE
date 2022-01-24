@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { getMe } from '../../redux/calls/me_calls'
-import { addAlert } from "../../redux/slices/alertsReducer";
+import { addAlert } from "../../redux/slices/alertsSlice";
 import FormError from "../../shared/FormError";
 import { IFormError, IFormData } from "../../types";
 import { Form, FormInput, FormSubmit } from "../../shared/styles";

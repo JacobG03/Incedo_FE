@@ -1,13 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { IMe } from '../../types'
 
+
+const initialState: IMe = {
+	meInfo: null,
+	pending: false,
+	finished: false,
+	errors: null
+}
 
 export const meSlice = createSlice({
 	name: 'me',
-	initialState: {
-		meInfo: null,
-		pending: false,
-		finished: false
-	},
+	initialState,
 	reducers: {
 		// Get current user reducers
 		fetchUser: (state) => {
@@ -22,12 +26,19 @@ export const meSlice = createSlice({
 			state.meInfo = null
 			state.pending = false
 			state.finished = true
+		},
+		setUsername: (state, action) => {
+			state.meInfo!.username = action.payload.username
+		},
+		setEmail: (state, action) => {
+			state.meInfo!.email = action.payload.email
 		}
 	}
 })
 
 export const {
-	fetchUser, setUser, nullUser
+	fetchUser, setUser, nullUser,
+	setUsername, setEmail
 } = meSlice.actions;
 
 export default meSlice.reducer;

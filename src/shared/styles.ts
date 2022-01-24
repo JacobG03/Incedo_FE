@@ -94,9 +94,12 @@ export const FormInput = styled.input`
   transition: 100ms ease-in-out;
 `
 
-export const FormSubmit = styled.input`
+export const FormSubmit = styled.button`
   padding: 0.5rem 1rem;
   width: fit-content;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
   border-radius: var(--border-radius);
   background-color: ${props => props.theme.bg};
   outline: none;
@@ -109,4 +112,17 @@ export const FormSubmit = styled.input`
   &:focus {
     border: 2px solid ${p => p.theme.main};
   }
+`
+
+export const Button = styled.button`
+	border: none;
+	outline: none;
+	padding: 0.25rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: ${p => p.theme.main};
+	background-color: ${p => p.theme.bg};
+	border-radius: var(--border-radius);
+	filter: var(--shadow);
 `

@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { addAlert } from "../../redux/slices/alertsReducer";
+import { addAlert } from "../../redux/slices/alertsSlice";
 import { IFormData } from "../../types";
 import { ReactComponent as CloseSVG } from '../../assets/svg/close-square.svg';
 import FormError from '../../shared/FormError';
 import axios from '../../services/index'
-import { FormInput, FormSubmit } from "../../shared/styles";
+import { Button, FormInput, FormSubmit } from "../../shared/styles";
 
 
 const Container = styled.div`
@@ -40,20 +40,6 @@ const Form = styled.form`
   align-items: center;
   gap: 1rem;
   `
-
-
-const Btn = styled.button`
-  border: none;
-  outline: none;
-  padding: 0.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${p => p.theme.main};
-  background-color: ${p => p.theme.bg};
-  border-radius: var(--border-radius);
-  filter: var(--shadow);
-`
 
 type Props = {
   setReset: Dispatch<SetStateAction<boolean>>;
@@ -102,7 +88,7 @@ const SendPassReset = ({ setReset }: Props) => {
             type='submit'
             value='Send Email'
           />
-          <Btn
+          <Button
             type='button'
             onClick={() => setReset(prev => !prev)}
             as={motion.button}
@@ -110,7 +96,7 @@ const SendPassReset = ({ setReset }: Props) => {
             whileTap={{ scale: 0.9 }}
           >
             <CloseSVG width={24} height={24} />
-          </Btn>
+          </Button>
         </Options>
       </Form>
     </Container>
