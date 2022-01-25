@@ -66,7 +66,7 @@ const Wrap = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   gap: 2rem;
 `
 
@@ -79,7 +79,7 @@ const Left = styled.div`
 `
 
 const Right = styled.div`
-  flex-grow: 1;
+  width: 200px;
   height: fit-content;
   display: flex;
   justify-content: center;
