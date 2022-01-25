@@ -16,10 +16,11 @@ import ResetPassPage from "./App/ResetPass";
 import GlobalStyle from './shared/globalStyle';
 import { getTheme } from "./redux/calls/theme_calls";
 import { getMe } from "./redux/calls/me_calls";
-import { IState, IMe, ITheme, IThemeState } from "./types";
+import { IState, IMe, IThemeState } from "./types";
 import Home from "./App/Home/Home";
 import Settings from "./App/Home/Settings";
 import Profile from "./App/Home/Profile";
+import { domAnimation, LazyMotion } from "framer-motion";
 
 
 function App() {
@@ -40,22 +41,24 @@ function App() {
   }
 
   return (
-    <ThemeProvider theme={theme.theme}>
-      <GlobalStyle />
-      <Routes>
-        <Route path="/" element={<RequireVerified><HomePage /></RequireVerified>}>
-          <Route index element={<Home />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="notes" element={<h1>Notes</h1>} />
-          <Route path="days" element={<h1>Days</h1>} />
-        </Route>
-        <Route path="login" element={<ExcludeAuth><LoginPage /></ExcludeAuth>} />
-        <Route path="register" element={<ExcludeAuth><RegisterPage /></ExcludeAuth>} />
-        <Route path="verify" element={<RequireAuth><VerifyPage /></RequireAuth>} />
-        <Route path='reset_password/:uri' element={<ExcludeAuth><ResetPassPage /></ExcludeAuth>} />
-      </Routes>
-    </ThemeProvider>
+    <LazyMotion features={domAnimation}>
+      <ThemeProvider theme={theme.theme}>
+        <GlobalStyle />
+        <Routes>
+          <Route path="/" element={<RequireVerified><HomePage /></RequireVerified>}>
+            <Route index element={<Home />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="notes" element={<h1>Notes</h1>} />
+            <Route path="days" element={<h1>Days</h1>} />
+          </Route>
+          <Route path="login" element={<ExcludeAuth><LoginPage /></ExcludeAuth>} />
+          <Route path="register" element={<ExcludeAuth><RegisterPage /></ExcludeAuth>} />
+          <Route path="verify" element={<RequireAuth><VerifyPage /></RequireAuth>} />
+          <Route path='reset_password/:uri' element={<ExcludeAuth><ResetPassPage /></ExcludeAuth>} />
+        </Routes>
+      </ThemeProvider>
+    </LazyMotion>
   );
 }
 

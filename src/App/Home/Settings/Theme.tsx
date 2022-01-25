@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { useDispatch } from "react-redux"
 import styled from "styled-components"
 import { updateTheme } from "../../../redux/calls/theme_calls"
@@ -41,9 +41,8 @@ const Theme = (props: Props) => {
 
   return (
     <Container
-      as={motion.div}
-      whileHover={{ scale: 1.1, cursor: 'pointer' }}
-      whileTap={{ scale: 0.9 }}
+      as={m.div}
+      whileHover={{ scale: 1.05, cursor: 'pointer' }}
       onClick={() => updateTheme(dispatch, { id: props.data.id })}
       preview={props.data}
     >
