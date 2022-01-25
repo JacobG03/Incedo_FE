@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import styled, { useTheme } from "styled-components"
@@ -90,7 +90,7 @@ const Navbar = () => {
       <Content>
         <Main>
           <Logo
-            as={motion.div}
+            as={m.div}
             whileHover={{ scale: 1.1, cursor: 'pointer' }}
             whileTap={{ scale: 0.9 }}
             onClick={() => navigate('/')}
@@ -99,14 +99,14 @@ const Navbar = () => {
           </Logo>
           <Items>
             <Item
-              as={motion.div}
+              as={m.div}
               whileHover={{ scale: 1.1, cursor: 'pointer' }}
               whileTap={{ scale: 0.9 }}
             >
               <NotificationSVG width={32} height={32} color={theme.main} />
             </Item>
             <Item
-              as={motion.div}
+              as={m.div}
               whileHover={{ scale: 1.1, cursor: 'pointer' }}
               whileTap={{ scale: 0.9 }}
               onClick={() => navigate('/settings')}
@@ -114,7 +114,7 @@ const Navbar = () => {
               <SettingsSVG width={32} height={32} color={theme.main} />
             </Item>
             <Item
-              as={motion.div}
+              as={m.div}
               whileHover={{ scale: 1.1, cursor: 'pointer' }}
               whileTap={{ scale: 0.9 }}
               onClick={() => navigate('/profile')}

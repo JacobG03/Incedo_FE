@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -74,7 +74,7 @@ const SendPassReset = ({ setReset }: Props) => {
 
   return (
     <Container
-      as={motion.div}
+      as={m.div}
       transition={{ duration: 0.3 }}
       animate={{ flexGrow: 2 }}
     >
@@ -82,7 +82,7 @@ const SendPassReset = ({ setReset }: Props) => {
         <FormInput
           autoFocus
           {...register('email', { required: 'Field is required.' })}
-          as={motion.input}
+          as={m.input}
           transition={{ duration: 0.3 }}
           initial={{ opacity: 0, position: "absolute" }}
           animate={{ opacity: 1, position: 'relative' }}
@@ -91,7 +91,7 @@ const SendPassReset = ({ setReset }: Props) => {
         <FormError error={errors.email} id={'send-pass-reset-error'} />
         <Options>
           <FormSubmit
-            as={motion.input}
+            as={m.input}
             whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 2 }}
             whileTap={{ scale: 0.9 }}
             type='submit'
@@ -100,7 +100,7 @@ const SendPassReset = ({ setReset }: Props) => {
           <Button
             type='button'
             onClick={() => setReset(prev => !prev)}
-            as={motion.button}
+            as={m.button}
             whileHover={{ scale: 1.1, cursor: 'pointer', zIndex: 2 }}
             whileTap={{ scale: 0.9 }}
           >

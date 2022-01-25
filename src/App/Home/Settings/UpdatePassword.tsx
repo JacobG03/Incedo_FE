@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useForm } from "react-hook-form";
 import FormError from "../../../shared/FormError";
 import { FormInput, FormSubmit } from "../../../shared/styles";
@@ -76,7 +76,7 @@ const UpdatePassword = () => {
       {watch('password') !== '' && watch('new_password2') !== ''
         ? <FormSubmit
           type='submit'
-          as={motion.button}
+          as={m.button}
           whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 2 }}
           whileTap={{ scale: 0.9 }}
         >

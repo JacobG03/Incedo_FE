@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useEffect } from 'react';
 import { Content, Cover, FixedContainer, Title } from '../../shared/styles';
 import Wrapper from '../../shared/Wrapper';
@@ -15,7 +15,7 @@ const ResetPassPage = () => {
       <Wrapper width={480}>
         <Content>
           <Cover
-            as={motion.div}
+            as={m.div}
             key={'reset-pass-cover'}
             animate={{ y: "-76px", height: '60px', transition: { duration: 0.6 } }}
           >

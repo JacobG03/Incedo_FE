@@ -9,7 +9,7 @@ import axios from '../../../services/index'
 import { setUsername } from "../../../redux/slices/meSlice";
 import { addAlert } from "../../../redux/slices/alertsSlice";
 import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 
 const Form = styled.form`
@@ -58,7 +58,7 @@ const UpdateUsername = () => {
       {watch('username') !== meInfo!.username
         ? <FormSubmit
           type='submit'
-          as={motion.button}
+          as={m.button}
           whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 2 }}
           whileTap={{ scale: 0.9 }}
         >

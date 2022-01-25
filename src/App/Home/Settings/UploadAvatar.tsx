@@ -6,7 +6,7 @@ import axios from '../../../services/index'
 import { useRef, useState } from "react";
 import { addAlert } from "../../../redux/slices/alertsSlice";
 import { Button, FormSubmit } from "../../../shared/styles";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ReactComponent as CloseSVG } from '../../../assets/svg/close-square.svg';
 import { ReactComponent as SubmitSVG } from '../../../assets/svg/tick-square.svg';
 
@@ -118,7 +118,7 @@ const UploadAvatar = () => {
         {preview
           ? <Button2
             onClick={() => setPreview(null)}
-            as={motion.button}
+            as={m.button}
             whileHover={{ scale: 1.1, cursor: 'pointer', zIndex: 2 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -128,7 +128,7 @@ const UploadAvatar = () => {
         {preview ?
           <FormSubmit2
             type='submit'
-            as={motion.button}
+            as={m.button}
             whileHover={{ scale: 1.1, cursor: 'pointer', zIndex: 2 }}
             whileTap={{ scale: 0.9 }}
           >

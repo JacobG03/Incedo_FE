@@ -3,7 +3,7 @@ import { getMe } from "../../../redux/calls/me_calls"
 import { addAlert } from "../../../redux/slices/alertsSlice"
 import axios from '../../../services/index'
 import { ReactComponent as LogoutSVG } from '../../../assets/svg/logout-1.svg'
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import styled from "styled-components"
 
 
@@ -38,7 +38,7 @@ const Logout = () => {
 
   return (
     <Container
-      as={motion.div}
+      as={m.div}
       whileHover={{ scale: 1.05, cursor: 'pointer' }}
       whileTap={{ scale: 0.9 }}
       onClick={() => logout()}

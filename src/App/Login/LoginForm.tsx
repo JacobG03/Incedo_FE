@@ -1,5 +1,5 @@
 import axios from '../../services/index'
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { getMe } from '../../redux/calls/me_calls'
@@ -38,7 +38,7 @@ const LoginForm = () => {
       <FormInput {...register('password', { required: 'Field is required.' })} placeholder='Password' type='password' />
       <FormError error={errors.password} id={'login-password-error'} />
       <FormSubmit
-        as={motion.button}
+        as={m.button}
         whileHover={{ scale: 1.1, cursor: 'pointer' }}
         whileTap={{ scale: 0.9 }}
         type='submit'

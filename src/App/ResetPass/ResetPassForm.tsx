@@ -1,5 +1,5 @@
 import axios from '../../services/index'
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -43,7 +43,7 @@ const ResetPassForm = () => {
       <FormInput type='password' {...register('password2', { required: 'Field is required.' })} placeholder='Repeat Password' />
       <FormError error={errors.password2} id={'reset-pass2-error'} />
       <FormSubmit
-        as={motion.input}
+        as={m.input}
         whileHover={{ scale: 1.1, cursor: 'pointer' }}
         whileTap={{ scale: 0.9 }}
         type='submit'

@@ -1,5 +1,5 @@
 import axios from '../../services/index'
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { getMe } from '../../redux/calls/me_calls'
@@ -35,7 +35,7 @@ const VerifyForm = () => {
       <FormInput autoFocus {...register('code', { required: 'Field is required.' })} placeholder='Enter your code' />
       <FormError error={errors.code} id={'verify-code-error'} />
       <FormSubmit
-        as={motion.input}
+        as={m.input}
         whileHover={{ scale: 1.1, cursor: 'pointer' }}
         whileTap={{ scale: 0.9 }}
         type='submit'

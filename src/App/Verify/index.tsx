@@ -1,5 +1,5 @@
 import axios from '../../services/index'
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Alerts from "../../shared/Alerts";
@@ -33,7 +33,7 @@ const VerifyPage = () => {
 			<Wrapper width={480}>
 				<Content>
 					<Cover
-						as={motion.div}
+						as={m.div}
 						key={'verify-cover'}
 						animate={{ y: "-76px", height: '60px', transition: { duration: 0.6 } }}
 					>
@@ -43,7 +43,7 @@ const VerifyPage = () => {
 					<Options>
 						<Option
 							onClick={() => resendCode()}
-							as={motion.div}
+							as={m.div}
 							whileHover={{ cursor: 'pointer' }}
 							whileTap={{ scale: 0.9 }}
 						>
