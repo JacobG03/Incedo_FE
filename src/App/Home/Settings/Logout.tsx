@@ -9,9 +9,10 @@ import styled from "styled-components"
 
 const Container = styled.div`
   width: fit-content;
-  height: fit-content;
+  height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 1rem;
   background-color: ${p => p.theme.bg};

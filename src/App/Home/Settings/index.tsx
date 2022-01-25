@@ -10,6 +10,7 @@ import UpdateEmail from './UpdateEmail'
 import axios from '../../../services/index'
 import Theme from './Theme'
 import { ITheme } from '../../../types'
+import UpdatePassword from './UpdatePassword'
 
 
 const Container = styled.div`
@@ -71,7 +72,7 @@ const Wrap = styled.div`
 
 const Left = styled.div`
   flex-grow: 1;
-  min-height: 160px;
+  min-height: fit-content;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -79,7 +80,7 @@ const Left = styled.div`
 
 const Right = styled.div`
   flex-grow: 1;
-  height: 160px;
+  height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -117,8 +118,13 @@ const Account = () => {
           <Right>
             <UploadAvatar />
           </Right>
+          <Left>
+            <UpdatePassword />
+          </Left>
+          <Right>
+            <Logout />
+          </Right>
         </Wrap>
-        <Logout />
       </Content>
     </Section>
   )
