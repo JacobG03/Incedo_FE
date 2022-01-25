@@ -32,6 +32,15 @@ const Options = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  & input {
+    height: 32px;
+    padding: 0.25rem 0.75rem;
+  }
+  & button {
+    height: 32px;
+    padding: 0.25rem 0.5rem;
+  }
 `
 
 const Form = styled.form`

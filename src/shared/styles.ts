@@ -101,16 +101,16 @@ export const FormSubmit = styled.button`
 	align-items: center;
 	gap: 0.5rem;
   border-radius: var(--border-radius);
-  background-color: ${props => props.theme.bg};
+  background-color: ${props => props.theme.main};
   outline: none;
   border: none;
-  color: ${props => props.theme.main};
+  color: ${props => props.theme.bg};
   font-size: 1.25rem;
   filter: var(--shadow);
   cursor: pointer;
 
   &:focus {
-    border: 2px solid ${p => p.theme.main};
+    border: 2px solid ${p => p.theme.sub};
   }
 `
 
@@ -121,8 +121,8 @@ export const Button = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: ${p => p.theme.main};
-	background-color: ${p => p.theme.bg};
+	color: ${p => p.theme.bg};
+	background-color: ${p => p.theme.main};
 	border-radius: var(--border-radius);
 	filter: var(--shadow);
 `

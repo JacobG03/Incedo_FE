@@ -17,7 +17,7 @@ const FormInput2 = styled(FormInput)`
 `
 
 const FormSubmit2 = styled(FormSubmit)`
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem;
 `
 
 

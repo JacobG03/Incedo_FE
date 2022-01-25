@@ -44,7 +44,7 @@ const Item = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.25rem;
   border-radius: var(--border-radius);
   background-color: ${p => p.theme.bg};
   filter: var(--shadow);
