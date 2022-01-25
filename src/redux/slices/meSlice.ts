@@ -32,13 +32,16 @@ export const meSlice = createSlice({
 		},
 		setEmail: (state, action) => {
 			state.meInfo!.email = action.payload.email
+		},
+		setAvatar: (state, action) => {
+			state.meInfo!.avatar_url = action.payload.avatar_url
 		}
 	}
 })
 
 export const {
 	fetchUser, setUser, nullUser,
-	setUsername, setEmail
+	setUsername, setEmail, setAvatar
 } = meSlice.actions;
 
 export default meSlice.reducer;

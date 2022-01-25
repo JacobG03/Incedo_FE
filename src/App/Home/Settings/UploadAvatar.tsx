@@ -9,6 +9,7 @@ import { Button, FormSubmit } from "../../../shared/styles";
 import { m } from "framer-motion";
 import { ReactComponent as CloseSVG } from '../../../assets/svg/close-square.svg';
 import { ReactComponent as SubmitSVG } from '../../../assets/svg/tick-square.svg';
+import { setAvatar } from "../../../redux/slices/meSlice";
 
 
 const Avatar = styled.img<{ preview: string | null }>`
@@ -86,6 +87,7 @@ const UploadAvatar = () => {
       }
     })
       .then(res => {
+        dispatch(setAvatar(res.data))
         dispatch(addAlert({ message: 'Avatar updated successfully.' }))
         setPreview(null)
       })
