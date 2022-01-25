@@ -15,17 +15,10 @@ import { ITheme } from '../../../types'
 const Container = styled.div`
   position: relative;
   width: 100%;
-  height: calc(100vh - 100px - 15vh);
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   gap: 1rem;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-
-  ::-webkit-scrollbar {
-  display: none;
-}
 `
 
 const Section = styled.section`
@@ -135,8 +128,8 @@ const Themes = styled.div`
   width: 100%;
   height: fit-content;
   display: grid;
-  grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
-  grid-template-rows: auto;
+  grid-template-columns: repeat( auto-fit, minmax(128px, 1fr) );
+  grid-template-rows: repeat( auto-fit, minmax(128px, 1fr) );
   grid-gap: 1rem;
 `
 

@@ -5,14 +5,17 @@ import styled, { useTheme } from "styled-components"
 import { IState, IMeInfo } from "../../types"
 import { ReactComponent as SettingsSVG } from '../../assets/svg/setting-2.svg';
 import { ReactComponent as NotificationSVG } from '../../assets/svg/notification.svg';
+import Alerts from "../../shared/Alerts"
 
 
 const Container = styled.div`
-  width: 100%;
-  height: 100px;
+  position: fixed;
+  width: 100vw;
+  height: fit-content;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  z-index: 500;
 `
 
 const Logo = styled.div`
@@ -56,6 +59,26 @@ const Avatar = styled.img`
   border-radius: var(--border-radius);
 `
 
+const Content = styled.div`
+  padding: 0 1rem;
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const Main = styled.div`
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: ${p => p.theme.bg};
+`
+
 const Navbar = () => {
   const navigate = useNavigate()
   const meInfo = useSelector<IState, IMeInfo | null>(state => state.me.meInfo)
@@ -64,39 +87,44 @@ const Navbar = () => {
 
   return (
     <Container>
-      <Logo
-        as={motion.div}
-        whileHover={{ scale: 1.1, cursor: 'pointer' }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => navigate('/')}
-      >
-        <span>Incedo</span>
-      </Logo>
-      <Items>
-        <Item
-          as={motion.div}
-          whileHover={{ scale: 1.1, cursor: 'pointer' }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <NotificationSVG width={32} height={32} color={theme.main} />
-        </Item>
-        <Item
-          as={motion.div}
-          whileHover={{ scale: 1.1, cursor: 'pointer' }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => navigate('/settings')}
-        >
-          <SettingsSVG width={32} height={32} color={theme.main} />
-        </Item>
-        <Item
-          as={motion.div}
-          whileHover={{ scale: 1.1, cursor: 'pointer' }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => navigate('/profile')}
-        >
-          <Avatar src={meInfo?.avatar_url} />
-        </Item>
-      </Items>
+      <Content>
+        <Main>
+          <Logo
+            as={motion.div}
+            whileHover={{ scale: 1.1, cursor: 'pointer' }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => navigate('/')}
+          >
+            <span>Incedo</span>
+          </Logo>
+          <Items>
+            <Item
+              as={motion.div}
+              whileHover={{ scale: 1.1, cursor: 'pointer' }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <NotificationSVG width={32} height={32} color={theme.main} />
+            </Item>
+            <Item
+              as={motion.div}
+              whileHover={{ scale: 1.1, cursor: 'pointer' }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => navigate('/settings')}
+            >
+              <SettingsSVG width={32} height={32} color={theme.main} />
+            </Item>
+            <Item
+              as={motion.div}
+              whileHover={{ scale: 1.1, cursor: 'pointer' }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => navigate('/profile')}
+            >
+              <Avatar src={meInfo?.avatar_url} />
+            </Item>
+          </Items>
+        </Main>
+        <Alerts />
+      </Content>
     </Container >
   )
 }

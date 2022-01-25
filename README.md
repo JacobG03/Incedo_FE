@@ -1,7 +1,7 @@
 # To do
 
-- [ ] Sticky navbar & notifications
-- [ ] Avatar upload preview scale up & move up + z-index higher
-- [ ] Highlight current theme
+- [x] Sticky navbar & notifications
+- [x] Avatar upload preview scale up & move up + z-index higher
+- [x] Highlight current theme
 - [ ] Reset Password
 - [ ] Delete account

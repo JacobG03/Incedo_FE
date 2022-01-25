@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import Alerts from '../../shared/Alerts';
 import styled from 'styled-components';
 import { Content } from '../../shared/styles';
 import Wrapper from '../../shared/Wrapper';
@@ -21,6 +20,7 @@ const WrapperPage = styled(Wrapper)`
 	flex-direction: column;
 	gap: 1rem;
 	overflow-x: hidden;
+	padding: 100px 1rem;
 `
 
 
@@ -32,14 +32,11 @@ const HomePage = () => {
 
 	return (
 		<Container>
+			<Navbar />
 			<WrapperPage width={800}>
-				<Navbar />
-				<div>
-					<Alerts />
-					<Content>
-						<Outlet />
-					</Content>
-				</div>
+				<Content>
+					<Outlet />
+				</Content>
 			</WrapperPage>
 		</Container>
 	)

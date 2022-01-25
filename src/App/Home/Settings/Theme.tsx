@@ -1,8 +1,8 @@
 import { motion } from "framer-motion"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import styled from "styled-components"
 import { updateTheme } from "../../../redux/calls/theme_calls"
-import { IState, ITheme } from "../../../types"
+import { ITheme } from "../../../types"
 
 
 const Container = styled.div<({ preview: ITheme }) >`
@@ -37,7 +37,6 @@ type Props = {
 }
 
 const Theme = (props: Props) => {
-  const theme = useSelector<IState, ITheme | null>(state => state.theme.theme)
   const dispatch = useDispatch()
 
   return (
