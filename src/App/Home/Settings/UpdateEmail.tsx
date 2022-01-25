@@ -9,6 +9,7 @@ import axios from '../../../services/index'
 import { addAlert } from "../../../redux/slices/alertsSlice";
 import { setEmail } from "../../../redux/slices/meSlice";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 // import { updateUsername } from "../../../redux/calls/me_calls";
 
 
@@ -60,7 +61,12 @@ const UpdateEmail = () => {
         ? <>
           <FormInput type='password' {...register('password', { required: 'Field is required.' })} placeholder='Enter your password' />
           <FormError error={errors.password} id='auth-password-error' />
-          <FormSubmit type='submit'>
+          <FormSubmit
+            type='submit'
+            as={motion.button}
+            whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 2 }}
+            whileTap={{ scale: 0.9 }}
+          >
             <SubmitSVG width={24} height={24} />
             <span>Update</span>
           </FormSubmit>

@@ -9,6 +9,7 @@ import axios from '../../../services/index'
 import { setUsername } from "../../../redux/slices/meSlice";
 import { addAlert } from "../../../redux/slices/alertsSlice";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 
 const Form = styled.form`
@@ -55,7 +56,12 @@ const UpdateUsername = () => {
       <FormInput type='text' {...register('username', { required: 'Field is required.' })} />
       <FormError error={errors.username} id='update-username-error' />
       {watch('username') !== meInfo!.username
-        ? <FormSubmit type='submit'>
+        ? <FormSubmit
+          type='submit'
+          as={motion.button}
+          whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 2 }}
+          whileTap={{ scale: 0.9 }}
+        >
           <SubmitSVG width={24} height={24} />
           <span>Update</span>
         </FormSubmit>

@@ -11,11 +11,13 @@ import { ReactComponent as CloseSVG } from '../../../assets/svg/close-square.svg
 import { ReactComponent as SubmitSVG } from '../../../assets/svg/tick-square.svg';
 
 
-const Avatar = styled.img`
-  width: 128px;
-  height: 128px;
+const Avatar = styled.img<{ preview: string | null }>`
+  width: ${(p) => (p.preview ? '160px' : '128px')};
+  height: ${(p) => (p.preview ? '160px' : '128px')};
+  transform: ${(p) => (p.preview ? 'translateY(-5rem)' : 'translateY(0)')};
   border-radius: var(--border-radius);
   cursor: pointer;
+  transition: 400ms ease-in-out;
 `
 
 const Container = styled.div`
@@ -100,6 +102,7 @@ const UploadAvatar = () => {
         src={preview ? preview.toString() : meInfo?.avatar_url}
         alt='Avatar'
         onClick={() => selectFile.current?.click()}
+        preview={preview}
       />
       <Form onSubmit={handleSubmit(onSubmit)} >
         <input
