@@ -1,11 +1,11 @@
 import { motion } from "framer-motion"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import { updateTheme } from "../../../redux/calls/theme_calls"
-import { ITheme } from "../../../types"
+import { IState, ITheme } from "../../../types"
 
 
-const Container = styled.div`
+const Container = styled.div<({ preview: ITheme }) >`
   grid-column: auto;
   grid-row: auto;
   width: 100%;
@@ -15,6 +15,7 @@ const Container = styled.div`
   align-items: center;
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
+  border: ${p => (p.preview.id === p.theme.id ? `2px solid ${p.theme.sub}` : null)};
   padding: 1rem;
   filter: var(--shadow);
 `
@@ -36,6 +37,7 @@ type Props = {
 }
 
 const Theme = (props: Props) => {
+  const theme = useSelector<IState, ITheme | null>(state => state.theme.theme)
   const dispatch = useDispatch()
 
   return (
@@ -44,6 +46,7 @@ const Theme = (props: Props) => {
       whileHover={{ scale: 1.1, cursor: 'pointer' }}
       whileTap={{ scale: 0.9 }}
       onClick={() => updateTheme(dispatch, { id: props.data.id })}
+      preview={props.data}
     >
       <Preview preview={props.data}>
         <span>{props.data.name}</span>
