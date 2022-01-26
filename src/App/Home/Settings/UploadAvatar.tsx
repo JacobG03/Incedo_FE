@@ -80,7 +80,7 @@ const UploadAvatar = () => {
     let file = selectFile.current?.files![0]!
 
     if (file.size > 2e6) {
-      dispatch(addAlert({message: "Please upload a file smaller than 2 MB"}))
+      dispatch(addAlert({ message: "Please upload a file smaller than 2 MB" }))
       return false;
     }
 

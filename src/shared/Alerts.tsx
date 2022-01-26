@@ -89,8 +89,8 @@ const Alert = ({ data }: { data: IAlert }) => {
     <AlertContainer
       as={motion.div}
       transition={{ duration: 0.4 }}
-      initial={{ x: -600, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
+      initial={{ y: -200, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
       exit={{ x: 600, opacity: 0 }}
 
       drag="x"
