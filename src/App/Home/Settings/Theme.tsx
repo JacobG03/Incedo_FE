@@ -30,6 +30,7 @@ const Preview = styled.div<{ preview: ITheme }>`
   padding: 2rem;
   background-color: ${p => p.preview.bg};
   color: ${p => p.preview.text};
+  text-align: center;
 `
 
 type Props = {

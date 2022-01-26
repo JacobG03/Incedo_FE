@@ -8,20 +8,19 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  overflow: hidden;
 `
 
 const animations = {
-  initial: { opacity: 0, y: -400 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -400 }
+  initial: { opacity: 0},
+  animate: { opacity: 1},
+  exit: { opacity: 0 }
 }
 
 const AnimatedPage = ({ children }: { children: JSX.Element[] | JSX.Element }) => {
   return (
     <Container
       as={motion.div}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.3 }}
       variants={animations}
       initial='initial'
       animate='animate'
