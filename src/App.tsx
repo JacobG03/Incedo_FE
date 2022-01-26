@@ -20,13 +20,15 @@ import { IState, IMe, IThemeState } from "./types";
 import Home from "./App/Home/Home";
 import Settings from "./App/Home/Settings";
 import Profile from "./App/Home/Profile";
-import { domAnimation, LazyMotion } from "framer-motion";
+import Notes from "./App/Home/Notes";
+import { AnimatePresence, domAnimation, LazyMotion } from "framer-motion";
 
 
 function App() {
   const dispatch = useDispatch()
   const me = useSelector<IState, IMe>(state => state.me)
   const theme = useSelector<IState, IThemeState>(state => state.theme)
+  const location = useLocation()
 
   useEffect(() => {
     getMe(dispatch)
@@ -44,19 +46,21 @@ function App() {
     <LazyMotion features={domAnimation}>
       <ThemeProvider theme={theme.theme}>
         <GlobalStyle />
-        <Routes>
-          <Route path="/" element={<RequireVerified><HomePage /></RequireVerified>}>
-            <Route index element={<Home />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="notes" element={<h1>Notes</h1>} />
-            <Route path="days" element={<h1>Days</h1>} />
-          </Route>
-          <Route path="login" element={<ExcludeAuth><LoginPage /></ExcludeAuth>} />
-          <Route path="register" element={<ExcludeAuth><RegisterPage /></ExcludeAuth>} />
-          <Route path="verify" element={<RequireAuth><VerifyPage /></RequireAuth>} />
-          <Route path='reset_password/:uri' element={<ExcludeAuth><ResetPassPage /></ExcludeAuth>} />
-        </Routes>
+        <AnimatePresence exitBeforeEnter>
+          <Routes key={location.pathname} location={location}>
+            <Route path="/" element={<RequireVerified><HomePage /></RequireVerified>}>
+              <Route index element={<Home />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="notes" element={<Notes />} />
+              <Route path="days" element={<h1>Days</h1>} />
+            </Route>
+            <Route path="login" element={<ExcludeAuth><LoginPage /></ExcludeAuth>} />
+            <Route path="register" element={<ExcludeAuth><RegisterPage /></ExcludeAuth>} />
+            <Route path="verify" element={<RequireAuth><VerifyPage /></RequireAuth>} />
+            <Route path='reset_password/:uri' element={<ExcludeAuth><ResetPassPage /></ExcludeAuth>} />
+          </Routes>
+        </AnimatePresence>
       </ThemeProvider>
     </LazyMotion>
   );

@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import AnimatedPage from "../AnimatePage";
+
 
 const Profile = () => {
   useEffect(() => {
@@ -6,9 +8,9 @@ const Profile = () => {
   }, [])
 
   return (
-    <>
-      Profile
-    </>
+    <AnimatedPage>
+      <span>Profile</span>
+    </AnimatedPage>
   )
 }
 

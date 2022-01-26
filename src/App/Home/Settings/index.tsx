@@ -11,16 +11,8 @@ import axios from '../../../services/index'
 import Theme from './Theme'
 import { ITheme } from '../../../types'
 import UpdatePassword from './UpdatePassword'
+import AnimatedPage from '../AnimatePage'
 
-
-const Container = styled.div`
-  position: relative;
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`
 
 const Section = styled.section`
   width: 100%;
@@ -86,19 +78,18 @@ const Right = styled.div`
   align-items: center;
 `
 
-
 const Settings = () => {
   useEffect(() => {
     document.title = 'Settings | Incedo'
   }, [])
 
   return (
-    <Container>
+    <AnimatedPage>
       <AnchorLink offset={() => 100} href='#account' style={{ display: 'none' }}></AnchorLink>
       <AnchorLink offset={() => 100} href='#appearance' style={{ display: 'none' }}></AnchorLink>
       <Account />
       <Appearance />
-    </Container>
+    </AnimatedPage>
   )
 }
 
