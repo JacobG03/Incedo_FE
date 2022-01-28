@@ -19,10 +19,8 @@ const WrapperPage = styled(Wrapper)`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
-	overflow-x: hidden;
 	padding: 100px 1rem;
 `
-
 
 const HomePage = () => {
 	useEffect(() => {

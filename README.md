@@ -5,4 +5,6 @@
 - [x] Highlight current theme
 - [x] Reset Password
 - [ ] Delete account
-- [ ] Validate Avatar size before sending a request
+- [x] Validate Avatar size before sending a request
+- [ ] Make a fixed footer with specific options per route
+- [ ] CRUD Notes

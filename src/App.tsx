@@ -22,6 +22,7 @@ import Settings from "./App/Home/Settings";
 import Profile from "./App/Home/Profile";
 import Notes from "./App/Home/Notes";
 import { AnimatePresence, domAnimation, LazyMotion } from "framer-motion";
+import Note from "./App/Home/Notes/Note";
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
               <Route path="profile" element={<Profile />} />
               <Route path="settings" element={<Settings />} />
               <Route path="notes" element={<Notes />} />
+              <Route path="notes/:id" element={<Note />} />
               <Route path="days" element={<h1>Days</h1>} />
             </Route>
             <Route path="login" element={<ExcludeAuth><LoginPage /></ExcludeAuth>} />

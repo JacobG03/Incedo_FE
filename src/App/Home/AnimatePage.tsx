@@ -11,16 +11,16 @@ const Container = styled.div`
 `
 
 const animations = {
-  initial: { opacity: 0},
-  animate: { opacity: 1},
-  exit: { opacity: 0 }
+  initial: {y: -50, opacity: 0},
+  animate: {y: 0, opacity: 1},
+  exit: {y: -50, opacity: 0}
 }
 
 const AnimatedPage = ({ children }: { children: JSX.Element[] | JSX.Element }) => {
   return (
     <Container
       as={motion.div}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.4, ease: 'easeInOut' }}
       variants={animations}
       initial='initial'
       animate='animate'

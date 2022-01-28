@@ -1,8 +1,7 @@
 import { Dispatch } from '@reduxjs/toolkit'
 import axios from '../../services/index'
 import {
-	fetchUser, setUser, nullUser,
-
+	fetchUser, setUser, nullUser
 } from '../slices/meSlice'
 
 

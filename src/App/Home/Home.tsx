@@ -45,24 +45,6 @@ const Home = () => {
         <NotesSVG width={48} height={48} />
         <span>Notes</span>
       </Section>
-      <Section
-        id='notes'
-        as={motion.section}
-        whileHover={{cursor: 'pointer', scale: 1.025}}
-        onClick={() => navigate('/notes')}
-      >
-        <NotesSVG width={48} height={48} />
-        <span>Notes</span>
-      </Section>
-      <Section
-        id='notes'
-        as={motion.section}
-        whileHover={{cursor: 'pointer', scale: 1.025}}
-        onClick={() => navigate('/notes')}
-      >
-        <NotesSVG width={48} height={48} />
-        <span>Notes</span>
-      </Section>  
     </AnimatedPage>
   )
 }

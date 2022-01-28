@@ -15,7 +15,8 @@ export interface IMe {
 export interface IState {
   me: IMe,
   theme: IThemeState,
-  alerts: IAlerts
+  alerts: IAlerts,
+  notes: INotes
 }
 
 export interface IFormError {
@@ -50,4 +51,15 @@ export interface IAlert {
 
 export interface IAlerts {
   alerts: IAlert[]
+}
+
+export interface INotes {
+  notes: INote[]
+}
+
+export interface INote {
+  id: number,
+  title: string,
+  body: string,
+  timestamp: number
 }
