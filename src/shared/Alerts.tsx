@@ -7,8 +7,14 @@ import { IState, IAlert } from "../types";
 import { ReactComponent as CloseSVG } from '../assets/svg/close-square.svg'
 
 
-const Container = styled.div`
-  width: 100%;
+const Container = styled.div<({width: number})>`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0% auto;
+  width: 75%;
+  max-width: ${p => p.width}px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,11 +23,15 @@ const Container = styled.div`
   padding: 0.5rem 0;
 `
 
-const Alerts = () => {
+interface Props {
+  width: number
+}
+
+const Alerts = (props: Props) => {
   const alerts = useSelector<IState, IAlert[]>(state => state.alerts.alerts)
 
   return (
-    <Container>
+    <Container width={props.width}>
       <AnimatePresence>
         {alerts.map((alert, i) => <Alert data={alert} key={i} />)}
       </AnimatePresence>
@@ -100,7 +110,7 @@ const Alert = ({ data }: { data: IAlert }) => {
     <AlertContainer
       as={motion.div}
       transition={{ duration: 0.3 }}
-      initial={{ y: -200, opacity: 0 }}
+      initial={{ y: 200, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ x: 600, opacity: 0 }}
 
