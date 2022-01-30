@@ -11,6 +11,17 @@ export const FixedContainer = styled.div`
 	justify-content: center;
 `
 
+export const Container = styled.div`
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: ${p => p.theme.bg};
+  filter: var(--shadow);
+  border-radius: var(--border-radius);
+`
+
 export const Content = styled.div`
 	position: relative;
 	display: flex;

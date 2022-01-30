@@ -123,7 +123,7 @@ const Navbar = () => {
             </Item>
           </Items>
         </Main>
-        <Alerts />
+      <Alerts />
       </Content>
     </Container >
   )

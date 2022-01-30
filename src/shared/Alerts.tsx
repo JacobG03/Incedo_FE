@@ -1,9 +1,10 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { removeAlert } from "../redux/slices/alertsSlice";
 import { IState, IAlert } from "../types";
+import { ReactComponent as CloseSVG } from '../assets/svg/close-square.svg'
 
 
 const Container = styled.div`
@@ -57,6 +58,16 @@ const Loader = styled.div`
   border-bottom-right-radius: var(--border-radius);
 `
 
+const Cancel = styled.div`
+  position: absolute;
+  right: 8px;
+  padding: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+
 const Alert = ({ data }: { data: IAlert }) => {
   const [deleted, setDelete] = useState(false)
   const dispatch = useDispatch()
@@ -79,7 +90,7 @@ const Alert = ({ data }: { data: IAlert }) => {
       if (!deletedRef.current) {
         dispatch(removeAlert(data))
       }
-    }, 4000)
+    }, 3000)
     return () => {
       clearTimeout(auto_remove)
     }
@@ -88,7 +99,7 @@ const Alert = ({ data }: { data: IAlert }) => {
   return (
     <AlertContainer
       as={motion.div}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.3 }}
       initial={{ y: -200, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ x: 600, opacity: 0 }}
@@ -100,9 +111,17 @@ const Alert = ({ data }: { data: IAlert }) => {
       <Message>{data.message}</Message>
       <Loader
         as={motion.div}
-        transition={{ duration: 4, ease: 'linear' }}
+        transition={{ duration: 3, ease: 'linear' }}
         animate={{ width: '99.9%' }}
       />
+      <Cancel
+        as={m.div}
+        whileHover={{ scale: 1.05, cursor: 'pointer' }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => dispatch(removeAlert(data))}
+      >
+        <CloseSVG width={24} height={24} />
+      </Cancel>
     </AlertContainer>
   )
 }
