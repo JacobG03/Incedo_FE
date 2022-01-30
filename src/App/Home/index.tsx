@@ -4,6 +4,7 @@ import { Content } from '../../shared/styles';
 import Wrapper from '../../shared/Wrapper';
 import Navbar from './Navbar';
 import { Outlet } from 'react-router-dom';
+import Alerts from '../../shared/Alerts';
 
 
 const Container = styled.div`
@@ -36,6 +37,7 @@ const HomePage = () => {
 					<Outlet />
 				</Content>
 			</WrapperPage>
+			<Alerts width={800} />
 		</Container>
 	)
 }

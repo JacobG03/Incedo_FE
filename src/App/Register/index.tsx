@@ -5,13 +5,8 @@ import RegisterForm from "./RegisterForm";
 import Wrapper from "../../shared/Wrapper";
 import Alerts from "../../shared/Alerts";
 import { ReactComponent as LoginSVG } from '../../assets/svg/key-square.svg';
-import { Content, Cover, FixedContainer, Option, Options, Title } from "../../shared/styles";
-import styled from 'styled-components';
-
-
-const Content2 = styled(Content)`
-	gap: 0.5rem;
-`
+import { FixedContainer, Option, Options } from "../../shared/styles";
+import CoverAnimate from '../../shared/CoverAnimate';
 
 
 const RegisterPage = () => {
@@ -39,16 +34,7 @@ const RegisterPage = () => {
 			<Wrapper width={480}>
 				<AnimatePresence>
 					{!redirect && (
-						<Content2>
-							<Cover
-								as={motion.div}
-								key={'register-cover'}
-								transition= {{ duration: 0.5 }}
-								animate={{ y: "-76px", height: '60px' }}
-								exit={{ y: "0px", height: '100%' }}
-							>
-								<Title>Incedo</Title>
-							</Cover>
+						<CoverAnimate>
 							<RegisterForm />
 							<span>or</span>
 							<Options>
@@ -62,10 +48,10 @@ const RegisterPage = () => {
 									<span>Login</span>
 								</Option>
 							</Options>
-						</Content2>
+						</CoverAnimate>
 					)}
 				</AnimatePresence>
-				<Alerts />
+				<Alerts width={480} />
 			</Wrapper>
 		</FixedContainer>
 	)

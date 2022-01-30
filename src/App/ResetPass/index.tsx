@@ -1,6 +1,6 @@
-import { m } from 'framer-motion';
 import { useEffect } from 'react';
-import { Content, Cover, FixedContainer, Title } from '../../shared/styles';
+import CoverAnimate from '../../shared/CoverAnimate';
+import { FixedContainer } from '../../shared/styles';
 import Wrapper from '../../shared/Wrapper';
 import ResetPassForm from './ResetPassForm';
 
@@ -13,16 +13,9 @@ const ResetPassPage = () => {
   return (
     <FixedContainer>
       <Wrapper width={480}>
-        <Content>
-          <Cover
-            as={m.div}
-            key={'reset-pass-cover'}
-            animate={{ y: "-76px", height: '60px', transition: { duration: 0.6 } }}
-          >
-            <Title>Reset Password</Title>
-          </Cover>
+        <CoverAnimate>
           <ResetPassForm />
-        </Content>
+        </CoverAnimate>
       </Wrapper>
     </FixedContainer>
   )

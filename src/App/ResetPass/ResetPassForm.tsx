@@ -21,10 +21,6 @@ const ResetPassForm = () => {
         navigate('/login')
       })
       .catch(err => {
-        if (err.response.status === 404) {
-          navigate('/login')
-          return
-        }
         let errors: IFormError[] = err.response.data.detail
         for (let i = 0; i < errors.length; i++) {
           let name = errors[i].loc[1]

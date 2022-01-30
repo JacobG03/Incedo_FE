@@ -9,8 +9,6 @@ import { INote } from '../../../types';
 import { addAlert } from '../../../redux/slices/alertsSlice';
 import AnimatedPage from '../AnimatePage';
 import { ReactComponent as BackSVG } from '../../../assets/svg/arrow-left.svg'
-import { ReactComponent as AddSVG } from '../../../assets/svg/add-circle.svg'
-import { ReactComponent as MinusSVG } from '../../../assets/svg/minus-circle.svg'
 import { ReactComponent as EditSVG } from '../../../assets/svg/edit.svg'
 import { ReactComponent as TrashSVG } from '../../../assets/svg/trash.svg'
 import { ReactComponent as SwitchSVG } from '../../../assets/svg/mirror.svg'

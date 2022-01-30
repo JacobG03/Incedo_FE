@@ -16,7 +16,11 @@ const animations = {
   exit: {y: -50, opacity: 0}
 }
 
-const AnimatedPage = ({ children }: { children: JSX.Element[] | JSX.Element }) => {
+interface Props {
+  children: JSX.Element[] | JSX.Element
+}
+
+const AnimatedPage = ({ children }: Props) => {
   return (
     <Container
       as={motion.div}

@@ -6,12 +6,12 @@ import Alerts from "../../shared/Alerts";
 import { addAlert } from "../../redux/slices/alertsSlice";
 import Wrapper from "../../shared/Wrapper";
 import VerifyForm from "./VerifyForm";
-import { Content, Cover, FixedContainer, Option, Options, Title } from "../../shared/styles";
+import { FixedContainer, Option, Options } from "../../shared/styles";
+import CoverAnimate from '../../shared/CoverAnimate';
 
 
 const VerifyPage = () => {
 	const dispatch = useDispatch()
-	// change theme/avatar here
 	const resendCode = useCallback(() => {
 		axios.get('/auth/send_verification')
 			.then(res => {
@@ -31,14 +31,7 @@ const VerifyPage = () => {
 	return (
 		<FixedContainer>
 			<Wrapper width={480}>
-				<Content>
-					<Cover
-						as={m.div}
-						key={'verify-cover'}
-						animate={{ y: "-76px", height: '60px', transition: { duration: 0.6 } }}
-					>
-						<Title>Verify Email</Title>
-					</Cover>
+				<CoverAnimate>
 					<VerifyForm />
 					<Options>
 						<Option
@@ -50,8 +43,8 @@ const VerifyPage = () => {
 							<span>Resend Code</span>
 						</Option>
 					</Options>
-				</Content>
-				<Alerts />
+				</CoverAnimate>
+				<Alerts width={480} />
 			</Wrapper>
 		</FixedContainer>
 	)

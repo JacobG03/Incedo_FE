@@ -7,7 +7,8 @@ import Alerts from "../../shared/Alerts";
 import SendPassReset from "./SendPassReset";
 import { ReactComponent as MailSVG } from '../../assets/svg/send-2.svg';
 import { ReactComponent as RegisterSVG } from '../../assets/svg/user-add.svg';
-import { Content, Cover, FixedContainer, Option, Options, Title } from "../../shared/styles";
+import { FixedContainer, Option, Options } from "../../shared/styles";
+import CoverAnimate from "../../shared/CoverAnimate";
 
 
 const LoginPage = () => {
@@ -38,16 +39,7 @@ const LoginPage = () => {
 			<Wrapper width={480}>
 				<AnimatePresence>
 					{!redirect && (
-						<Content>
-							<Cover
-								as={motion.div}
-								key={'login-cover'}
-								transition={{ duration: 0.5 }}
-								animate={{ y: "-76px", height: '60px' }}
-								exit={{ y: "0px", height: '100%' }}
-							>
-								<Title>Incedo</Title>
-							</Cover>
+						<CoverAnimate>
 							<LoginForm />
 							<span>or</span>
 							<Options >
@@ -73,10 +65,10 @@ const LoginPage = () => {
 									<span>Register</span>
 								</Option>
 							</Options>
-						</Content>
+						</CoverAnimate>
 					)}
 				</AnimatePresence>
-				<Alerts />
+				<Alerts width={480} />
 			</Wrapper>
 		</FixedContainer>
 	)

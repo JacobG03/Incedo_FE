@@ -5,7 +5,6 @@ import styled, { useTheme } from "styled-components"
 import { IState, IMeInfo } from "../../types"
 import { ReactComponent as SettingsSVG } from '../../assets/svg/setting-2.svg';
 import { ReactComponent as NotificationSVG } from '../../assets/svg/notification.svg';
-import Alerts from "../../shared/Alerts"
 
 
 const Container = styled.div`
@@ -123,7 +122,6 @@ const Navbar = () => {
             </Item>
           </Items>
         </Main>
-      <Alerts />
       </Content>
     </Container >
   )
