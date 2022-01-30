@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AnimatedPage from "../AnimatePage"
 import CreateNote from "./CreateNote";
 import { fetchNotes } from "../../../redux/calls/notes_calls";
@@ -7,6 +7,7 @@ import { IState, INote } from "../../../types";
 import styled from "styled-components";
 import { m } from "framer-motion";
 import { Outlet, useNavigate } from "react-router-dom";
+import Dashboard from "./Dashboard";
 
 
 const NotesContainer = styled.div`
@@ -42,7 +43,7 @@ const Notes = () => {
 
   return (
     <AnimatedPage>
-      <CreateNote />
+      <Dashboard />
       <NotesContainer>
         {notes.map(note =>
           <NoteContainer 

@@ -3,11 +3,19 @@ import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Editor from "../../../shared/Editor";
-import AnimatedPage from "../AnimatePage";
 import { setNote } from '../../../redux/slices/notesSlice';
 import { useDispatch } from 'react-redux';
 import { INote } from '../../../types';
 import { addAlert } from '../../../redux/slices/alertsSlice';
+import AnimatedPage from '../AnimatePage';
+import { ReactComponent as BackSVG } from '../../../assets/svg/arrow-left.svg'
+import { ReactComponent as AddSVG } from '../../../assets/svg/add-circle.svg'
+import { ReactComponent as MinusSVG } from '../../../assets/svg/minus-circle.svg'
+import { ReactComponent as EditSVG } from '../../../assets/svg/edit.svg'
+import { ReactComponent as TrashSVG } from '../../../assets/svg/trash.svg'
+import { ReactComponent as SwitchSVG } from '../../../assets/svg/mirror.svg'
+import { Button } from '../../../shared/styles';
+import { m } from 'framer-motion';
 
 
 const Container = styled.div`
@@ -23,13 +31,18 @@ const Container = styled.div`
 
 const Options = styled.div`
   width: 100%;
-  height: fit-content;
+  height: 4rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem;
   justify-content: space-evenly;
   color: ${p => p.theme.main};
+`
+
+const Button2 = styled(Button)`
+  flex-grow: 1;
+  height: 100%;
 `
 
 const Note = () => {
@@ -47,27 +60,27 @@ const Note = () => {
         setData(res.data)
       })
       .catch(error => console.log(error.response.data.detail))
-    
+
     return () => setMount(false)
   }, [dispatch, location])
 
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     axios.put(location.pathname, data)
-    .then(res => {
-      dispatch(setNote(res.data))
-    })
-    .catch(error => console.log(error.response.data.detail))
-  }
+      .then(res => {
+        dispatch(setNote(res.data))
+      })
+      .catch(error => console.log(error.response.data.detail))
+  }, [location.pathname, data, dispatch])
 
   const handleDelete = () => {
     axios.delete(location.pathname)
-    .then(res => {
-      dispatch(addAlert({message: 'Note deleted.'}))
-      navigate('/notes')
-    })
-    .catch(error => console.log(error.response.data.detail))
+      .then(res => {
+        dispatch(addAlert({ message: 'Note deleted.' }))
+        navigate('/notes')
+      })
+      .catch(error => console.log(error.response.data.detail))
   }
-  
+
   const handleChange = useCallback((state: string) => {
     if (data && mounted) {
       let new_data = data
@@ -76,20 +89,70 @@ const Note = () => {
     }
   }, [data, mounted])
 
+  const handleKeys = useCallback(e => {
+    if (e.ctrlKey && e.keyCode === 83) {
+      e.preventDefault();
+      handleSave()
+    }
+  }, [handleSave])
+
+  const handleNavigate = useCallback(() => {
+    handleSave()
+    navigate('/notes')
+  }, [navigate, handleSave])
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeys)
+
+    return () => document.removeEventListener('keydown', handleKeys)
+  }, [handleKeys])
+
   if (!data) {
     return null
   }
 
   return (
-    <Container>
-      <Options>
-        <span onClick={() => navigate('/notes')}>Back</span>
-        <span onClick={() => setPreview(!preview)}>Preview</span>
-        <span onClick={() => handleSave()}>Save</span>
-        <span onClick={() => handleDelete()}>Delete</span>
-      </Options>
-      <Editor initialDoc={data.body} preview={preview} onChange={handleChange} />
-    </Container>
+    <AnimatedPage>
+      <Container>
+        <Options>
+          <Button2
+            onClick={() => handleNavigate()}
+            as={m.button}
+            whileHover={{ scale: 1.05, cursor: 'pointer' }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <BackSVG />
+          </Button2>
+          <Button2
+            onClick={() => setPreview(!preview)}
+            as={m.button}
+            whileHover={{ scale: 1.05, cursor: 'pointer' }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {preview
+              ? <EditSVG />
+              : <SwitchSVG />}
+          </Button2>
+          <Button2
+            onClick={() => handleSave()}
+            as={m.button}
+            whileHover={{ scale: 1.05, cursor: 'pointer' }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span>Save</span>
+          </Button2>
+          <Button2
+            onClick={() => handleDelete()}
+            as={m.button}
+            whileHover={{ scale: 1.05, cursor: 'pointer' }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <TrashSVG />
+          </Button2>
+        </Options>
+        <Editor initialDoc={data.body} preview={preview} onChange={handleChange} />
+      </Container>
+    </AnimatedPage>
   )
 }
 

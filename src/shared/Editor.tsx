@@ -2,6 +2,10 @@ import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import useCodeMirror from './use-codemirror'
 import { useRemark } from 'react-remark';
+import { ReactComponent as AddSVG } from '../assets/svg/add-circle.svg'
+import { ReactComponent as MinusSVG } from '../assets/svg/minus-circle.svg'
+import { Button } from './styles';
+import { m } from 'framer-motion';
 
 
 const Container = styled.div`
@@ -18,14 +22,11 @@ const Options = styled.div`
   height: fit-content;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   padding: 0.5rem;
-  background-color: ${ p => p.theme.bg};
-  filter: var(--shadow);
-  border-radius: var(--border-radius);
+  gap: 1rem;
 `
 
-const Content = styled.div<({fontSize: number})>`
+const Content = styled.div<({ fontSize: number }) >`
   position: relative;
   width: 100%;
   height: fit-content;
@@ -50,7 +51,7 @@ const Preview = styled.div`
   height: 100%;
   background-color: ${p => p.theme.bg};
   padding: 0.5rem;
-  background-color: ${ p => p.theme.bg};
+  background-color: ${p => p.theme.bg};
   filter: var(--shadow);
   border-radius: var(--border-radius);
 `
@@ -95,10 +96,24 @@ const Editor: React.FC<Props> = (props) => {
     <Container>
       <Content fontSize={fontSize}>
         <Options>
-          <span onClick={() => biggerFont()}>+</span>
-          <span onClick={() => smallerFort()}>-</span>
+          <Button
+            onClick={() => biggerFont()}
+            as={m.button}
+            whileHover={{ scale: 1.05, cursor: 'pointer' }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <AddSVG />
+          </Button>
+          <Button
+            onClick={() => smallerFort()}
+            as={m.button}
+            whileHover={{ scale: 1.05, cursor: 'pointer' }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <MinusSVG />
+          </Button>
         </Options>
-        <MarkDown ref={refContainer} style={props.preview ? {display: 'none'} : {}}></MarkDown>
+        <MarkDown ref={refContainer} style={props.preview ? { display: 'none' } : {}}></MarkDown>
         {props.preview ? <Preview>{reactContent}</Preview> : null}
       </Content>
     </Container>
