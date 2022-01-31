@@ -23,6 +23,8 @@ import Profile from "./App/Home/Profile";
 import Notes from "./App/Home/Notes";
 import { AnimatePresence, domAnimation, LazyMotion } from "framer-motion";
 import Note from "./App/Home/Notes/Note";
+import Section from "./App/Home/Notes/Section";
+import { fetchNotes, fetchSections } from "./redux/calls/notes_calls";
 
 
 function App() {
@@ -37,6 +39,10 @@ function App() {
 
   useEffect(() => {
     getTheme(dispatch)
+    if (me.meInfo) {
+      fetchNotes(dispatch)
+      fetchSections(dispatch)
+    }
   }, [dispatch, me.meInfo])
 
   if (me.finished === false || !theme.theme) {
@@ -55,7 +61,7 @@ function App() {
               <Route path="settings" element={<Settings />} />
               <Route path="notes" element={<Notes />} />
               <Route path="notes/:id" element={<Note />} />
-              <Route path="days" element={<h1>Days</h1>} />
+              <Route path="sections/:id" element={<Section />} />
             </Route>
             <Route path="login" element={<ExcludeAuth><LoginPage /></ExcludeAuth>} />
             <Route path="register" element={<ExcludeAuth><RegisterPage /></ExcludeAuth>} />

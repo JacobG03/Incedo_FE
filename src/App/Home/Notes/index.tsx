@@ -1,15 +1,18 @@
 import AnimatedPage from "../AnimatePage"
-import { Outlet } from "react-router-dom";
-import Dashboard from "./Dashboard";
+import { useSelector } from "react-redux";
+import { INote, IState } from "../../../types";
+import MainNotes from "./MainNotes";
 
 
 const Notes = () => {
+  const notes = useSelector<IState, INote[]>(state => state.notes.notes)
+
   return (
     <AnimatedPage>
-      <Dashboard />
-      <Outlet />
+      <MainNotes notes={notes.filter(note => note.parent_id === null)} />
     </AnimatedPage>
   )
 }
+
 
 export default Notes;

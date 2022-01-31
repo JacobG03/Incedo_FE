@@ -54,12 +54,27 @@ export interface IAlerts {
 }
 
 export interface INotes {
-  notes: INote[]
+  notes: INote[],
+  sections: ISection[]
 }
 
 export interface INote {
   id: number,
   title: string,
   body: string,
-  timestamp: number
+  timestamp: number,
+  parent_id: number | null,
+  sort_id: number,
+  favorite: boolean
+}
+
+export interface ISection {
+  id: number,
+  name: string,
+  parent_id: number | null,
+  sort_id: number | null,
+  favorite: boolean,
+  timestamp: number,
+  notes: INote[],
+  sub_sections: ISection[]
 }
