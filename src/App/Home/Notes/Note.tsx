@@ -148,7 +148,7 @@ const Note = () => {
             <TrashSVG />
           </Button2>
         </Options>
-        <Editor initialDoc={data.body} preview={preview} onChange={handleChange} />
+        <Editor initialDoc={data.body ? data.body: ''} preview={preview} onChange={handleChange} />
       </Container>
     </AnimatedPage>
   )

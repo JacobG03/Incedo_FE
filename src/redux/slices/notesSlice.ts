@@ -4,18 +4,37 @@ import { INotes } from "../../types";
 
 const initialState: INotes = {
   notes: [],
-  sections: []
+  sections: [],
+  createNote: {
+    pending: false,
+    success: false,
+    errors: [],
+  }
 }
 
 export const notesSlice = createSlice({
   name: 'notes',
   initialState,
   reducers: {
+    addNoteStart: (state) => {
+      state.createNote.pending = true
+    },
+    addNoteSuccess: (state, action) => {
+      state.createNote.pending = false
+      state.createNote.success = true
+      state.notes = [...state.notes, action.payload]
+    },
+    addNoteFailure: (state, action) => {
+      state.createNote.pending = false
+      state.createNote.errors = action.payload
+    },
+    addNoteReset: (state) => {
+      state.createNote.pending = false
+      state.createNote.errors = []
+      state.createNote.success = false
+    },
     setNotes: (state, action) => {
       state.notes = action.payload
-    },
-    addNote: (state, action) => {
-      state.notes = [...state.notes, action.payload]
     },
     removeNote: (state, action) => {
       state.notes = state.notes.filter(note => note.id !== action.payload.id)
@@ -45,7 +64,8 @@ export const notesSlice = createSlice({
 })
 
 export const {
-  addNote, removeNote, setNotes, setNote,
+  addNoteStart, addNoteSuccess, addNoteFailure, addNoteReset,
+  removeNote, setNotes, setNote,
   setSections, addSection, removeSection, setSection
 } = notesSlice.actions;
 

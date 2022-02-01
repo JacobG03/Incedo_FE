@@ -20,7 +20,7 @@ export interface IState {
 }
 
 export interface IFormError {
-  type: string,
+  type?: string,
   loc: string[],
   msg: string
 }
@@ -53,28 +53,35 @@ export interface IAlerts {
   alerts: IAlert[]
 }
 
+export interface ICreateNote {
+  pending: boolean,
+  success: boolean,
+  errors: IFormError[]
+}
+
 export interface INotes {
   notes: INote[],
-  sections: ISection[]
+  sections: ISection[],
+  createNote: ICreateNote
 }
 
 export interface INote {
   id: number,
   title: string,
-  body: string,
-  timestamp: number,
+  body: string | null,
   parent_id: number | null,
-  sort_id: number,
   favorite: boolean
+  timestamp: number,
+  modified: number
 }
 
 export interface ISection {
   id: number,
   name: string,
   parent_id: number | null,
-  sort_id: number | null,
   favorite: boolean,
   timestamp: number,
+  modified: number,
   notes: INote[],
   sub_sections: ISection[]
 }
