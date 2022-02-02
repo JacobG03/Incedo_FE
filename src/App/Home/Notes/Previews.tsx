@@ -10,6 +10,7 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  border-radius: var(--border-radius);
 `
 
 interface Options {

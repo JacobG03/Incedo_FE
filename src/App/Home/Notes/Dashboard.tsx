@@ -4,9 +4,24 @@ import styled, { useTheme } from "styled-components";
 import { IGetStatus, IState } from "../../../types";
 import { ReactComponent as FavoriteSVG } from '../../../assets/svg/star.svg'
 import { ReactComponent as ReverseSVG } from '../../../assets/svg/arrow-3.svg'
+import { motion } from "framer-motion";
 
 
 const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  color: ${p => p.theme.sub};
+  filter: var(--shadow);
+`
+
+const Top = styled.div`
   width: 100%;
   height: 3rem;
   display: flex;
@@ -16,7 +31,15 @@ const Container = styled.div`
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
   color: ${p => p.theme.sub};
-  filter: var(--shadow);
+`
+
+const Option = styled.div<({ highlight: boolean }) >`
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${p => p.highlight ? p.theme.main : p.theme.sub};
 `
 
 interface Props {
@@ -44,31 +67,50 @@ const Dashboard = (props: Props) => {
     return <h1>Loading</h1>
   }
   return (
-    <>
-      <Container>
-        <FavoriteSVG
+    <Container>
+      <Top>
+        <Option
           onClick={() => setFavorite(!favorite)}
-          fill={favorite ? theme.main : 'none'}
-          style={{ color: favorite ? theme.main : 'inherit' }}
-        />
-        <span 
+          highlight={favorite}
+          as={motion.div}
+          whileHover={{ cursor: 'pointer', scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <FavoriteSVG fill={favorite ? theme.main : 'none'} />
+        </Option>
+        <Option
           onClick={() => setSort('timestamp')}
-          style={{color: sort === 'timestamp' ? theme.main: 'inherit'}}
-        >Created</span>
-        <span 
+          highlight={sort === 'timestamp'}
+          as={motion.div}
+          whileHover={{ cursor: 'pointer', scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <span>Created</span>
+        </Option>
+        <Option
           onClick={() => setSort('modified')}
-          style={{color: sort === 'modified' ? theme.main: 'inherit'}}
-        >Recent</span>
-        <ReverseSVG
+          highlight={sort === 'modified'}
+          as={motion.div}
+          whileHover={{ cursor: 'pointer', scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <span>Recent</span>
+        </Option>
+        <Option
           onClick={() => setReverse(!reverse)}
-          style={{ color: reverse ? theme.main : 'inherit' }}
-        />
-      </Container>
+          highlight={reverse}
+          as={motion.div}
+          whileHover={{ cursor: 'pointer', scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ReverseSVG />
+        </Option>
+      </Top>
       {React.cloneElement(props.children, {
         options: options,
         parent_id: props.parent_id ? props.parent_id : null
       })}
-    </>
+    </Container>
   )
 }
 

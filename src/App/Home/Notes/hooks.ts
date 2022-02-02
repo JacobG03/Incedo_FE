@@ -44,21 +44,21 @@ export const useSelect = (length: number) => {
   useEffect(() => {
     const handleKeys = (e: any) => {
       if (selected !== null) {
-        if (e.keyCode === 38) {
+        if (e.keyCode === 37) {
           if (selected > 0) {
             setSelected(selected - 1)
           } else {
             setSelected(null)
           }
         }
-        else if (e.keyCode === 40) {
+        else if (e.keyCode === 39) {
           if (selected < length - 1) {
             setSelected(selected + 1)
           } else {
             setSelected(0)
           }
         }
-      } else if (e.keyCode === 40) {
+      } else if (e.keyCode === 39) {
         setSelected(0)
       }
     }

@@ -10,5 +10,5 @@ export const PreviewContainer = styled.div<({ selected: boolean }) >`
   border-radius: var(--border-radius);
   filter: var(--shadow);
   padding: 2rem;
-  border: ${p => p.selected ? `2px solid ${p.theme.sub}` : null};
+  border: ${p => p.selected ? `1px solid ${p.theme.sub}` : null};
 `
