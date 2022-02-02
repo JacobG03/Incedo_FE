@@ -1,21 +1,34 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import LocalTime from "../../../shared/LocalTime";
-import { Container } from "../../../shared/styles";
 import { ISection } from "../../../types";
+import { PreviewContainer } from "./styles";
 
 
-const Container2 = styled(Container)`
-  width: fit-content;
-  flex-direction: column;
-`
+interface Props {
+  section: ISection,
+  selected: boolean
+}
 
-const SectionPreview = (props: { section: ISection }) => {
+const SectionPreview = (props: Props) => {
   const navigate = useNavigate()
 
+  useEffect(() => {
+    const handleKeys = (e: any) => {
+      if (props.selected) {
+        if (e.keyCode === 13) {
+          navigate(`/sections/${props.section.id}`)
+        }
+      }
+    }
+    document.addEventListener('keydown', handleKeys)
+    return () => document.removeEventListener('keydown', handleKeys)
+  }, [props.selected, props.section.id, navigate])
+
   return (
-    <Container2>
+    <PreviewContainer selected={props.selected}>
       <h2>Section</h2>
+      {props.selected ? <span>Selected!</span>: null}
       <span>id: {props.section.id}</span>
       <h2 onClick={() => navigate(`/sections/${props.section.id}`)}>Navigate</h2>
       <span>favorite: {props.section.favorite}</span>
@@ -23,7 +36,7 @@ const SectionPreview = (props: { section: ISection }) => {
       <span>created: <LocalTime timestamp={props.section.timestamp} /></span>
       <span>title: {props.section.name}</span>
       <span>parent_id: {props.section.parent_id}</span>
-    </Container2>
+    </PreviewContainer>
   )
 }
 

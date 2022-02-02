@@ -1,7 +1,16 @@
-import { usePreviews } from "./hooks"
+import styled from "styled-components"
+import { usePreviews, useSelect } from "./hooks"
 import NotePreview from "./NotePreview"
 import SectionPreview from "./SectionPreview"
 
+
+const Container = styled.div`
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+`
 
 interface Options {
   favorite: boolean,
@@ -16,15 +25,15 @@ interface Props {
 
 const Previews = (props: Props) => {
   const previews = usePreviews(props.parent_id!, props.options!)
-  console.log(previews)
+  const selected = useSelect(previews.length)
 
   return (
-    <>
+    <Container>
       {previews.map((preview, i) => 'body' in preview ?
-        <NotePreview note={preview} key={i} />
-        : <SectionPreview section={preview} key={i} />
+        <NotePreview note={preview} key={i} selected={selected === i ? true : false} />
+        : <SectionPreview section={preview} key={i} selected={selected === i ? true : false} />
       )}
-    </>
+    </Container>
   )
 }
 

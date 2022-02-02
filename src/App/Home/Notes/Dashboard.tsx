@@ -5,7 +5,7 @@ import { IGetStatus, IState } from "../../../types";
 
 interface Props {
   children: JSX.Element
-  parent_id: number | null
+  parent_id?: number | null
 }
 
 const Dashboard = (props: Props) => {
@@ -34,7 +34,7 @@ const Dashboard = (props: Props) => {
       <span onClick={() => setReverse(!reverse)}>Reverse: {`${reverse}`}</span>
       {React.cloneElement(props.children, { 
         options: options,
-        parent_id: props.parent_id
+        parent_id: props.parent_id ? props.parent_id: null
       })}
     </>
   )

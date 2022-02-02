@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { INote, ISection, IState } from "../../../types"
 
@@ -35,4 +36,36 @@ export const usePreviews = (parent_id: number | null, options: Options) => {
   }
 
   return previews
+}
+
+export const useSelect = (length: number) => {
+  const [selected, setSelected] = useState<number | null>(null)
+
+  useEffect(() => {
+    const handleKeys = (e: any) => {
+      if (selected !== null) {
+        if (e.keyCode === 38) {
+          if (selected > 0) {
+            setSelected(selected - 1)
+          } else {
+            setSelected(null)
+          }
+        }
+        else if (e.keyCode === 40) {
+          if (selected < length - 1) {
+            setSelected(selected + 1)
+          } else {
+            setSelected(0)
+          }
+        }
+      } else if (e.keyCode === 40) {
+        setSelected(0)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeys)
+    return () => document.removeEventListener('keydown', handleKeys)
+  }, [selected, length])
+
+  return selected
 }
