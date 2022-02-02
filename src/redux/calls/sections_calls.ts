@@ -9,5 +9,5 @@ export const fetchSections = (dispatch: Dispatch) => {
   dispatch(fetchSectionsStart())
   axios.get('/sections')
     .then(res => dispatch(fetchSectionsSuccess(res.data)))
-    .catch(error => dispatch(fetchSectionsFailure()))
+    .catch(() => dispatch(fetchSectionsFailure()))
 }

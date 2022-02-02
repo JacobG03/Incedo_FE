@@ -22,8 +22,8 @@ import Settings from "./App/Home/Settings";
 import Profile from "./App/Home/Profile";
 import Notes from "./App/Home/Notes";
 import { AnimatePresence, domAnimation, LazyMotion } from "framer-motion";
-import Note from "./App/Home/Notes/Note";
-import Section from "./App/Home/Notes/Section";
+import Note from "./App/Home/Notes/Note/Note";
+import Section from "./App/Home/Notes/Section/Section";
 
 
 function App() {

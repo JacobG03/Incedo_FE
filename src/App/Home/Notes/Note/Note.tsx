@@ -1,18 +1,18 @@
-import axios from '../../../services/index'
+import axios from '../../../../services/index'
 import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Editor from "../../../shared/Editor";
+import Editor from "../../../../shared/Editor";
 import { useDispatch } from 'react-redux';
-import { INote } from '../../../types';
-import AnimatedPage from '../AnimatePage';
-import { ReactComponent as BackSVG } from '../../../assets/svg/arrow-left.svg'
-import { ReactComponent as EditSVG } from '../../../assets/svg/edit.svg'
-import { ReactComponent as TrashSVG } from '../../../assets/svg/trash.svg'
-import { ReactComponent as SwitchSVG } from '../../../assets/svg/mirror.svg'
-import { Button } from '../../../shared/styles';
+import { INote } from '../../../../types';
+import AnimatedPage from '../../AnimatePage';
+import { ReactComponent as BackSVG } from '../../../../assets/svg/arrow-left.svg'
+import { ReactComponent as EditSVG } from '../../../../assets/svg/edit.svg'
+import { ReactComponent as TrashSVG } from '../../../../assets/svg/trash.svg'
+import { ReactComponent as SwitchSVG } from '../../../../assets/svg/mirror.svg'
+import { Button } from '../../../../shared/styles';
 import { m } from 'framer-motion';
-import { removeNote, updateNote } from '../../../redux/calls/notes_calls';
+import { removeNote, updateNote } from '../../../../redux/calls/notes_calls';
 
 
 const Container = styled.div`
