@@ -1,5 +1,7 @@
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { removeNote } from "../../../redux/calls/notes_calls";
 import LocalTime from "../../../shared/LocalTime";
 import { Container } from "../../../shared/styles";
 import { INote } from "../../../types";
@@ -15,16 +17,18 @@ const Container2 = styled(Container)`
 
 const NotePreview = (props: { note: INote }) => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   // Todo
-  // delete
+  // [x] delete
   // favorite
   // share icon, dummy for now
 
   return (
     <Container2>
-      <h2 onClick={() => console.log('yo')}>Note</h2>
+      <h2>Note</h2>
       <span>id: {props.note.id}</span>
+      <span onClick={() => removeNote(dispatch, props.note.id)}>Delete</span>
       <span onClick={() => navigate(`/notes/${props.note.id}`)}>Navigate</span>
       <span>favorite: {props.note.favorite}</span>
       <span>modified: <LocalTime timestamp={props.note.modified} /> </span>

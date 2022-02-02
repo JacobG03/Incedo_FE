@@ -6,7 +6,6 @@ import Editor from "../../../shared/Editor";
 import { setNote } from '../../../redux/slices/notesSlice';
 import { useDispatch } from 'react-redux';
 import { INote } from '../../../types';
-import { addAlert } from '../../../redux/slices/alertsSlice';
 import AnimatedPage from '../AnimatePage';
 import { ReactComponent as BackSVG } from '../../../assets/svg/arrow-left.svg'
 import { ReactComponent as EditSVG } from '../../../assets/svg/edit.svg'
@@ -14,6 +13,7 @@ import { ReactComponent as TrashSVG } from '../../../assets/svg/trash.svg'
 import { ReactComponent as SwitchSVG } from '../../../assets/svg/mirror.svg'
 import { Button } from '../../../shared/styles';
 import { m } from 'framer-motion';
+import { removeNote } from '../../../redux/calls/notes_calls';
 
 
 const Container = styled.div`
@@ -69,15 +69,6 @@ const Note = () => {
       })
       .catch(error => console.log(error.response.data.detail))
   }, [location.pathname, data, dispatch])
-
-  const handleDelete = () => {
-    axios.delete(location.pathname)
-      .then(res => {
-        dispatch(addAlert({ message: 'Note deleted.' }))
-        navigate('/notes')
-      })
-      .catch(error => console.log(error.response.data.detail))
-  }
 
   const handleChange = useCallback((state: string) => {
     if (data && mounted) {
@@ -140,7 +131,7 @@ const Note = () => {
             <span>Save</span>
           </Button2>
           <Button2
-            onClick={() => handleDelete()}
+            onClick={() => removeNote(dispatch, data.id)}
             as={m.button}
             whileHover={{ scale: 1.05, cursor: 'pointer' }}
             whileTap={{ scale: 0.95 }}

@@ -16,7 +16,8 @@ export interface IState {
   me: IMe,
   theme: IThemeState,
   alerts: IAlerts,
-  notes: INotes
+  notes: INotes,
+  sections: ISections
 }
 
 export interface IFormError {
@@ -53,7 +54,7 @@ export interface IAlerts {
   alerts: IAlert[]
 }
 
-export interface ICreateNote {
+export interface IStatus {
   pending: boolean,
   success: boolean,
   errors: IFormError[]
@@ -61,8 +62,9 @@ export interface ICreateNote {
 
 export interface INotes {
   notes: INote[],
-  sections: ISection[],
-  createNote: ICreateNote
+  createNote: IStatus,
+  removeNote: IStatus,
+  updateNote: IStatus
 }
 
 export interface INote {
@@ -73,6 +75,10 @@ export interface INote {
   favorite: boolean
   timestamp: number,
   modified: number
+}
+
+export interface ISections {
+  sections: ISection[]
 }
 
 export interface ISection {

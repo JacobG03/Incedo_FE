@@ -2,20 +2,32 @@ import { createSlice } from "@reduxjs/toolkit";
 import { INotes } from "../../types";
 
 
+const status = {
+  pending: false,
+  success: false,
+  errors: [],
+} 
+
 const initialState: INotes = {
   notes: [],
-  sections: [],
-  createNote: {
-    pending: false,
-    success: false,
-    errors: [],
-  }
+  createNote: status,
+  removeNote: status,
+  updateNote: status
 }
 
 export const notesSlice = createSlice({
   name: 'notes',
   initialState,
   reducers: {
+    setNotes: (state, action) => {
+      state.notes = action.payload
+    },
+    setNote: (state, action) => {
+      state.notes = state.notes.filter(note =>
+        note.id === action.payload.id
+          ? { ...note, ...action.payload }
+          : null)
+    },
     addNoteStart: (state) => {
       state.createNote.pending = true
     },
@@ -33,40 +45,46 @@ export const notesSlice = createSlice({
       state.createNote.errors = []
       state.createNote.success = false
     },
-    setNotes: (state, action) => {
-      state.notes = action.payload
+    removeNoteStart: (state) => {
+      state.removeNote.pending = true
     },
-    removeNote: (state, action) => {
+    removeNoteSuccess: (state, action) => {
       state.notes = state.notes.filter(note => note.id !== action.payload.id)
+      state.removeNote.pending = false
+      state.removeNote.success = true
     },
-    setNote: (state, action) => {
-      state.notes = state.notes.filter(note =>
-        note.id === action.payload.id
-          ? { ...note, ...action.payload }
-          : null)
+    removeNoteFailure: (state, action) => {
+      state.removeNote.pending = false
+      state.removeNote.success = false
+      state.removeNote.errors = action.payload
     },
-    setSections: (state, action) => {
-      state.sections = action.payload
+    removeNoteReset: (state) => {
+      state.removeNote = status
     },
-    addSection: (state, action) => {
-      state.sections = [...state.sections, action.payload]
+    updateNoteStart: (state) => {
+      state.updateNote.pending = true
     },
-    removeSection: (state, action) => {
-      state.sections = state.sections.filter(section => section.id !== action.payload.id)
+    updateNoteSuccess: (state, action) => {
+      state.notes = state.notes.filter(note => note.id !== action.payload.id)
+      state.updateNote.pending = false
+      state.updateNote.success = true
     },
-    setSection: (state, action) => {
-      state.sections = state.sections.filter(section =>
-        section.id === action.payload.id
-          ? { ...section, ...action.payload }
-          : null)
+    updateNoteFailure: (state, action) => {
+      state.updateNote.pending = false
+      state.updateNote.success = false
+      state.removeNote.errors = action.payload
+    },
+    updateNoteReset: (state) => {
+      state.removeNote = status
     },
   }
 })
 
 export const {
   addNoteStart, addNoteSuccess, addNoteFailure, addNoteReset,
-  removeNote, setNotes, setNote,
-  setSections, addSection, removeSection, setSection
+  removeNoteStart, removeNoteSuccess, removeNoteFailure, removeNoteReset,
+  updateNoteStart, updateNoteSuccess, updateNoteFailure, updateNoteReset,
+  setNotes, setNote
 } = notesSlice.actions;
 
 export default notesSlice.reducer;

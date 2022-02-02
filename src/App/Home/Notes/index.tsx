@@ -23,7 +23,7 @@ const Notes = () => {
   const [showCreate, setShowCreate] = useState(false)
 
   const notes = useSelector<IState, INote[]>(state => state.notes.notes)
-  const sections = useSelector<IState, ISection[]>(state => state.notes.sections)
+  const sections = useSelector<IState, ISection[]>(state => state.sections.sections)
 
   const dispatch = useDispatch()
 
