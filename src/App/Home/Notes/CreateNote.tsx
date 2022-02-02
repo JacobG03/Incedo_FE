@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { createNote } from "../../../redux/calls/notes_calls";
 import FormError from "../../../shared/FormError";
 import { Container, FormInput, FormSubmit } from "../../../shared/styles";
-import { IStatus, IState } from "../../../types";
+import { ICruStatus, IState } from "../../../types";
 import { m } from 'framer-motion';
 
 
@@ -42,7 +42,7 @@ interface Props {
 }
 
 const CreateNote = (props: Props) => {
-  const status = useSelector<IState, IStatus>(state => state.notes.createNote)
+  const status = useSelector<IState, ICruStatus>(state => state.notes.createNote)
   const { register, handleSubmit, formState: { errors }, setError } = useForm()
   const dispatch = useDispatch()
 

@@ -2,34 +2,40 @@ import { createSlice } from "@reduxjs/toolkit"
 import { ISections } from "../../types"
 
 
+const get_status = {
+  pending: false,
+  finished: false
+}
+
 const initialState: ISections = {
-  sections: []
+  sections: [],
+  fetchSections: get_status
 }
 
 export const sectionsSlice = createSlice({
   name: 'notes',
   initialState,
   reducers: {
-    setSections: (state, action) => {
+    fetchSectionsStart: (state) => {
+      state.fetchSections.pending = true
+    },
+    fetchSectionsSuccess: (state, action) => {
       state.sections = action.payload
+      state.fetchSections.pending = false
+      state.fetchSections.finished = true
     },
-    addSection: (state, action) => {
-      state.sections = [...state.sections, action.payload]
+    fetchSectionsFailure: (state) => {
+      state.fetchSections.pending = false
+      state.fetchSections.finished = true
     },
-    removeSection: (state, action) => {
-      state.sections = state.sections.filter(section => section.id !== action.payload.id)
+    fetchSectionsReset: (state) => {
+      state.fetchSections = get_status
     },
-    setSection: (state, action) => {
-      state.sections = state.sections.filter(section =>
-        section.id === action.payload.id
-          ? { ...section, ...action.payload }
-          : null)
-    }
   }
 })
 
 export const {
-  setSections, addSection, removeSection, setSection
+  fetchSectionsStart, fetchSectionsSuccess, fetchSectionsFailure, fetchSectionsReset
 } = sectionsSlice.actions;
 
 export default sectionsSlice.reducer;

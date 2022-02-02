@@ -2,17 +2,20 @@ import { Dispatch } from '@reduxjs/toolkit'
 import axios from '../../services/index'
 import { INote } from '../../types'
 import {
-  setNotes,
-  addNoteStart, addNoteSuccess, addNoteFailure, addNoteReset, 
-  removeNoteStart, removeNoteSuccess, removeNoteFailure, removeNoteReset,
-  updateNoteStart, updateNoteSuccess, updateNoteFailure, updateNoteReset
+  fetchNotesStart, fetchNotesSuccess, fetchNotesFailure,
+  addNoteStart, addNoteSuccess, addNoteFailure, 
+  removeNoteStart, removeNoteSuccess, removeNoteFailure,
+  updateNoteStart, updateNoteSuccess, updateNoteFailure
 } from '../slices/notesSlice'
 
 
 export const fetchNotes = (dispatch: Dispatch) => {
+  dispatch(fetchNotesStart())
   axios.get('/notes')
-    .then(res => dispatch(setNotes(res.data)))
-    .catch(error => console.log(error.response.data.detail))
+    .then(res => {
+      dispatch(fetchNotesSuccess(res.data))
+    })
+    .catch(() => dispatch(fetchNotesFailure()))
 }
 
 interface CreateNote {
@@ -24,7 +27,6 @@ export const createNote = (dispatch: Dispatch, data: CreateNote) => {
   axios.post('/notes', data)
   .then(res => {
       dispatch(addNoteSuccess(res.data))
-      dispatch(addNoteReset())
     })
     .catch(error => dispatch(addNoteFailure(error.response.data.detail)))
 }
@@ -34,7 +36,6 @@ export const removeNote = (dispatch: Dispatch, id: number) => {
   axios.delete(`/notes/${id}`)
     .then(() => {
       dispatch(removeNoteSuccess({id}))
-      dispatch(removeNoteReset())
     })
     .catch(error => dispatch(removeNoteFailure(error.response.data.detail)))
 }
@@ -44,7 +45,6 @@ export const updateNote = (dispatch: Dispatch, note: INote) => {
   axios.put(`/notes/${note.id}`)
   .then(res => {
     dispatch(updateNoteSuccess(res.data))
-    dispatch(updateNoteReset())
   })
   .catch(error => updateNoteFailure(error.response.data.detail))
 }

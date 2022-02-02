@@ -1,12 +1,13 @@
 import { Dispatch } from '@reduxjs/toolkit'
 import axios from '../../services/index'
 import {
-  setSections
+  fetchSectionsStart, fetchSectionsSuccess, fetchSectionsFailure
 } from '../slices/sectionsSlice'
 
 
 export const fetchSections = (dispatch: Dispatch) => {
+  dispatch(fetchSectionsStart())
   axios.get('/sections')
-    .then(res => dispatch(setSections(res.data)))
-    .catch(error => console.log(error.response.data.detail))
+    .then(res => dispatch(fetchSectionsSuccess(res.data)))
+    .catch(error => dispatch(fetchSectionsFailure()))
 }

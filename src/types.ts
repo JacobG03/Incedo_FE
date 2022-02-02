@@ -54,17 +54,23 @@ export interface IAlerts {
   alerts: IAlert[]
 }
 
-export interface IStatus {
+export interface ICruStatus {
   pending: boolean,
   success: boolean,
   errors: IFormError[]
 }
 
+export interface IGetStatus {
+  pending: boolean,
+  finished: boolean
+}
+
 export interface INotes {
   notes: INote[],
-  createNote: IStatus,
-  removeNote: IStatus,
-  updateNote: IStatus
+  fetchNotes: IGetStatus,
+  createNote: ICruStatus,
+  removeNote: ICruStatus,
+  updateNote: ICruStatus
 }
 
 export interface INote {
@@ -78,7 +84,8 @@ export interface INote {
 }
 
 export interface ISections {
-  sections: ISection[]
+  sections: ISection[],
+  fetchSections: IGetStatus
 }
 
 export interface ISection {

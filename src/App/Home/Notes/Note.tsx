@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Editor from "../../../shared/Editor";
-import { setNote } from '../../../redux/slices/notesSlice';
 import { useDispatch } from 'react-redux';
 import { INote } from '../../../types';
 import AnimatedPage from '../AnimatePage';
@@ -13,7 +12,7 @@ import { ReactComponent as TrashSVG } from '../../../assets/svg/trash.svg'
 import { ReactComponent as SwitchSVG } from '../../../assets/svg/mirror.svg'
 import { Button } from '../../../shared/styles';
 import { m } from 'framer-motion';
-import { removeNote } from '../../../redux/calls/notes_calls';
+import { removeNote, updateNote } from '../../../redux/calls/notes_calls';
 
 
 const Container = styled.div`
@@ -54,7 +53,7 @@ const Note = () => {
   useEffect(() => {
     axios.get(location.pathname)
       .then(res => {
-        dispatch(setNote(res.data))
+        updateNote(dispatch, res.data)
         setData(res.data)
       })
       .catch(error => console.log(error.response.data.detail))
@@ -63,12 +62,10 @@ const Note = () => {
   }, [dispatch, location])
 
   const handleSave = useCallback(() => {
-    axios.put(location.pathname, data)
-      .then(res => {
-        dispatch(setNote(res.data))
-      })
-      .catch(error => console.log(error.response.data.detail))
-  }, [location.pathname, data, dispatch])
+    if (data) {
+      updateNote(dispatch, data)
+    }
+  }, [data, dispatch])
 
   const handleChange = useCallback((state: string) => {
     if (data && mounted) {

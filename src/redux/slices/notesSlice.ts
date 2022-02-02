@@ -2,31 +2,43 @@ import { createSlice } from "@reduxjs/toolkit";
 import { INotes } from "../../types";
 
 
-const status = {
+const cru_status = {
   pending: false,
   success: false,
   errors: [],
-} 
+}
+
+const get_status = {
+  pending: false,
+  finished: false
+}
 
 const initialState: INotes = {
   notes: [],
-  createNote: status,
-  removeNote: status,
-  updateNote: status
+  fetchNotes: get_status,
+  createNote: cru_status,
+  removeNote: cru_status,
+  updateNote: cru_status
 }
 
 export const notesSlice = createSlice({
   name: 'notes',
   initialState,
   reducers: {
-    setNotes: (state, action) => {
-      state.notes = action.payload
+    fetchNotesStart: (state) => {
+      state.fetchNotes.pending = true
     },
-    setNote: (state, action) => {
-      state.notes = state.notes.filter(note =>
-        note.id === action.payload.id
-          ? { ...note, ...action.payload }
-          : null)
+    fetchNotesSuccess: (state, action) => {
+      state.notes = action.payload
+      state.fetchNotes.pending = false
+      state.fetchNotes.finished = true
+    },
+    fetchNotesFailure: (state) => {
+      state.fetchNotes.pending = false
+      state.fetchNotes.finished = true
+    },
+    fetchNotesReset: (state) => {
+      state.fetchNotes = get_status
     },
     addNoteStart: (state) => {
       state.createNote.pending = true
@@ -59,13 +71,15 @@ export const notesSlice = createSlice({
       state.removeNote.errors = action.payload
     },
     removeNoteReset: (state) => {
-      state.removeNote = status
+      state.removeNote = cru_status
     },
     updateNoteStart: (state) => {
       state.updateNote.pending = true
     },
     updateNoteSuccess: (state, action) => {
-      state.notes = state.notes.filter(note => note.id !== action.payload.id)
+      state.notes = state.notes.filter(note => note.id === action.payload.id
+          ? { ...note, ...action.payload }
+          : null)
       state.updateNote.pending = false
       state.updateNote.success = true
     },
@@ -75,16 +89,16 @@ export const notesSlice = createSlice({
       state.removeNote.errors = action.payload
     },
     updateNoteReset: (state) => {
-      state.removeNote = status
+      state.removeNote = cru_status
     },
   }
 })
 
 export const {
+  fetchNotesStart, fetchNotesSuccess, fetchNotesFailure, fetchNotesReset,
   addNoteStart, addNoteSuccess, addNoteFailure, addNoteReset,
   removeNoteStart, removeNoteSuccess, removeNoteFailure, removeNoteReset,
   updateNoteStart, updateNoteSuccess, updateNoteFailure, updateNoteReset,
-  setNotes, setNote
 } = notesSlice.actions;
 
 export default notesSlice.reducer;

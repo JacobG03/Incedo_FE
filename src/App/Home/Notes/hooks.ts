@@ -1,71 +1,38 @@
-import { INote, ISection } from "../../../types"
+import { useSelector } from "react-redux"
+import { INote, ISection, IState } from "../../../types"
 
 
 interface Options {
-  filters?: {
-    favorite?: boolean
-  },
-  sort_by?: string,
-  reverse?: boolean,
+  favorite: boolean,
+  sort: string,
+  reverse: boolean
 }
 
-/* 
-  Takes in a list of notes and options
-  Returns a filtered, sorted list of notes (based on options provided)
-*/
-export const useNotes = (notes: INote[], options?: Options) => {
-  let new_notes = notes.slice()
-  if (options) {
-    if (options.filters) {
-      if (options.filters.favorite) {
-        new_notes = new_notes.filter(note => note.favorite === true)
-      }
-    }
-    if (options.sort_by) {
-      switch (options.sort_by) {
-        case 'timestamp':
-          new_notes = new_notes.sort((a, b) => a.timestamp - b.timestamp)
-          break;
-        case 'modified':
-          new_notes = new_notes.sort((a, b) => b.modified - a.modified)
-          break;
-      }
-    }
-    if (options.reverse) {
-      new_notes = new_notes.reverse()
-    }
+// "Preview" meaning INote | ISection
+
+export const usePreviews = (parent_id: number | null, options: Options) => {
+  const all_notes = useSelector<IState, INote[]>(state => state.notes.notes)
+  const all_sections = useSelector<IState, ISection[]>(state => state.sections.sections)
+
+  const notes = all_notes.filter(note => note.parent_id === parent_id)
+  const sections = all_sections.filter(section => section.parent_id === parent_id)
+
+  let previews = [...notes, ...sections]
+  
+  if (options.favorite) {
+    previews = previews.filter(preview => preview.favorite === true)
+  }
+  switch (options.sort) {
+    case 'timestamp':
+      previews = previews.sort((a, b) => a.timestamp - b.timestamp)
+      break;
+    case 'modified':
+      previews = previews.sort((a, b) => b.modified - a.modified)
+      break;
+  }
+  if (options.reverse) {
+    previews = previews.reverse()
   }
 
-  return new_notes
-}
-
-/* 
-  Takes in a list of notes and options
-  Returns a filtered, sorted list of notes (based on options provided)
-*/
-
-export const useSections = (sections: ISection[], options?: Options) => {
-  let new_sections = sections.slice()
-  if (options) {
-    if (options.filters) {
-      if (options.filters.favorite) {
-        new_sections = new_sections.filter(section => section.favorite === true)
-      }
-    }
-    if (options.sort_by) {
-      switch (options.sort_by) {
-        case 'timestamp':
-          new_sections = new_sections.sort((a, b) => a.timestamp - b.timestamp)
-          break;
-        case 'modified':
-          new_sections = new_sections.sort((a, b) => b.modified - a.modified)
-          break;
-      }
-    }
-    if (options.reverse) {
-      new_sections = new_sections.reverse()
-    }
-  }
-
-  return new_sections
+  return previews
 }
