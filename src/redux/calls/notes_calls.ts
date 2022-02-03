@@ -42,7 +42,7 @@ export const removeNote = (dispatch: Dispatch, id: number) => {
 
 export const updateNote = (dispatch: Dispatch, note: INote) => {
   dispatch(updateNoteStart())
-  axios.put(`/notes/${note.id}`)
+  axios.put(`/notes/${note.id}`, note)
   .then(res => {
     dispatch(updateNoteSuccess(res.data))
   })

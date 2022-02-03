@@ -31,15 +31,16 @@ const Top = styled.div`
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
   color: ${p => p.theme.sub};
+  font-size: 1.2rem;
 `
 
-const Option = styled.div<({ highlight: boolean }) >`
+const Option = styled.div<({ $highlight: boolean }) >`
   width: fit-content;
   height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${p => p.highlight ? p.theme.main : p.theme.sub};
+  color: ${p => p.$highlight ? p.theme.main : p.theme.sub};
 `
 
 interface Props {
@@ -66,12 +67,13 @@ const Dashboard = (props: Props) => {
   if (!notes_status.finished || !sections_status.finished) {
     return <h1>Loading</h1>
   }
+  
   return (
     <Container>
       <Top>
         <Option
           onClick={() => setFavorite(!favorite)}
-          highlight={favorite}
+          $highlight={favorite}
           as={motion.div}
           whileHover={{ cursor: 'pointer', scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -80,7 +82,7 @@ const Dashboard = (props: Props) => {
         </Option>
         <Option
           onClick={() => setSort('timestamp')}
-          highlight={sort === 'timestamp'}
+          $highlight={sort === 'timestamp'}
           as={motion.div}
           whileHover={{ cursor: 'pointer', scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -89,7 +91,7 @@ const Dashboard = (props: Props) => {
         </Option>
         <Option
           onClick={() => setSort('modified')}
-          highlight={sort === 'modified'}
+          $highlight={sort === 'modified'}
           as={motion.div}
           whileHover={{ cursor: 'pointer', scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -98,7 +100,7 @@ const Dashboard = (props: Props) => {
         </Option>
         <Option
           onClick={() => setReverse(!reverse)}
-          highlight={reverse}
+          $highlight={reverse}
           as={motion.div}
           whileHover={{ cursor: 'pointer', scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

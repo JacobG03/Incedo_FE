@@ -60,6 +60,8 @@ export const useSelect = (length: number) => {
         }
       } else if (e.keyCode === 39) {
         setSelected(0)
+      } else if (e.keyCode === 37) {
+        setSelected(length - 1)
       }
     }
 
