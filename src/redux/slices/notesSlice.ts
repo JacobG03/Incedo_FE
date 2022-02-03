@@ -77,9 +77,10 @@ export const notesSlice = createSlice({
       state.updateNote.pending = true
     },
     updateNoteSuccess: (state, action) => {
-      state.notes = state.notes.filter(note => note.id === action.payload.id
-          ? { ...note, ...action.payload }
-          : null)
+      console.log(action.payload)
+      state.notes = state.notes.map(note => note.id === action.payload.id
+          ? {...note, ...action.payload}
+          : note)
       state.updateNote.pending = false
       state.updateNote.success = true
     },

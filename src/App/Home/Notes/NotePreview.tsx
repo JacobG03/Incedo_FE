@@ -6,9 +6,12 @@ import { ReactComponent as NoteSVG } from '../../../assets/svg/stickynote.svg'
 import { ReactComponent as NoteCreatedSVG } from '../../../assets/svg/calendar-add.svg'
 import { ReactComponent as NoteModifiedSVG } from '../../../assets/svg/calendar-edit.svg'
 import { ReactComponent as EditSVG } from '../../../assets/svg/edit.svg'
-import styled from "styled-components";
+import { ReactComponent as FavoriteSVG } from '../../../assets/svg/star.svg'
+import styled, { useTheme } from "styled-components";
 import LocalTime from "../../../shared/LocalTime";
 import { motion } from "framer-motion";
+import { updateNote } from "../../../redux/calls/notes_calls";
+import { useDispatch } from "react-redux";
 
 
 const Top = styled.div`
@@ -56,7 +59,7 @@ const Row = styled.div`
   gap: 0.25rem;
 `
 
-const EditButton = styled.button`
+const Button = styled.button`
   width: 100%;
   height: 100%;
   display: flex;
@@ -82,7 +85,16 @@ const Bottom = styled.div`
   height: 60px;
   display: flex;
   align-items: center;
+  gap: 0.5rem;
   justify-content: space-evenly;
+  background-color: rgba(0,0,0,0.2);
+  box-shadow: var(--shadow-inner);
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+`
+
+const Button2 = styled(Button)`
+  flex-grow: 1;
 `
 
 interface Props {
@@ -97,20 +109,11 @@ interface Props {
 
 const NotePreview = (props: Props) => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const theme = useTheme()
   const previewRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const handleKeys = (e: any) => {
-      if (props.selected) {
-        if (e.keyCode === 13) {
-          navigate(`/notes/${props.note.id}`)
-        }
-      }
-    }
-    document.addEventListener('keydown', handleKeys)
-    return () => document.removeEventListener('keydown', handleKeys)
-  }, [props.selected, props.note.id, navigate])
-
+  // Handles auto scroll & tabbing
   useEffect(() => {
     if (props.selected && previewRef.current) {
       previewRef.current.scrollIntoView({ block: "end", inline: "nearest", behavior: "smooth" })
@@ -118,6 +121,45 @@ const NotePreview = (props: Props) => {
       previewRef.current.focus()
     }
   }, [props.selected, previewRef])
+
+  const keyDownHandler = (e: any) => {
+    // only execute if tab is pressed
+    if (e.key !== 'Tab') return
+
+    // here we query all focusable elements, customize as your own need
+    if (previewRef.current) {
+      const focusableModalElements = previewRef.current.querySelectorAll(
+        'button'
+      )
+
+      const firstElement = focusableModalElements[0]
+      const lastElement = focusableModalElements[focusableModalElements.length - 1]
+  
+      // if going forward by pressing tab and lastElement is active shift focus to first focusable element 
+      if (!e.shiftKey && document.activeElement === lastElement) {
+        firstElement.focus()
+        return e.preventDefault()
+      }
+  
+      // if going backward by pressing tab and firstElement is active shift focus to last focusable element 
+      if (e.shiftKey && document.activeElement === firstElement) {
+        lastElement.focus()
+        e.preventDefault()
+      }
+    }
+  }
+
+  useEffect(() => {
+    previewRef.current?.addEventListener('keydown', keyDownHandler)
+  }, [])
+
+  const handleFavorite = () => {
+    updateNote(dispatch, {...props.note, favorite: !props.note.favorite})
+  }
+
+  const handleNavigate = () => {
+    navigate(`/notes/${props.note.id}`)
+  }
 
   return (
     <PreviewContainer selected={props.selected} ref={previewRef}>
@@ -137,18 +179,25 @@ const NotePreview = (props: Props) => {
           </Row>
         </Left>
         <Right>
-          <EditButton
-            onClick={() => navigate(`/notes/${props.note.id}`)}
+          <Button
+            onClick={() => handleNavigate()}
             as={motion.button}
             whileHover={{cursor: 'pointer', scale: 1.05}}
             whileTap={{cursor: 'pointer', scale: 0.95}}
           >
             <EditSVG width={32} height={32} />
-          </EditButton>
+          </Button>
         </Right>
       </Mid>
       <Bottom>
-
+        <Button2
+          onClick={() => handleFavorite()}
+          as={motion.button}
+          whileHover={{cursor: 'pointer', scale: 1.05}}
+          whileTap={{cursor: 'pointer', scale: 0.95}}
+        >
+          <FavoriteSVG fill={props.note.favorite ? theme.main : 'none'}/>
+        </Button2>
       </Bottom>
     </PreviewContainer>
   )

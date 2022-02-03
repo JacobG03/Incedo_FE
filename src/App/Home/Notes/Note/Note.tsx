@@ -13,6 +13,7 @@ import { ReactComponent as SwitchSVG } from '../../../../assets/svg/mirror.svg'
 import { Button } from '../../../../shared/styles';
 import { m } from 'framer-motion';
 import { removeNote, updateNote } from '../../../../redux/calls/notes_calls';
+import { useEscape } from '../../hooks';
 
 
 const Container = styled.div`
@@ -44,6 +45,7 @@ const Button2 = styled(Button)`
 
 const Note = () => {
   const [data, setData] = useState<INote | null>(null)
+  useEscape('/notes')
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const location = useLocation()

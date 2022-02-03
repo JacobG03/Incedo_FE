@@ -15,6 +15,5 @@ export const PreviewContainer = styled.div<({ selected: boolean })>`
   color: ${p => p.theme.text};
   padding: 1rem;
   outline: none;
-  border: none;
-  border: ${p => p.selected ? `2px solid ${p.theme.main}` : null};
+  border: ${p => p.selected ? `2px solid ${p.theme.main}` : `2px solid ${p.theme.bg}`};
 `
