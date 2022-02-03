@@ -31,8 +31,8 @@ const Previews = (props: Props) => {
   return (
     <Container>
       {previews.map((preview, i) => 'body' in preview ?
-        <NotePreview note={preview} key={i} selected={selected === i ? true : false} />
-        : <SectionPreview section={preview} key={i} selected={selected === i ? true : false} />
+        <NotePreview note={preview} key={(i * Math.random())} selected={selected === i ? true : false} />
+        : <SectionPreview section={preview} key={(i * Math.random())} selected={selected === i ? true : false} />
       )}
     </Container>
   )

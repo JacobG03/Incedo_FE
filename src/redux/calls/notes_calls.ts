@@ -5,7 +5,7 @@ import {
   fetchNotesStart, fetchNotesSuccess, fetchNotesFailure,
   addNoteStart, addNoteSuccess, addNoteFailure, 
   removeNoteStart, removeNoteSuccess, removeNoteFailure,
-  updateNoteStart, updateNoteSuccess, updateNoteFailure
+  updateNoteStart, updateNoteSuccess, updateNoteFailure, removeNoteReset, addNoteReset, updateNoteReset
 } from '../slices/notesSlice'
 
 
@@ -27,6 +27,7 @@ export const createNote = (dispatch: Dispatch, data: CreateNote) => {
   axios.post('/notes', data)
   .then(res => {
       dispatch(addNoteSuccess(res.data))
+      dispatch(addNoteReset())
     })
     .catch(error => dispatch(addNoteFailure(error.response.data.detail)))
 }
@@ -36,6 +37,7 @@ export const removeNote = (dispatch: Dispatch, id: number) => {
   axios.delete(`/notes/${id}`)
     .then(() => {
       dispatch(removeNoteSuccess({id}))
+      dispatch(removeNoteReset())
     })
     .catch(error => dispatch(removeNoteFailure(error.response.data.detail)))
 }
@@ -45,6 +47,7 @@ export const updateNote = (dispatch: Dispatch, note: INote) => {
   axios.put(`/notes/${note.id}`, note)
   .then(res => {
     dispatch(updateNoteSuccess({...note, ...res.data}))
+    dispatch(updateNoteReset())
   })
   .catch(error => updateNoteFailure(error.response.data.detail))
 }

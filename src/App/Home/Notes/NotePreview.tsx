@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { INote } from "../../../types";
 import { PreviewContainer } from "./styles";
@@ -7,10 +7,11 @@ import { ReactComponent as NoteCreatedSVG } from '../../../assets/svg/calendar-a
 import { ReactComponent as NoteModifiedSVG } from '../../../assets/svg/calendar-edit.svg'
 import { ReactComponent as EditSVG } from '../../../assets/svg/edit.svg'
 import { ReactComponent as FavoriteSVG } from '../../../assets/svg/star.svg'
+import { ReactComponent as RemoveSVG } from '../../../assets/svg/trash.svg'
 import styled, { useTheme } from "styled-components";
 import LocalTime from "../../../shared/LocalTime";
 import { motion } from "framer-motion";
-import { updateNote } from "../../../redux/calls/notes_calls";
+import { removeNote, updateNote } from "../../../redux/calls/notes_calls";
 import { useDispatch } from "react-redux";
 
 
@@ -65,10 +66,12 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
   color: ${p => p.theme.sub};
   filter: var(--shadow);
+  font-size: 1.2rem;
   
   &:focus {
     border: 1px solid ${p => p.theme.main};
@@ -104,7 +107,6 @@ interface Props {
 
 // Todo
 // [x] delete
-// favorite
 // share icon, dummy for now
 
 const NotePreview = (props: Props) => {
@@ -112,14 +114,17 @@ const NotePreview = (props: Props) => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const previewRef = useRef<HTMLDivElement>(null)
+  const [canRemove, setRemove] = useState(false)
 
-  // Handles auto scroll & tabbing
+  // Handles auto scroll & tabbing & keys
   useEffect(() => {
     if (props.selected && previewRef.current) {
       previewRef.current.scrollIntoView({ block: "end", inline: "nearest", behavior: "smooth" })
       previewRef.current.tabIndex = -1
       previewRef.current.focus()
     }
+    previewRef.current?.addEventListener('keydown', keyDownHandler)
+    return () => console.log('here')
   }, [props.selected, previewRef])
 
   const keyDownHandler = (e: any) => {
@@ -149,16 +154,21 @@ const NotePreview = (props: Props) => {
     }
   }
 
-  useEffect(() => {
-    previewRef.current?.addEventListener('keydown', keyDownHandler)
-  }, [])
-
   const handleFavorite = () => {
     updateNote(dispatch, {...props.note, favorite: !props.note.favorite})
   }
 
   const handleNavigate = () => {
     navigate(`/notes/${props.note.id}`)
+  }
+
+  const handleRemove = () => {
+    if (!canRemove) {
+      setRemove(!canRemove)
+    }
+    else {
+      removeNote(dispatch, props.note.id)
+    }
   }
 
   return (
@@ -197,6 +207,15 @@ const NotePreview = (props: Props) => {
           whileTap={{cursor: 'pointer', scale: 0.95}}
         >
           <FavoriteSVG fill={props.note.favorite ? theme.main : 'none'}/>
+        </Button2>
+        <Button2
+          onClick={() => handleRemove()}
+          as={motion.button}
+          whileHover={{cursor: 'pointer', scale: 1.05}}
+          whileTap={{cursor: 'pointer', scale: 0.95}}
+        >
+          {canRemove ? <span>Confirm</span>: null}
+          <RemoveSVG />
         </Button2>
       </Bottom>
     </PreviewContainer>

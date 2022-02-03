@@ -84,11 +84,6 @@ const Note = () => {
     }
   }, [handleSave])
 
-  const handleNavigate = useCallback(() => {
-    handleSave()
-    navigate('/notes')
-  }, [navigate, handleSave])
-
   useEffect(() => {
     document.addEventListener('keydown', handleKeys)
 
@@ -104,7 +99,7 @@ const Note = () => {
       <Container>
         <Options>
           <Button2
-            onClick={() => handleNavigate()}
+            onClick={() => navigate('/notes')}
             as={m.button}
             whileHover={{ scale: 1.05, cursor: 'pointer' }}
             whileTap={{ scale: 0.95 }}
