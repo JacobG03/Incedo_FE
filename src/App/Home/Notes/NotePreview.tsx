@@ -118,13 +118,13 @@ const NotePreview = (props: Props) => {
 
   // Handles auto scroll & tabbing & keys
   useEffect(() => {
+    previewRef.current?.addEventListener('keydown', keyDownHandler)
+
     if (props.selected && previewRef.current) {
       previewRef.current.scrollIntoView({ block: "end", inline: "nearest", behavior: "smooth" })
       previewRef.current.tabIndex = -1
       previewRef.current.focus()
     }
-    previewRef.current?.addEventListener('keydown', keyDownHandler)
-    return () => console.log('here')
   }, [props.selected, previewRef])
 
   const keyDownHandler = (e: any) => {
@@ -170,6 +170,15 @@ const NotePreview = (props: Props) => {
       removeNote(dispatch, props.note.id)
     }
   }
+
+  useEffect(() => {
+    if (canRemove) {
+      var removeWindow = setTimeout(() => {
+        setRemove(false)
+      }, 3000)
+    }
+    return () => clearTimeout(removeWindow)
+  }, [canRemove]) 
 
   return (
     <PreviewContainer selected={props.selected} ref={previewRef}>
