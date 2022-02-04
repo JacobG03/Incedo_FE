@@ -52,7 +52,7 @@ const Create = (props: Props) => {
         onClick={(e: any) => handleNote(e)}
         as={motion.button}
         whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 5 }}
-        whileTap={{ scale: 0.95 }}>
+        whileTap={{ scale: 0.95}}>
         <CreateNoteSVG width={32} height={32} />
         <span>Create Note</span>
       </Button2>

@@ -6,7 +6,6 @@ export const PreviewContainer = styled.div<({ selected: boolean }) >`
   flex-basis: 0;
   height: 240px;
   min-width: 300px;
-  max-width: 50%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -78,7 +77,6 @@ export const PreviewBottom = styled.div`
   padding: 0.5rem;
 `
 
-
 export const Button = styled.button`
   width: 100%;
   height: 100%;
@@ -93,11 +91,11 @@ export const Button = styled.button`
   font-size: 1.2rem;
   
   &:focus {
-    border: 1px solid ${p => p.theme.main};
+    outline: 1px solid ${p => p.theme.main};
     color: ${p => p.theme.main};
   };
   &:hover {
-    border: 1px solid ${p => p.theme.main};
+    outline: 1px solid ${p => p.theme.main};
     color: ${p => p.theme.main};
   }
 `
