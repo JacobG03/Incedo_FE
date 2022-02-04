@@ -6,6 +6,7 @@ import AnimatedPage from "../AnimatePage"
 import Dashboard from "./Dashboard";
 import { useEscape } from "../hooks";
 import Previews from "./Previews";
+import Create from "./Create";
 
 
 const Notes = () => {
@@ -17,9 +18,9 @@ const Notes = () => {
     fetchSections(dispatch)
   }, [dispatch])
 
-
   return (
     <AnimatedPage>
+      <Create parent_id={null} />
       <Dashboard>
         <Previews />
       </Dashboard>
