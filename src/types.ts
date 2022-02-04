@@ -85,7 +85,10 @@ export interface INote {
 
 export interface ISections {
   sections: ISection[],
-  fetchSections: IGetStatus
+  fetchSections: IGetStatus,
+  createSection: ICruStatus,
+  removeSection: ICruStatus,
+  updateSection: ICruStatus
 }
 
 export interface ISection {
