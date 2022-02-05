@@ -91,11 +91,11 @@ export const Button = styled.button`
   font-size: 1.2rem;
   
   &:focus {
-    outline: 1px solid ${p => p.theme.main};
+    outline: 2px solid ${p => p.theme.main};
     color: ${p => p.theme.main};
   };
   &:hover {
-    outline: 1px solid ${p => p.theme.main};
+    outline: 2px solid ${p => p.theme.main};
     color: ${p => p.theme.main};
   }
 `

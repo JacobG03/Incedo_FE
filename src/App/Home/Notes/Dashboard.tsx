@@ -5,6 +5,7 @@ import { IGetStatus, IState } from "../../../types";
 import { ReactComponent as FavoriteSVG } from '../../../assets/svg/star.svg'
 import { ReactComponent as ReverseSVG } from '../../../assets/svg/arrow-3.svg'
 import { motion } from "framer-motion";
+import { Content } from "../../../shared/styles";
 
 
 const Container = styled.div`
@@ -17,18 +18,14 @@ const Container = styled.div`
   gap: 1rem;
   padding: 0.5rem;
   border-radius: var(--border-radius);
+  background-color: ${p => p.theme.bg};
   color: ${p => p.theme.sub};
   filter: var(--shadow);
 `
 
 const Top = styled.div`
   width: 100%;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 0.5rem;
-  background-color: ${p => p.theme.bg};
+  height: fit-content;
   border-radius: var(--border-radius);
   color: ${p => p.theme.sub};
   font-size: 1.2rem;
@@ -36,18 +33,30 @@ const Top = styled.div`
 `
 
 const Option = styled.button<({ $highlight: boolean }) >`
-  width: fit-content;
-  height: fit-content;
+  flex-grow: 1;
+  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   color: ${p => p.$highlight ? p.theme.main : p.theme.sub};
   border: none;
-  background-color: inherit;
+  background-color: ${p => p.theme.bg};
+  border-radius: var(--border-radius);
+  filter: var(--shadow);
   
   &:focus {
     color: ${p => p.theme.main};
+    outline: 2px solid ${p => p.theme.main};
   }
+`
+
+const Content2 = styled(Content)`
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  gap: 0.5rem;
 `
 
 interface Props {
@@ -120,42 +129,44 @@ const Dashboard = (props: Props) => {
   return (
     <Container>
       <Top ref={topRef}>
-        <Option
-          onClick={() => setFavorite(!favorite)}
-          $highlight={favorite}
-          as={motion.button}
-          whileHover={{ cursor: 'pointer', scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <FavoriteSVG fill={favorite ? theme.main : 'none'} />
-        </Option>
-        <Option
-          onClick={() => setSort('timestamp')}
-          $highlight={sort === 'timestamp'}
-          as={motion.button}
-          whileHover={{ cursor: 'pointer', scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <span>Created</span>
-        </Option>
-        <Option
-          onClick={() => setSort('modified')}
-          $highlight={sort === 'modified'}
-          as={motion.button}
-          whileHover={{ cursor: 'pointer', scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <span>Recent</span>
-        </Option>
-        <Option
-          onClick={() => setReverse(!reverse)}
-          $highlight={reverse}
-          as={motion.button}
-          whileHover={{ cursor: 'pointer', scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <ReverseSVG />
-        </Option>
+        <Content2>
+          <Option
+            onClick={() => setFavorite(!favorite)}
+            $highlight={favorite}
+            as={motion.button}
+            whileHover={{ cursor: 'pointer', scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <FavoriteSVG fill={favorite ? theme.main : 'none'} />
+          </Option>
+          <Option
+            onClick={() => setSort('timestamp')}
+            $highlight={sort === 'timestamp'}
+            as={motion.button}
+            whileHover={{ cursor: 'pointer', scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span>Created</span>
+          </Option>
+          <Option
+            onClick={() => setSort('modified')}
+            $highlight={sort === 'modified'}
+            as={motion.button}
+            whileHover={{ cursor: 'pointer', scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span>Recent</span>
+          </Option>
+          <Option
+            onClick={() => setReverse(!reverse)}
+            $highlight={reverse}
+            as={motion.button}
+            whileHover={{ cursor: 'pointer', scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ReverseSVG />
+          </Option>
+        </Content2>
       </Top>
       {React.cloneElement(props.children, {
         options: options,

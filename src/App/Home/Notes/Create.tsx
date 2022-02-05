@@ -8,18 +8,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { IState, INote, ISection } from "../../../types";
 import { createSection } from "../../../redux/calls/sections_calls";
 import { useEffect, useRef } from "react";
+import { Content } from "../../../shared/styles";
 
 
 const Container = styled.div`
   width: 100%;
   height: fit-content;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
   padding: 0.5rem;
   color: ${p => p.theme.sub};
   outline: none;
   background-color: ${p => p.theme.bg};
+  border-radius: var(--border-radius);
+  filter: var(--shadow);
 `
 
 const Button2 = styled(Button)`
@@ -27,6 +27,14 @@ const Button2 = styled(Button)`
   flex-basis: 0;
   min-width: 200px;
   padding: 0.5rem;
+`
+
+const Content2 = styled(Content)`
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  gap: 0.5rem;
 `
 
 interface Props {
@@ -92,22 +100,24 @@ const Create = (props: Props) => {
 
   return (
     <Container ref={containerRef}>
-      <Button2
-        onClick={(e: any) => handleNote(e)}
-        as={motion.button}
-        whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 5 }}
-        whileTap={{ scale: 0.95}}>
-        <CreateNoteSVG width={32} height={32} />
-        <span>Create Note</span>
-      </Button2>
-      <Button2
-        onClick={(e: any) => handleSection(e)}
-        as={motion.button}
-        whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 5 }}
-        whileTap={{ scale: 0.95 }}>
-        <CreateSectionSVG width={32} height={32} />
-        <span>Create Section</span>
-      </Button2>
+      <Content2>
+        <Button2
+          onClick={(e: any) => handleNote(e)}
+          as={motion.button}
+          whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 5 }}
+          whileTap={{ scale: 0.95}}>
+          <CreateNoteSVG width={32} height={32} />
+          <span>Create Note</span>
+        </Button2>
+        <Button2
+          onClick={(e: any) => handleSection(e)}
+          as={motion.button}
+          whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 5 }}
+          whileTap={{ scale: 0.95 }}>
+          <CreateSectionSVG width={32} height={32} />
+          <span>Create Section</span>
+        </Button2>
+      </Content2>
     </Container>
   )
 }
