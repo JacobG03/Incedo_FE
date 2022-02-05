@@ -17,6 +17,12 @@ const Container = styled.div`
   padding: 0.5rem;
 `
 
+const Container2 = styled(Container)`
+  align-items: center;
+  justify-content: center;
+  color: ${ p => p.theme.text};
+`
+
 interface Options {
   favorite: boolean,
   sort: string,
@@ -68,6 +74,14 @@ const Previews = (props: Props) => {
       setSelected(0)
     } 
   }, [props.selected, containerRef])
+
+  if (previews.length === 0 ) {
+    return (
+      <Container2>
+        <h1>Nothing here</h1>
+      </Container2>
+    )
+  } 
 
   return (
     <Container ref={containerRef}>
