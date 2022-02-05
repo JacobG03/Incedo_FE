@@ -12,6 +12,7 @@ import Theme from './Theme'
 import { ITheme } from '../../../types'
 import UpdatePassword from './UpdatePassword'
 import AnimatedPage from '../AnimatePage'
+import { useEscape } from '../hooks'
 
 
 const Section = styled.section`
@@ -82,6 +83,8 @@ const Settings = () => {
   useEffect(() => {
     document.title = 'Settings | Incedo'
   }, [])
+
+  useEscape('/')
 
   return (
     <AnimatedPage>

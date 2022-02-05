@@ -42,7 +42,7 @@ const Items = styled.div`
   box-shadow: var(--shadow-inner);
 `
 
-const Item = styled.div`
+const Item = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,6 +50,10 @@ const Item = styled.div`
   border-radius: var(--border-radius);
   background-color: ${p => p.theme.bg};
   filter: var(--shadow);
+  
+  &:focus {
+    outline: 1px solid ${p => p.theme.main};
+  }
 `
 
 const Avatar = styled.img`
@@ -98,14 +102,14 @@ const Navbar = () => {
           </Logo>
           <Items>
             <Item
-              as={m.div}
+              as={m.button}
               whileHover={{ scale: 1.1, cursor: 'pointer' }}
               whileTap={{ scale: 0.9 }}
             >
               <NotificationSVG width={32} height={32} color={theme.main} />
             </Item>
             <Item
-              as={m.div}
+              as={m.button}
               whileHover={{ scale: 1.1, cursor: 'pointer' }}
               whileTap={{ scale: 0.9 }}
               onClick={() => navigate('/settings')}
@@ -113,7 +117,7 @@ const Navbar = () => {
               <SettingsSVG width={32} height={32} color={theme.main} />
             </Item>
             <Item
-              as={m.div}
+              as={m.button}
               whileHover={{ scale: 1.1, cursor: 'pointer' }}
               whileTap={{ scale: 0.9 }}
               onClick={() => navigate('/profile')}

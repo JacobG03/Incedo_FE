@@ -24,6 +24,7 @@ const Notes = () => {
     const handleKeys = (e: any) => {
       if (selected !== null) {
         if (e.keyCode === 38) {
+          e.preventDefault()
           if (selected > 0) {
             setSelected(selected - 1)
           } else {
@@ -32,6 +33,7 @@ const Notes = () => {
           }
         }
         else if (e.keyCode === 40) {
+          e.preventDefault()
           if (selected < 2) {
             setSelected(selected + 1)
           } else {
@@ -39,8 +41,10 @@ const Notes = () => {
           }
         }
       } else if (e.keyCode === 40) {
+        e.preventDefault()
         setSelected(0)
       } else if (e.keyCode === 38) {
+        e.preventDefault()
         setSelected(2)
       }
     }

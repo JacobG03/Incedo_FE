@@ -15,9 +15,13 @@ const Container = styled.div<({ preview: ITheme }) >`
   align-items: center;
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
-  border: ${p => (p.preview.id === p.theme.id ? `2px solid ${p.theme.sub}` : null)};
   padding: 1rem;
   filter: var(--shadow);
+  outline: ${p => (p.preview.id === p.theme.id ? `1px solid ${p.theme.main}` : null)};
+
+  &:focus {
+    outline: 1px solid ${p => p.theme.main};
+  }
 `
 
 const Preview = styled.div<{ preview: ITheme }>`
@@ -42,7 +46,7 @@ const Theme = (props: Props) => {
 
   return (
     <Container
-      as={m.div}
+      as={m.button}
       whileHover={{ scale: 1.05, cursor: 'pointer' }}
       onClick={() => updateTheme(dispatch, { id: props.data.id })}
       preview={props.data}

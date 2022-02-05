@@ -7,7 +7,7 @@ const Container = styled.div`
   height: fit-content;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 1rem;
 `
 
 const animations = {

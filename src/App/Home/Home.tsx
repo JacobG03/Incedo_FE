@@ -6,7 +6,7 @@ import AnimatedPage from "./AnimatePage";
 import { useNavigate } from "react-router-dom";
 
 
-const Section = styled.section<({ selected: boolean }) >`
+const Section = styled.div<({ selected: boolean }) >`
   flex-grow: 1;
   height: 100px;
   display: flex;
@@ -70,32 +70,34 @@ const Home = () => {
   )
 }
 
-const NoteNavigate = ({ selected }: { selected: boolean }) => {
+const NoteNavigate = (props: { selected: boolean }) => {
   const navigate = useNavigate()
   const sectionRef = useRef<HTMLDivElement>(null)
 
 
   useEffect(() => {
     const handleKeys = (e: any) => {
-      if (selected) {
-        console.log(e.keyCode)
+      if (props.selected) {
         if (e.keyCode === 13) {
           navigate('/notes')
         }
       }
     }
-    if (selected && sectionRef.current) {
-      sectionRef.current.scrollIntoView({ block: "end", inline: "nearest", behavior: "smooth" })
-    }
 
     document.addEventListener('keydown', handleKeys)
+
+    if (sectionRef.current && props.selected) {
+      console.log('here')
+      sectionRef.current.tabIndex = -1
+      sectionRef.current.focus()
+    }
     return () => document.removeEventListener('keydown', handleKeys)
-  }, [selected, sectionRef, navigate])
+  }, [props.selected, sectionRef, navigate])
 
   return (
     <Section
-      selected={selected}
-      as={motion.section}
+      selected={props.selected}
+      as={motion.div}
       whileHover={{ cursor: 'pointer', scale: 1.025 }}
       onClick={() => navigate('/notes')}
     >

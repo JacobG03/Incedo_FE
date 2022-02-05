@@ -39,6 +39,7 @@ const Option = styled.button<({ $highlight: boolean }) >`
   align-items: center;
   justify-content: center;
   color: ${p => p.$highlight ? p.theme.main : p.theme.sub};
+  font-weight: ${p => p.$highlight ? 700: 300};
   border: none;
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
@@ -46,7 +47,8 @@ const Option = styled.button<({ $highlight: boolean }) >`
   
   &:focus {
     color: ${p => p.theme.main};
-    outline: 2px solid ${p => p.theme.main};
+    outline: 1px solid ${p => p.theme.main};
+    font-weight: 700;
   }
 `
 

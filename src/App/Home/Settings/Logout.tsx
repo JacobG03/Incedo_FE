@@ -7,7 +7,7 @@ import { m } from "framer-motion"
 import styled from "styled-components"
 
 
-const Container = styled.div`
+const Container = styled.button`
   width: 100%;
   height: 100%;
   display: flex;
@@ -21,6 +21,10 @@ const Container = styled.div`
   border-radius: var(--border-radius);
   font-weight: 700;
   font-size: 1.25rem;
+
+  &:focus {
+    outline: 1px solid ${p => p.theme.main};
+  }
 `
 
 
@@ -38,7 +42,7 @@ const Logout = () => {
 
   return (
     <Container
-      as={m.div}
+      as={m.button}
       whileHover={{ scale: 1.05, cursor: 'pointer' }}
       whileTap={{ scale: 0.9 }}
       onClick={() => logout()}

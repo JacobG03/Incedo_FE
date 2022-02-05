@@ -36,7 +36,7 @@ const VerifyPage = () => {
 					<Options>
 						<Option
 							onClick={() => resendCode()}
-							as={m.div}
+							as={m.button}
 							whileHover={{ cursor: 'pointer' }}
 							whileTap={{ scale: 0.9 }}
 						>

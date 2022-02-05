@@ -47,7 +47,7 @@ const LoginPage = () => {
 									? <SendPassReset setReset={setReset} />
 									: <Option
 										onClick={() => setReset(!reset)}
-										as={motion.div}
+										as={motion.button}
 										whileHover={{ cursor: 'pointer' }}
 										whileTap={{ scale: 0.9 }}
 									>
@@ -57,7 +57,7 @@ const LoginPage = () => {
 								}
 								<Option
 									onClick={() => handleRedirect()}
-									as={motion.div}
+									as={motion.button}
 									whileHover={{ cursor: 'pointer' }}
 									whileTap={{ scale: 0.9 }}
 								>

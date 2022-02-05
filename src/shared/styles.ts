@@ -77,6 +77,10 @@ export const Option = styled.button`
 	border-radius: var(--border-radius);
 	filter: var(--shadow);
 	color: ${p => p.theme.sub};
+
+	&:focus {
+		outline: 1px solid ${p => p.theme.main};
+	}
 `
 
 export const Form = styled.form`
@@ -136,4 +140,8 @@ export const Button = styled.button`
 	background-color: ${p => p.theme.main};
 	border-radius: var(--border-radius);
 	filter: var(--shadow);
+
+	&:focus {
+		outline: 1px solid ${p => p.theme.sub};
+	}
 `

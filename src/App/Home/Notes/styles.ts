@@ -15,7 +15,7 @@ export const PreviewContainer = styled.div<({ selected: boolean }) >`
   color: ${p => p.theme.text};
   padding: 1rem;
   outline: none;
-  border: ${p => p.selected ? `2px solid ${p.theme.main}` : `2px solid ${p.theme.bg}`};
+  border: ${p => p.selected ? `1px solid ${p.theme.main}` : `1px solid ${p.theme.bg}`};
 `
 
 export const PreviewTop = styled.div`
@@ -91,11 +91,11 @@ export const Button = styled.button`
   font-size: 1.2rem;
   
   &:focus {
-    outline: 2px solid ${p => p.theme.main};
+    outline: 1px solid ${p => p.theme.main};
     color: ${p => p.theme.main};
   };
   &:hover {
-    outline: 2px solid ${p => p.theme.main};
+    outline: 1px solid ${p => p.theme.main};
     color: ${p => p.theme.main};
   }
 `

@@ -40,7 +40,7 @@ const RegisterPage = () => {
 							<Options>
 								<Option
 									onClick={() => handleRedirect()}
-									as={motion.div}
+									as={motion.button}
 									whileHover={{ cursor: 'pointer' }}
 									whileTap={{ scale: 0.9 }}
 								>
