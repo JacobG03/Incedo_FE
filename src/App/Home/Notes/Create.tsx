@@ -19,6 +19,7 @@ const Container = styled.div`
   padding: 0.5rem;
   color: ${p => p.theme.sub};
   outline: none;
+  background-color: ${p => p.theme.bg};
 `
 
 const Button2 = styled(Button)`

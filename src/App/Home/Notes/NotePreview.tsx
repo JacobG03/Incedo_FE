@@ -37,9 +37,9 @@ const NotePreview = (props: Props) => {
     previewRef.current?.addEventListener('keydown', keyDownHandler)
 
     if (props.selected && previewRef.current) {
-      previewRef.current.scrollIntoView({ block: "end", inline: "nearest", behavior: "smooth" })
       previewRef.current.tabIndex = -1
       previewRef.current.focus()
+      previewRef.current.scrollIntoView({ block: 'center', inline: "nearest", behavior: "smooth" })
     }
   }, [props.selected, previewRef])
 
