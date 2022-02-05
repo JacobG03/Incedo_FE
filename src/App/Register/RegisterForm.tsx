@@ -60,6 +60,7 @@ const RegisterForm = () => {
         whileHover={{ scale: 1.1, cursor: 'pointer' }}
         whileTap={{ scale: 0.9 }}
         type='submit'
+        name='Register'
       >
         <RegisterSVG width={24} height={24} />
         <span>Sign up</span>

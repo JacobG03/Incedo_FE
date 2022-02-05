@@ -105,6 +105,7 @@ const Navbar = () => {
               as={m.button}
               whileHover={{ scale: 1.1, cursor: 'pointer' }}
               whileTap={{ scale: 0.9 }}
+              name='Notifications'
             >
               <NotificationSVG width={32} height={32} color={theme.main} />
             </Item>
@@ -113,6 +114,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.1, cursor: 'pointer' }}
               whileTap={{ scale: 0.9 }}
               onClick={() => navigate('/settings')}
+              name='Settings'
             >
               <SettingsSVG width={32} height={32} color={theme.main} />
             </Item>
@@ -121,8 +123,9 @@ const Navbar = () => {
               whileHover={{ scale: 1.1, cursor: 'pointer' }}
               whileTap={{ scale: 0.9 }}
               onClick={() => navigate('/profile')}
+              name='Profile'
             >
-              <Avatar src={meInfo?.avatar_url} />
+              <Avatar src={meInfo?.avatar_url} alt='My Profile Picture' />
             </Item>
           </Items>
         </Main>

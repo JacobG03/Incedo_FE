@@ -46,6 +46,7 @@ const Logout = () => {
       whileHover={{ scale: 1.05, cursor: 'pointer' }}
       whileTap={{ scale: 0.9 }}
       onClick={() => logout()}
+      name='Logout'
     >
       <LogoutSVG width={32} height={32} />
       <span>Logout</span>

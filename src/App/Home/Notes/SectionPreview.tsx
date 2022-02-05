@@ -121,7 +121,8 @@ const SectionPreview = (props: Props) => {
             onClick={() => handleNavigate()}
             as={motion.button}
             whileHover={{cursor: 'pointer', scale: 1.05}}
-            whileTap={{cursor: 'pointer', scale: 0.95}}>
+            whileTap={{cursor: 'pointer', scale: 0.95}}
+            name='Open Section'>
             <SectionOpenSVG width={32} height={32} />
           </PreviewButton2>
         </PreviewRight>
@@ -132,6 +133,7 @@ const SectionPreview = (props: Props) => {
           as={motion.button}
           whileHover={{cursor: 'pointer', scale: 1.05}}
           whileTap={{cursor: 'pointer', scale: 0.95}}
+          name='Change Favorite'
         >
           <FavoriteSVG fill={props.section.favorite ? theme.sub : 'none'}/>
         </PreviewButton2>
@@ -140,6 +142,7 @@ const SectionPreview = (props: Props) => {
           as={motion.button}
           whileHover={{cursor: 'pointer', scale: 1.05}}
           whileTap={{cursor: 'pointer', scale: 0.95}}
+          name='Remove Section'
         >
           {canRemove ? <span>Confirm</span>: null}
           <RemoveSVG />

@@ -91,18 +91,19 @@ const SendPassReset = ({ setReset }: Props) => {
         <FormError error={errors.email} id={'send-pass-reset-error'} />
         <Options>
           <FormSubmit
-            as={m.input}
+            as={m.button}
             whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 2 }}
             whileTap={{ scale: 0.9 }}
             type='submit'
-            value='Send Email'
-          />
+            name='Send Password Reset URL'
+          >Send Email</FormSubmit>
           <Button
             type='button'
             onClick={() => setReset(prev => !prev)}
             as={m.button}
             whileHover={{ scale: 1.1, cursor: 'pointer', zIndex: 2 }}
             whileTap={{ scale: 0.9 }}
+            name='Close Form'
           >
             <CloseSVG width={24} height={24} />
           </Button>

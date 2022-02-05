@@ -43,6 +43,7 @@ const RegisterPage = () => {
 									as={motion.button}
 									whileHover={{ cursor: 'pointer' }}
 									whileTap={{ scale: 0.9 }}
+									name='Login Page'
 								>
 									<LoginSVG width={24} height={24} />
 									<span>Login</span>

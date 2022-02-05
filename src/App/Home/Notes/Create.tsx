@@ -105,7 +105,8 @@ const Create = (props: Props) => {
           onClick={(e: any) => handleNote(e)}
           as={motion.button}
           whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 5 }}
-          whileTap={{ scale: 0.95}}>
+          whileTap={{ scale: 0.95}}
+          name='Create Note'>
           <CreateNoteSVG width={32} height={32} />
           <span>Create Note</span>
         </Button2>
@@ -113,7 +114,8 @@ const Create = (props: Props) => {
           onClick={(e: any) => handleSection(e)}
           as={motion.button}
           whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 5 }}
-          whileTap={{ scale: 0.95 }}>
+          whileTap={{ scale: 0.95 }}
+          name='Create Section'>
           <CreateSectionSVG width={32} height={32} />
           <span>Create Section</span>
         </Button2>

@@ -119,6 +119,7 @@ const NotePreview = (props: Props) => {
             as={motion.button}
             whileHover={{ cursor: 'pointer', scale: 1.05 }}
             whileTap={{ cursor: 'pointer', scale: 0.95 }}
+            name='Edit Note'
           >
             <EditSVG width={32} height={32} />
           </Button>
@@ -130,6 +131,7 @@ const NotePreview = (props: Props) => {
           as={motion.button}
           whileHover={{ cursor: 'pointer', scale: 1.05 }}
           whileTap={{ cursor: 'pointer', scale: 0.95 }}
+          name='Change Favorite'
         >
           <FavoriteSVG fill={props.note.favorite ? theme.sub : 'none'} />
         </PreviewButton2>
@@ -138,6 +140,7 @@ const NotePreview = (props: Props) => {
           as={motion.button}
           whileHover={{ cursor: 'pointer', scale: 1.05 }}
           whileTap={{ cursor: 'pointer', scale: 0.95 }}
+          name='Remove Note'
         >
           {canRemove ? <span>Confirm</span> : null}
           <RemoveSVG />

@@ -139,6 +139,7 @@ const UploadAvatar = () => {
             as={m.button}
             whileHover={{ scale: 1.1, cursor: 'pointer', zIndex: 2 }}
             whileTap={{ scale: 0.9 }}
+            name='Update Avatar'
           >
             <SubmitSVG width={24} height={24} />
           </FormSubmit2>

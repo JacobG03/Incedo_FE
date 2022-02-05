@@ -103,6 +103,7 @@ const Note = () => {
             as={m.button}
             whileHover={{ scale: 1.05, cursor: 'pointer' }}
             whileTap={{ scale: 0.95 }}
+            name='Exit note'
           >
             <BackSVG />
           </Button2>
@@ -111,6 +112,7 @@ const Note = () => {
             as={m.button}
             whileHover={{ scale: 1.05, cursor: 'pointer' }}
             whileTap={{ scale: 0.95 }}
+            name='Preview Note'
           >
             {preview
               ? <EditSVG />
@@ -121,6 +123,7 @@ const Note = () => {
             as={m.button}
             whileHover={{ scale: 1.05, cursor: 'pointer' }}
             whileTap={{ scale: 0.95 }}
+            name='Save Note'
           >
             <span>Save</span>
           </Button2>
@@ -129,6 +132,7 @@ const Note = () => {
             as={m.button}
             whileHover={{ scale: 1.05, cursor: 'pointer' }}
             whileTap={{ scale: 0.95 }}
+            name='Remove Note'
           >
             <TrashSVG />
           </Button2>

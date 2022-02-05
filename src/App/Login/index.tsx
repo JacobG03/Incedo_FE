@@ -50,6 +50,7 @@ const LoginPage = () => {
 										as={motion.button}
 										whileHover={{ cursor: 'pointer' }}
 										whileTap={{ scale: 0.9 }}
+										name='Send Password Reset'
 									>
 										<MailSVG width={24} height={24} style={{ minWidth: '24px' }} />
 										<span style={{ textAlign: 'center' }}>Reset Password</span>
@@ -60,6 +61,7 @@ const LoginPage = () => {
 									as={motion.button}
 									whileHover={{ cursor: 'pointer' }}
 									whileTap={{ scale: 0.9 }}
+									name='Register Page'
 								>
 									<RegisterSVG width={24} height={24} />
 									<span>Register</span>

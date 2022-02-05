@@ -138,6 +138,7 @@ const Dashboard = (props: Props) => {
             as={motion.button}
             whileHover={{ cursor: 'pointer', scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            name='Filter by favorite'
           >
             <FavoriteSVG fill={favorite ? theme.main : 'none'} />
           </Option>
@@ -147,6 +148,7 @@ const Dashboard = (props: Props) => {
             as={motion.button}
             whileHover={{ cursor: 'pointer', scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            name='Sort by created'
           >
             <span>Created</span>
           </Option>
@@ -156,6 +158,7 @@ const Dashboard = (props: Props) => {
             as={motion.button}
             whileHover={{ cursor: 'pointer', scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            name='Sort by recent'
           >
             <span>Recent</span>
           </Option>
@@ -165,6 +168,7 @@ const Dashboard = (props: Props) => {
             as={motion.button}
             whileHover={{ cursor: 'pointer', scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            name='Reverse sort'
           >
             <ReverseSVG />
           </Option>

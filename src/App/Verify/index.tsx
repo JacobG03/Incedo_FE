@@ -39,6 +39,7 @@ const VerifyPage = () => {
 							as={m.button}
 							whileHover={{ cursor: 'pointer' }}
 							whileTap={{ scale: 0.9 }}
+							name='Resend Verification Code'
 						>
 							<span>Resend Code</span>
 						</Option>

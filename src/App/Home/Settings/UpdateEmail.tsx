@@ -65,6 +65,7 @@ const UpdateEmail = () => {
             as={m.button}
             whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 2 }}
             whileTap={{ scale: 0.9 }}
+            name='Update Password'
           >
             <SubmitSVG width={24} height={24} />
             <span>Update</span>

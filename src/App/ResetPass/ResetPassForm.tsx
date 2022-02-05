@@ -39,12 +39,12 @@ const ResetPassForm = () => {
       <FormInput type='password' {...register('password2', { required: 'Field is required.' })} placeholder='Repeat Password' />
       <FormError error={errors.password2} id={'reset-pass2-error'} />
       <FormSubmit
-        as={m.input}
+        as={m.button}
         whileHover={{ scale: 1.1, cursor: 'pointer' }}
         whileTap={{ scale: 0.9 }}
         type='submit'
-        value='Submit'
-      />
+        name='Send Password Verification'
+      >Reset</FormSubmit>
     </Form>
   )
 }

@@ -42,6 +42,7 @@ const LoginForm = () => {
         whileHover={{ scale: 1.1, cursor: 'pointer' }}
         whileTap={{ scale: 0.9 }}
         type='submit'
+        name='Login'
       >
         <LoginSVG width={24} height={24} />
         <span>Sign in</span>

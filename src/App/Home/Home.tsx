@@ -86,11 +86,6 @@ const NoteNavigate = (props: { selected: boolean }) => {
 
     document.addEventListener('keydown', handleKeys)
 
-    if (sectionRef.current && props.selected) {
-      console.log('here')
-      sectionRef.current.tabIndex = -1
-      sectionRef.current.focus()
-    }
     return () => document.removeEventListener('keydown', handleKeys)
   }, [props.selected, sectionRef, navigate])
 

@@ -68,13 +68,14 @@ const Loader = styled.div`
   border-bottom-right-radius: var(--border-radius);
 `
 
-const Cancel = styled.div`
+const Cancel = styled.button`
   position: absolute;
   right: 8px;
   padding: 0.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: inherit;
 `
 
 
@@ -125,10 +126,11 @@ const Alert = ({ data }: { data: IAlert }) => {
         animate={{ width: '99.9%' }}
       />
       <Cancel
-        as={m.div}
+        as={m.button}
         whileHover={{ scale: 1.05, cursor: 'pointer' }}
         whileTap={{ scale: 0.95 }}
         onClick={() => dispatch(removeAlert(data))}
+        name='Remove Notification'
       >
         <CloseSVG width={24} height={24} />
       </Cancel>
