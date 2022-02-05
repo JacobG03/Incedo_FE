@@ -22,7 +22,6 @@ const Container = styled.div`
   gap: 1rem;
 	background-color: ${p => p.theme.bg};
 	border-radius: var(--border-radius);
-	filter: var(--shadow);
 	color: ${p => p.theme.sub};
 `
 

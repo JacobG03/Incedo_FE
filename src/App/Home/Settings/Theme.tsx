@@ -16,7 +16,6 @@ const Container = styled.div<({ preview: ITheme }) >`
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
   padding: 1rem;
-  filter: var(--shadow);
   outline: ${p => (p.preview.id === p.theme.id ? `1px solid ${p.theme.main}` : null)};
 
   &:focus {

@@ -24,7 +24,6 @@ const Section = styled.section`
   gap: 1rem;
   padding: 1rem;
   background-color: ${p => p.theme.bg};
-  filter: var(--shadow);
   border-radius: var(--border-radius2);
 `
 

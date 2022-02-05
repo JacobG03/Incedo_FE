@@ -20,7 +20,6 @@ const Container = styled.div`
   border-radius: var(--border-radius);
   background-color: ${p => p.theme.bg};
   color: ${p => p.theme.sub};
-  filter: var(--shadow);
 `
 
 const Top = styled.div`
@@ -43,7 +42,6 @@ const Option = styled.button<({ $highlight: boolean }) >`
   border: none;
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
-  filter: var(--shadow);
   
   &:focus {
     color: ${p => p.theme.main};

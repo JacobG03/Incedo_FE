@@ -49,7 +49,6 @@ const AlertContainer = styled.div`
   border-radius: var(--border-radius);
   padding: 0.5rem 3rem;
   color: ${p => p.theme.info};
-  filter: var(--shadow);
 `
 
 const Message = styled.span`

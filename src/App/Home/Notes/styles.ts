@@ -11,7 +11,6 @@ export const PreviewContainer = styled.div<({ selected: boolean }) >`
   gap: 1rem;
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
-  filter: var(--shadow);
   color: ${p => p.theme.text};
   padding: 1rem;
   outline: none;
@@ -53,7 +52,6 @@ export const PreviewRight = styled.div`
   padding: 0.5rem;
   background-color: rgba(0,0,0,0.2);
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow-inner);
 `
 
 export const PreviewRow = styled.div`
@@ -72,7 +70,6 @@ export const PreviewBottom = styled.div`
   gap: 0.5rem;
   justify-content: space-evenly;
   background-color: rgba(0,0,0,0.2);
-  box-shadow: var(--shadow-inner);
   border-radius: var(--border-radius);
   padding: 0.5rem;
 `
@@ -87,7 +84,6 @@ export const Button = styled.button`
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
   color: ${p => p.theme.sub};
-  filter: var(--shadow);
   font-size: 1.2rem;
   
   &:focus {

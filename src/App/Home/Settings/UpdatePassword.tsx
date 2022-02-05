@@ -21,7 +21,6 @@ const Form = styled.form`
   padding: 0.5rem;
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
-  filter: var(--shadow);
 `
 
 

@@ -11,7 +11,6 @@ const Message = styled.div`
   padding: 0.25rem;
   border-radius: var(--border-radius);
   background-color: ${props => props.theme.bg};
-  filter: var(--shadow);
 `
 
 const FormError = ({ error, id }: { error: any, id: string }) => (

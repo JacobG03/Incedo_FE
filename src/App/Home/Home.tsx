@@ -15,7 +15,6 @@ const Section = styled.div<({ selected: boolean }) >`
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius2);
   padding: 2rem;
-  filter: var(--shadow);
   color: ${p => p.theme.sub};
   font-size: 3rem;
   font-weight: 600;

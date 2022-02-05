@@ -18,7 +18,6 @@ export const Container = styled.div`
   gap: 0.5rem;
   padding: 1rem;
   background-color: ${p => p.theme.bg};
-  filter: var(--shadow);
   border-radius: var(--border-radius);
 `
 
@@ -31,7 +30,6 @@ export const Content = styled.div`
 	gap: 1rem;
 	background-color: rgba(0,0,0,0.2);
 	border-radius: var(--border-radius2);
-	box-shadow: var(--shadow-inner);
 `
 
 export const Cover = styled.div`
@@ -75,7 +73,6 @@ export const Option = styled.button`
 	padding: 0.5rem;
 	background-color: ${p => p.theme.bg};
 	border-radius: var(--border-radius);
-	filter: var(--shadow);
 	color: ${p => p.theme.sub};
 
 	&:focus {
@@ -92,7 +89,6 @@ export const Form = styled.form`
   padding: 1rem;
   border-radius: var(--border-radius);
   background-color: ${props => props.theme.bg};
-  filter: var(--shadow);
   overflow: hidden;
 `
 
@@ -102,7 +98,6 @@ export const FormInput = styled.input`
   width: 100%;
   font-size: 1.25rem;
   background-color: rgba(0,0,0,0.2);
-  box-shadow: var(--shadow-inner);
   padding: 0.75rem;
   border-radius: var(--border-radius);
   color: ${props => props.theme.text};
@@ -121,7 +116,6 @@ export const FormSubmit = styled.button`
   border: none;
   color: ${props => props.theme.bg};
   font-size: 1.25rem;
-  filter: var(--shadow);
   cursor: pointer;
 
   &:focus {
@@ -139,7 +133,6 @@ export const Button = styled.button`
 	color: ${p => p.theme.bg};
 	background-color: ${p => p.theme.main};
 	border-radius: var(--border-radius);
-	filter: var(--shadow);
 
 	&:focus {
 		outline: 1px solid ${p => p.theme.sub};

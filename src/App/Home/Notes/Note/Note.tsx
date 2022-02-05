@@ -24,7 +24,6 @@ const Container = styled.div`
   padding: 1rem;
   border-radius: var(--border-radius2);
   background-color: ${p => p.theme.bg};
-  filter: var(--shadow);
 `
 
 const Options = styled.div`

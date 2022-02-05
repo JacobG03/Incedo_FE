@@ -15,7 +15,6 @@ const Container = styled.div`
   outline: none;
   background-color: rgba(0,0,0,0.2);
   padding: 0.5rem;
-  box-shadow: var(--shadow-inner);
 `
 
 interface Options {

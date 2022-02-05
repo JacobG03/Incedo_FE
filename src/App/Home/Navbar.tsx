@@ -39,7 +39,6 @@ const Items = styled.div`
   gap: 0.5rem;
   background-color: rgba(0,0,0,0.2);
   border-radius: var(--border-radius2);
-  box-shadow: var(--shadow-inner);
 `
 
 const Item = styled.button`
@@ -49,7 +48,6 @@ const Item = styled.button`
   padding: 0.25rem;
   border-radius: var(--border-radius);
   background-color: ${p => p.theme.bg};
-  filter: var(--shadow);
   
   &:focus {
     outline: 1px solid ${p => p.theme.main};

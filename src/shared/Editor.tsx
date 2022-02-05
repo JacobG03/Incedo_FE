@@ -36,7 +36,6 @@ const Content = styled.div<({ fontSize: number }) >`
   flex-direction: column;
   font-size: ${p => p.fontSize}rem;
   background-color: rgba(0,0,0,0.2);
-  box-shadow: var(--shadow-inner);
   border-radius: var(--border-radius);
 `
 
@@ -52,7 +51,6 @@ const Preview = styled.div`
   background-color: ${p => p.theme.bg};
   padding: 0.5rem;
   background-color: ${p => p.theme.bg};
-  filter: var(--shadow);
   border-radius: var(--border-radius);
 `
 

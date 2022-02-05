@@ -32,7 +32,6 @@ const Container = styled.div`
   gap: 0.5rem;
   border-radius: var(--border-radius);
   background-color: ${p => p.theme.bg};
-  filter: var(--shadow);
 `
 
 const Form = styled.form`

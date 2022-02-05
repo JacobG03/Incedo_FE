@@ -17,7 +17,6 @@ const Container = styled.button`
   padding: 1rem;
   background-color: ${p => p.theme.bg};
   color: ${p => p.theme.main};
-  filter: var(--shadow);
   border-radius: var(--border-radius);
   font-weight: 700;
   font-size: 1.25rem;

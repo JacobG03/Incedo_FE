@@ -19,7 +19,6 @@ const Container = styled.div`
   outline: none;
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
-  filter: var(--shadow);
 `
 
 const Button2 = styled(Button)`
