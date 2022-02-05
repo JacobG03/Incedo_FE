@@ -37,37 +37,3 @@ export const usePreviews = (parent_id: number | null, options: Options) => {
 
   return previews
 }
-
-export const useSelect = (length: number) => {
-  const [selected, setSelected] = useState<number | null>(null)
-
-  useEffect(() => {
-    const handleKeys = (e: any) => {
-      if (selected !== null) {
-        if (e.keyCode === 37) {
-          if (selected > 0) {
-            setSelected(selected - 1)
-          } else {
-            setSelected(null)
-          }
-        }
-        else if (e.keyCode === 39) {
-          if (selected < length - 1) {
-            setSelected(selected + 1)
-          } else {
-            setSelected(0)
-          }
-        }
-      } else if (e.keyCode === 39) {
-        setSelected(0)
-      } else if (e.keyCode === 37) {
-        setSelected(length - 1)
-      }
-    }
-
-    document.addEventListener('keydown', handleKeys)
-    return () => document.removeEventListener('keydown', handleKeys)
-  }, [selected, length])
-
-  return selected
-}

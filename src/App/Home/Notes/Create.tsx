@@ -7,6 +7,7 @@ import { createNote } from "../../../redux/calls/notes_calls";
 import { useDispatch, useSelector } from "react-redux";
 import { IState, INote, ISection } from "../../../types";
 import { createSection } from "../../../redux/calls/sections_calls";
+import { useEffect, useRef } from "react";
 
 
 const Container = styled.div`
@@ -17,6 +18,7 @@ const Container = styled.div`
   gap: 0.5rem;
   padding: 0.5rem;
   color: ${p => p.theme.sub};
+  outline: none;
 `
 
 const Button2 = styled(Button)`
@@ -27,11 +29,13 @@ const Button2 = styled(Button)`
 `
 
 interface Props {
+  selected: boolean,
   parent_id: number | null
 }
 
 const Create = (props: Props) => {
   const dispatch = useDispatch()
+  const containerRef = useRef<HTMLDivElement | null>(null)
 
   const notes = useSelector<IState, INote[]>(state => state.notes.notes)
   const sections = useSelector<IState, ISection[]>(state => state.sections.sections)
@@ -46,8 +50,46 @@ const Create = (props: Props) => {
     createSection(dispatch, {name: `Section ${sections.length}`, parent_id: props.parent_id})
   }
 
+  const keyDownHandler = (e: any) => {
+    // only execute if tab is pressed
+    if (e.key !== 'Tab') return
+
+    // here we query all focusable elements, customize as your own need
+    if (containerRef.current) {
+      const focusableModalElements = containerRef.current.querySelectorAll(
+        'button'
+      )
+
+      const firstElement = focusableModalElements[0]
+      const lastElement = focusableModalElements[focusableModalElements.length - 1]
+
+      // if going forward by pressing tab and lastElement is active shift focus to first focusable element 
+      if (!e.shiftKey && document.activeElement === lastElement) {
+        firstElement.focus()
+        return e.preventDefault()
+      }
+
+      // if going backward by pressing tab and firstElement is active shift focus to last focusable element 
+      if (e.shiftKey && document.activeElement === firstElement) {
+        lastElement.focus()
+        e.preventDefault()
+      }
+    }
+  }
+
+  useEffect(() => {
+    containerRef.current?.addEventListener('keydown', keyDownHandler)
+
+    if (containerRef.current && props.selected) {
+      // scroll into view
+      containerRef.current.tabIndex = -1
+      let buttons = containerRef.current.querySelectorAll('button')
+      buttons[0].focus()
+    }
+  }, [containerRef, props.selected])
+
   return (
-    <Container>
+    <Container ref={containerRef}>
       <Button2
         onClick={(e: any) => handleNote(e)}
         as={motion.button}

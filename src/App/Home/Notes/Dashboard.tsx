@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import styled, { useTheme } from "styled-components";
 import { IGetStatus, IState } from "../../../types";
@@ -32,18 +32,26 @@ const Top = styled.div`
   border-radius: var(--border-radius);
   color: ${p => p.theme.sub};
   font-size: 1.2rem;
+  outline: none;
 `
 
-const Option = styled.div<({ $highlight: boolean }) >`
+const Option = styled.button<({ $highlight: boolean }) >`
   width: fit-content;
   height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
   color: ${p => p.$highlight ? p.theme.main : p.theme.sub};
+  border: none;
+  background-color: inherit;
+  
+  &:focus {
+    color: ${p => p.theme.main};
+  }
 `
 
 interface Props {
+  selected: boolean,
   children: JSX.Element
   parent_id?: number | null
 }
@@ -64,17 +72,57 @@ const Dashboard = (props: Props) => {
     reverse: reverse
   }
 
+  const topRef = useRef<HTMLDivElement>(null)
+
+  const keyDownHandler = (e: any) => {
+    // only execute if tab is pressed
+    if (e.key !== 'Tab') return
+
+    // here we query all focusable elements, customize as your own need
+    if (topRef.current) {
+      const focusableModalElements = topRef.current.querySelectorAll(
+        'button'
+      )
+
+      const firstElement = focusableModalElements[0]
+      const lastElement = focusableModalElements[focusableModalElements.length - 1]
+
+      // if going forward by pressing tab and lastElement is active shift focus to first focusable element 
+      if (!e.shiftKey && document.activeElement === lastElement) {
+        firstElement.focus()
+        return e.preventDefault()
+      }
+
+      // if going backward by pressing tab and firstElement is active shift focus to last focusable element 
+      if (e.shiftKey && document.activeElement === firstElement) {
+        lastElement.focus()
+        e.preventDefault()
+      }
+    }
+  }
+
+  useEffect(() => {
+    topRef.current?.addEventListener('keydown', keyDownHandler)
+
+    if (topRef.current && props.selected) {
+      // scroll into view
+      topRef.current.tabIndex = -1
+      let buttons = topRef.current.querySelectorAll('button')
+      buttons[0].focus()
+    }
+  }, [topRef, props.selected])
+
   if (!notes_status.finished || !sections_status.finished) {
     return <h1>Loading</h1>
   }
-  
+
   return (
     <Container>
-      <Top>
+      <Top ref={topRef}>
         <Option
           onClick={() => setFavorite(!favorite)}
           $highlight={favorite}
-          as={motion.div}
+          as={motion.button}
           whileHover={{ cursor: 'pointer', scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -83,7 +131,7 @@ const Dashboard = (props: Props) => {
         <Option
           onClick={() => setSort('timestamp')}
           $highlight={sort === 'timestamp'}
-          as={motion.div}
+          as={motion.button}
           whileHover={{ cursor: 'pointer', scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -92,7 +140,7 @@ const Dashboard = (props: Props) => {
         <Option
           onClick={() => setSort('modified')}
           $highlight={sort === 'modified'}
-          as={motion.div}
+          as={motion.button}
           whileHover={{ cursor: 'pointer', scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -101,7 +149,7 @@ const Dashboard = (props: Props) => {
         <Option
           onClick={() => setReverse(!reverse)}
           $highlight={reverse}
-          as={motion.div}
+          as={motion.button}
           whileHover={{ cursor: 'pointer', scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
