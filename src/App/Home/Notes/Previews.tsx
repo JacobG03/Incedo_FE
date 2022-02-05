@@ -64,6 +64,7 @@ const Previews = (props: Props) => {
     if (props.selected && containerRef.current) {
       containerRef.current.tabIndex = -1
       containerRef.current.focus()
+      containerRef.current.scrollIntoView({ block: "end", inline: "nearest", behavior: "smooth" })
       setSelected(0)
     } 
   }, [props.selected, containerRef])

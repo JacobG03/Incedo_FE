@@ -109,6 +109,7 @@ const Dashboard = (props: Props) => {
       topRef.current.tabIndex = -1
       let buttons = topRef.current.querySelectorAll('button')
       buttons[0].focus()
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [topRef, props.selected])
 

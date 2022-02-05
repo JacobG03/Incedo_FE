@@ -85,6 +85,7 @@ const Create = (props: Props) => {
       containerRef.current.tabIndex = -1
       let buttons = containerRef.current.querySelectorAll('button')
       buttons[0].focus()
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [containerRef, props.selected])
 
