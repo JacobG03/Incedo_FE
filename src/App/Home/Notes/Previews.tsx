@@ -78,7 +78,7 @@ const Previews = (props: Props) => {
   if (previews.length === 0 ) {
     return (
       <Container2>
-        <h1>Nothing here</h1>
+        <h1 style={{cursor: 'default'}}>Nothing here</h1>
       </Container2>
     )
   } 

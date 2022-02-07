@@ -1,14 +1,17 @@
 import styled from "styled-components";
+import axios from '../../../services/index'
 import { ReactComponent as CreateNoteSVG } from '../../../assets/svg/note-add.svg'
 import { ReactComponent as CreateSectionSVG } from '../../../assets/svg/folder-add.svg'
 import { motion } from "framer-motion";
 import { Button } from "./styles";
-import { createNote } from "../../../redux/calls/notes_calls";
 import { useDispatch, useSelector } from "react-redux";
 import { IState, INote, ISection } from "../../../types";
 import { createSection } from "../../../redux/calls/sections_calls";
 import { useEffect, useRef } from "react";
 import { Content } from "../../../shared/styles";
+import { addNoteSuccess } from '../../../redux/slices/notesSlice'
+import { addAlert } from "../../../redux/slices/alertsSlice";
+import { useNavigate } from "react-router-dom";
 
 
 const Container = styled.div`
@@ -43,6 +46,7 @@ interface Props {
 
 const Create = (props: Props) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const containerRef = useRef<HTMLDivElement | null>(null)
 
   const notes = useSelector<IState, INote[]>(state => state.notes.notes)
@@ -50,12 +54,18 @@ const Create = (props: Props) => {
 
   const handleNote = (e: any) => {
     e.target.blur()
-    createNote(dispatch, {title: `Note ${notes.length}`, parent_id: props.parent_id})
+    axios.post('/notes', { title: notes.length, parent_id: props.parent_id })
+      .then(res => {
+        dispatch(addNoteSuccess(res.data))
+        dispatch(addAlert({message: 'Note created.'}))
+        navigate(`/notes/${res.data.id}`)
+      })
+      .catch(null)
   }
 
   const handleSection = (e: any) => {
     e.target.blur()
-    createSection(dispatch, {name: `Section ${sections.length}`, parent_id: props.parent_id})
+    createSection(dispatch, { name: `Section ${sections.length}`, parent_id: props.parent_id })
   }
 
   const keyDownHandler = (e: any) => {
@@ -104,7 +114,7 @@ const Create = (props: Props) => {
           onClick={(e: any) => handleNote(e)}
           as={motion.button}
           whileHover={{ scale: 1.05, cursor: 'pointer', zIndex: 5 }}
-          whileTap={{ scale: 0.95}}
+          whileTap={{ scale: 0.95 }}
           name='Create Note'>
           <CreateNoteSVG width={32} height={32} />
           <span>Create Note</span>
