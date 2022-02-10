@@ -16,9 +16,10 @@ const get_status = {
 const initialState: INotes = {
   notes: [],
   fetchNotes: get_status,
+  getNote: get_status,
   createNote: cru_status,
   removeNote: cru_status,
-  updateNote: cru_status
+  updateNote: cru_status,
 }
 
 export const notesSlice = createSlice({
@@ -39,6 +40,26 @@ export const notesSlice = createSlice({
     },
     fetchNotesReset: (state) => {
       state.fetchNotes = get_status
+    },
+    getNoteStart: (state) => {
+      state.getNote.pending = true
+    },
+    getNoteSuccess: (state, action) => {
+      let notes = state.notes.filter(note => note.id === action.payload.id)
+      if (notes.length > 0) {
+        state.notes.filter(note => note.id === notes[0].id ? notes[0]: null)
+      } else {
+        state.notes = [...state.notes, action.payload]
+      }
+      state.getNote.pending = false
+      state.getNote.finished = true
+    },
+    getNoteFailure: (state) => {
+      state.getNote.pending = false
+      state.getNote.finished = true
+    },
+    getNoteReset: (state) => {
+      state.getNote = get_status
     },
     addNoteStart: (state) => {
       state.createNote.pending = true
@@ -96,6 +117,7 @@ export const notesSlice = createSlice({
 
 export const {
   fetchNotesStart, fetchNotesSuccess, fetchNotesFailure, fetchNotesReset,
+  getNoteStart, getNoteSuccess, getNoteFailure, getNoteReset,
   addNoteStart, addNoteSuccess, addNoteFailure, addNoteReset,
   removeNoteStart, removeNoteSuccess, removeNoteFailure, removeNoteReset,
   updateNoteStart, updateNoteSuccess, updateNoteFailure, updateNoteReset,

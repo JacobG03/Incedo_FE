@@ -68,6 +68,7 @@ export interface IGetStatus {
 export interface INotes {
   notes: INote[],
   fetchNotes: IGetStatus,
+  getNote: IGetStatus,
   createNote: ICruStatus,
   removeNote: ICruStatus,
   updateNote: ICruStatus

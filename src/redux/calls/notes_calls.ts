@@ -4,6 +4,7 @@ import { INote } from '../../types'
 import { addAlert } from '../slices/alertsSlice'
 import {
 	fetchNotesStart, fetchNotesSuccess, fetchNotesFailure,
+	getNoteStart, getNoteSuccess, getNoteFailure,
 	addNoteStart, addNoteSuccess, addNoteFailure,
 	removeNoteStart, removeNoteSuccess, removeNoteFailure,
 	updateNoteStart, updateNoteSuccess, updateNoteFailure,
@@ -21,6 +22,15 @@ export const fetchNotes = (dispatch: Dispatch) => {
 			dispatch(fetchNotesSuccess(res.data))
 		})
 		.catch(() => dispatch(fetchNotesFailure()))
+}
+
+export const getNote = (dispatch: Dispatch, id: string) => {
+	dispatch(getNoteStart())
+	axios.get(`/notes/${id}`)
+	.then(res => {
+		dispatch(getNoteSuccess(res.data))
+	})
+	.catch(() => dispatch(getNoteFailure()))
 }
 
 interface CreateNote {
