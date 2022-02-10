@@ -22,8 +22,9 @@ const Options = styled.div`
   height: fit-content;
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: 4px;
   gap: 1rem;
+  font-size: 1.5rem;
 `
 
 const Content = styled.div<({ fontSize: number }) >`
@@ -110,6 +111,7 @@ const Editor: React.FC<Props> = (props) => {
           >
             <MinusSVG />
           </Button>
+          <span>{fontSize.toFixed(1)}x</span>
         </Options>
         <MarkDown ref={refContainer} style={props.preview ? { display: 'none' } : {}}></MarkDown>
         {props.preview ? <Preview>{reactContent}</Preview> : null}

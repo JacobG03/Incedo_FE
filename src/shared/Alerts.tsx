@@ -75,6 +75,7 @@ const Cancel = styled.button`
   justify-content: center;
   align-items: center;
   background-color: inherit;
+  color: ${p => p.theme.main};
 `
 
 

@@ -57,7 +57,7 @@ const Notes = () => {
     <AnimatedPage>
       <Create parent_id={null} selected={selected === 0 ? true : false} />
       <Dashboard selected={selected === 1 ? true : false}>
-        <Previews selected={selected === 2 ? true: false} />
+        <Previews selected={selected === 2 ? true: false} setSelected={setSelected} />
       </Dashboard>
     </AnimatedPage>
   )

@@ -31,6 +31,7 @@ interface Options {
 
 interface Props {
   selected: boolean,
+  setSelected: (selected: number | null) => void,
   options?: Options,
   parent_id?: number | null
 }
@@ -40,6 +41,7 @@ const Previews = (props: Props) => {
   const [selected, setSelected] = useState<number | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
+  
   useEffect(() => {
     const handleKeys = (e: any) => {
       if (props.selected) {
@@ -62,33 +64,36 @@ const Previews = (props: Props) => {
         }
       }
     }
-
+    
     containerRef.current?.addEventListener('keydown', handleKeys)
     return () => containerRef.current?.removeEventListener('keydown', handleKeys)
-
+    
   }, [props.selected, previews, selected, containerRef])
-
+  
   useEffect(() => {
+    if (previews.length === 0 && props.selected) {
+      props.setSelected(0)
+    }
     if (props.selected && containerRef.current) {
       containerRef.current.tabIndex = -1
       setSelected(0)
     } 
-  }, [props.selected, containerRef])
-
+  }, [containerRef, props, previews.length])
+  
   if (previews.length === 0 ) {
     return (
       <Container2>
         <h1 style={{cursor: 'default'}}>Nothing here</h1>
       </Container2>
     )
-  } 
-
+  }
+  
   return (
     <Container ref={containerRef}>
       {previews.map((preview, i) => 'body' in preview ?
         <NotePreview note={preview} key={((i + 1) * Math.random())} selected={selected === i ? true : false} />
         : <SectionPreview section={preview} key={((i + 1) * Math.random())} selected={selected === i ? true : false} />
-      )}
+        )}
     </Container>
   )
 }
