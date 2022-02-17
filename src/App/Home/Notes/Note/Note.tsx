@@ -3,17 +3,16 @@ import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Editor from "../../../../shared/Editor";
-import { useDispatch } from 'react-redux';
-import { INote } from '../../../../types';
 import AnimatedPage from '../../AnimatePage';
 import { ReactComponent as BackSVG } from '../../../../assets/svg/arrow-left.svg'
-import { ReactComponent as EditSVG } from '../../../../assets/svg/edit.svg'
 import { ReactComponent as TrashSVG } from '../../../../assets/svg/trash.svg'
-import { ReactComponent as SwitchSVG } from '../../../../assets/svg/mirror.svg'
 import { Button } from '../../../../shared/styles';
-import { m } from 'framer-motion';
-import { removeNote, updateNote } from '../../../../redux/calls/notes_calls';
+import { motion } from 'framer-motion';
 import { useEscape } from '../../hooks';
+import { INote } from "../../../../types";
+import Title from './Title';
+import { useDispatch } from 'react-redux';
+import { updateNote } from '../../../../redux/calls/notes_calls';
 
 
 const Container = styled.div`
@@ -26,120 +25,104 @@ const Container = styled.div`
   background-color: ${p => p.theme.bg};
 `
 
-const Options = styled.div`
+const Control = styled.div`
+  position: relative;
   width: 100%;
   height: 4rem;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  justify-content: space-evenly;
-  color: ${p => p.theme.main};
+  flex-direction: column;
 `
 
-const Button2 = styled(Button)`
-  flex-grow: 1;
-  height: 100%;
+const Section = styled.div`
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0px 4rem;
+`
+
+const ExitButton = styled(Button)`
+  position: absolute;
+  width: 4rem;
+  height: 3rem;
+  left: 0;
+  top: 0;
+`
+
+const RemoveButton = styled(Button)`
+  position: absolute;
+  height: 3rem;
+  width: fit-content;
+  top: 0;
+  right: 0;
 `
 
 const Note = () => {
-  const [data, setData] = useState<INote | null>(null)
   useEscape('/notes')
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   const location = useLocation()
-  const [mounted, setMount] = useState(true)
-  const [preview, setPreview] = useState(false)
 
-  useEffect(() => {
-    axios.get(location.pathname)
-      .then(res => {
-        updateNote(dispatch, res.data)
-        setData(res.data)
-      })
-      .catch(error => console.log(error.response.data.detail))
-
-    return () => setMount(false)
-  }, [dispatch, location])
-
-  const handleSave = useCallback(() => {
-    if (data) {
-      updateNote(dispatch, data)
-    }
-  }, [data, dispatch])
-
+  let id = location.pathname.split('/').at(-1)
+  const {note, update} = useNote(id!)
+  
   const handleChange = useCallback((state: string) => {
-    if (data && mounted) {
-      let new_data = data
-      new_data.body = state
-      setData(new_data)
-    }
-  }, [data, mounted])
 
-  const handleKeys = useCallback(e => {
-    if (e.ctrlKey && e.keyCode === 83) {
-      e.preventDefault();
-      handleSave()
-    }
-  }, [handleSave])
+  }, [])
 
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeys)
-
-    return () => document.removeEventListener('keydown', handleKeys)
-  }, [handleKeys])
-
-  if (!data) {
+  if (!note) {
     return null
   }
 
   return (
     <AnimatedPage>
-      <Container>
-        <Options>
-          <Button2
-            onClick={() => navigate('/notes')}
-            as={m.button}
+      <Control>
+        <Section>
+          <Title note={note} updateNote={update} />
+          <ExitButton
+            as={motion.button}
             whileHover={{ scale: 1.05, cursor: 'pointer' }}
             whileTap={{ scale: 0.95 }}
-            name='Exit note'
+            onClick={() => navigate('/notes')}
           >
             <BackSVG />
-          </Button2>
-          <Button2
-            onClick={() => setPreview(!preview)}
-            as={m.button}
+          </ExitButton>
+          <RemoveButton
+            as={motion.button}
             whileHover={{ scale: 1.05, cursor: 'pointer' }}
             whileTap={{ scale: 0.95 }}
-            name='Preview Note'
-          >
-            {preview
-              ? <EditSVG />
-              : <SwitchSVG />}
-          </Button2>
-          <Button2
-            onClick={() => handleSave()}
-            as={m.button}
-            whileHover={{ scale: 1.05, cursor: 'pointer' }}
-            whileTap={{ scale: 0.95 }}
-            name='Save Note'
-          >
-            <span>Save</span>
-          </Button2>
-          <Button2
-            onClick={() => removeNote(dispatch, data.id)}
-            as={m.button}
-            whileHover={{ scale: 1.05, cursor: 'pointer' }}
-            whileTap={{ scale: 0.95 }}
-            name='Remove Note'
+            onClick={() => null}
           >
             <TrashSVG />
-          </Button2>
-        </Options>
-        <Editor initialDoc={data.body ? data.body: ''} preview={preview} onChange={handleChange} />
+          </RemoveButton>
+        </Section>
+        <Section>
+          <span>bottom</span>
+        </Section>
+      </Control>
+      <Container>
+        <Editor initialDoc={note.body ? note.body: ''} preview={false} onChange={handleChange} />
       </Container>
     </AnimatedPage>
   )
+}
+
+const useNote = (id: string) => {
+  const [note, setNote] = useState<INote | null>(null)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    axios.get(`/notes/${id}`)
+    .then(res => setNote(res.data))
+    .catch(error => console.log(error.response))
+  }, [id])
+
+  const update = (note: INote) => {
+    updateNote(dispatch, note)
+    setNote(note)
+  }
+
+  return {note, update}
 }
 
 export default Note;
