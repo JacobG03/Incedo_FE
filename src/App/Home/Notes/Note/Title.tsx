@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import FormError from "../../../../shared/FormError";
 import { ICruStatus, IFormData, INote, IState } from "../../../../types";
-import {ReactComponent as CancelSVG } from '../../../../assets/svg/close-square.svg'
+import { ReactComponent as CancelSVG } from '../../../../assets/svg/close-square.svg'
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 
 const Container = styled.div`
@@ -44,11 +45,11 @@ const Input = styled.input`
 const Cancel = styled.button`
   background-color: ${p => p.theme.bg};
   border-radius: var(--border-radius);
-  color: ${ p => p.theme.main};
+  color: ${p => p.theme.main};
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.25rem;
 `
 
 const Submit = styled.input`
@@ -69,12 +70,12 @@ interface Props {
 
 const Title = (props: Props) => {
   const [edit, setEdit] = useState(false)
-  const { register, handleSubmit, setValue, setFocus, formState: {errors} } = useForm()
-  
+  const { register, handleSubmit, setValue, setFocus, formState: { errors } } = useForm()
+
   const note_status = useSelector<IState, ICruStatus>(state => state.notes.updateNote)
 
   const onSubmit = (data: IFormData) => {
-    props.updateNote({...props.note, ...data})
+    props.updateNote({ ...props.note, ...data })
   }
 
   useEffect(() => {
@@ -97,6 +98,9 @@ const Title = (props: Props) => {
           ? <Form onSubmit={handleSubmit(onSubmit)}>
             <Input type='text' {...register('title')} />
             <Cancel
+              as={motion.button}
+              whileHover={{ scale: 1.05, cursor: 'pointer' }}
+              whileTap={{ scale: 0.95 }}
               type='button'
               onClick={() => setEdit(!edit)}
             >
@@ -105,7 +109,7 @@ const Title = (props: Props) => {
             <FormError id='note-update-title-error' error={errors.title} />
             <Submit type='submit' />
           </Form>
-          : <Span onClick={() => setEdit(!edit)}>{props.note.title}</Span>
+          : <Span as={motion.span} whileHover={{ cursor: 'pointer' }} onClick={() => setEdit(!edit)}>{props.note.title}</Span>
       }
     </Container>
   )

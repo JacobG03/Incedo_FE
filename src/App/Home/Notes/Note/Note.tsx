@@ -12,7 +12,7 @@ import { useEscape } from '../../hooks';
 import { INote } from "../../../../types";
 import Title from './Title';
 import { useDispatch } from 'react-redux';
-import { updateNote } from '../../../../redux/calls/notes_calls';
+import { removeNote, updateNote } from '../../../../redux/calls/notes_calls';
 
 
 const Container = styled.div`
@@ -64,8 +64,23 @@ const Note = () => {
   const location = useLocation()
 
   let id = location.pathname.split('/').at(-1)
-  const {note, update} = useNote(id!)
-  
+  const { note, update } = useNote(id!)
+
+  const [canDelete, setDelete] = useState(false)
+  const dispatch = useDispatch()
+
+  const handleDelete = () => {
+    if (canDelete && note) {
+      removeNote(dispatch, note.id)
+      navigate('/')
+    } else {
+      setDelete(true)
+      setTimeout(() => {
+        setDelete(false)
+      }, 2000)
+    }
+  }
+
   const handleChange = useCallback((state: string) => {
 
   }, [])
@@ -91,8 +106,9 @@ const Note = () => {
             as={motion.button}
             whileHover={{ scale: 1.05, cursor: 'pointer' }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => null}
+            onClick={() => handleDelete()}
           >
+            {canDelete ? <span>Confirm</span> : null}
             <TrashSVG />
           </RemoveButton>
         </Section>
@@ -101,7 +117,7 @@ const Note = () => {
         </Section>
       </Control>
       <Container>
-        <Editor initialDoc={note.body ? note.body: ''} preview={false} onChange={handleChange} />
+        <Editor initialDoc={note.body ? note.body : ''} preview={false} onChange={handleChange} />
       </Container>
     </AnimatedPage>
   )
@@ -113,8 +129,8 @@ const useNote = (id: string) => {
 
   useEffect(() => {
     axios.get(`/notes/${id}`)
-    .then(res => setNote(res.data))
-    .catch(error => console.log(error.response))
+      .then(res => setNote(res.data))
+      .catch(error => console.log(error.response))
   }, [id])
 
   const update = (note: INote) => {
@@ -122,7 +138,7 @@ const useNote = (id: string) => {
     setNote(note)
   }
 
-  return {note, update}
+  return { note, update }
 }
 
 export default Note;
