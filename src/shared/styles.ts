@@ -130,6 +130,7 @@ export const Button = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	gap: 0.25rem;
 	color: ${p => p.theme.bg};
 	background-color: ${p => p.theme.main};
 	border-radius: var(--border-radius);

@@ -6,6 +6,7 @@ import Editor from "../../../../shared/Editor";
 import AnimatedPage from '../../AnimatePage';
 import { ReactComponent as BackSVG } from '../../../../assets/svg/arrow-left.svg'
 import { ReactComponent as TrashSVG } from '../../../../assets/svg/trash.svg'
+import { ReactComponent as SaveSVG } from '../../../../assets/svg/tick-square.svg'
 import { Button } from '../../../../shared/styles';
 import { motion } from 'framer-motion';
 import { useEscape } from '../../hooks';
@@ -28,8 +29,9 @@ const Container = styled.div`
 const Control = styled.div`
   position: relative;
   width: 100%;
-  height: 4rem;
+  height: 5rem;
   display: flex;
+  gap: 0.5rem;
   flex-direction: column;
 `
 
@@ -71,13 +73,20 @@ const Note = () => {
 
   const mounted = useRef(false);
 
+  const [body, setBody] = useState<string | null>(null)
+
   useEffect(() => {
     mounted.current = true;
-
     return () => {
       mounted.current = false;
     }
   }, [])
+
+  useEffect(() => {
+    if (note) {
+      setBody(note.body)
+    }
+  }, [note])
 
   const handleDelete = () => {
     if (canDelete && note) {
@@ -94,8 +103,29 @@ const Note = () => {
   }
 
   const handleChange = useCallback((state: string) => {
-    
-  }, [])
+    if (note) {
+      setBody(state)
+    }
+  }, [note])
+
+  const handleSave = useCallback(() => {
+    if (note && note.id) {
+      let new_note = { ...note, body: body }
+      update(new_note)
+    }
+  }, [body, note, update])
+
+  useEffect(() => {
+    const keydownHandler = (e: KeyboardEvent) => {
+      // ctrl + s
+      if(e.keyCode === 83 && e.ctrlKey) {
+        e.preventDefault()
+        handleSave()
+      }
+    }
+    document.addEventListener('keydown', keydownHandler)
+    return () => document.removeEventListener('keydown', keydownHandler)
+  }, [handleSave])
 
   if (!note) {
     return null
@@ -125,7 +155,19 @@ const Note = () => {
           </RemoveButton>
         </Section>
         <Section>
-          <span>bottom</span>
+          {body !== note.body
+            ?
+            <Button
+              as={motion.button}
+              whileHover={{ scale: 1.05, cursor: 'pointer' }}
+              whileTap={{scale: 0.95}}
+              onClick={() => handleSave()}
+            >
+              <span>Save</span>
+              <SaveSVG />
+            </Button>
+            : null
+          }
         </Section>
       </Control>
       <Container>

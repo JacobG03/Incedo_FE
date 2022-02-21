@@ -87,7 +87,7 @@ const Title = (props: Props) => {
 
   useEffect(() => {
     if (note_status.success) {
-      setEdit(!edit)
+      setEdit(false)
     }
   }, [note_status, edit])
 
