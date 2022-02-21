@@ -29,15 +29,16 @@ const Container = styled.div`
 const Control = styled.div`
   position: relative;
   width: 100%;
-  height: 5rem;
+  height: fit-content;
   display: flex;
+  padding: 0.5rem;
   gap: 0.5rem;
   flex-direction: column;
 `
 
 const Section = styled.div`
   width: 100%;
-  height: 3rem;
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -48,16 +49,16 @@ const ExitButton = styled(Button)`
   position: absolute;
   width: 4rem;
   height: 3rem;
-  left: 0;
-  top: 0;
+  left: 0.5rem;
+  top: 0.5rem;
 `
 
 const RemoveButton = styled(Button)`
   position: absolute;
   height: 3rem;
   width: fit-content;
-  top: 0;
-  right: 0;
+  top: 0.5rem;
+  right: 0.5rem;
 `
 
 const Note = () => {

@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 0.5rem;
+  padding: 0.1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,6 +28,8 @@ const Form = styled.form`
 
 const Input = styled.input`
   flex-grow: 1;
+  margin-left: 2rem;
+  max-width: 80%;
   height: 100%;
   background-color: transparent;
   border: none;
@@ -49,7 +51,7 @@ const Cancel = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.25rem;
+  padding: 0.7rem;
 `
 
 const Submit = styled.input`
@@ -59,7 +61,7 @@ const Submit = styled.input`
 const Span = styled.span`
   color: ${p => p.theme.sub};
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-align: center;
 `
 
