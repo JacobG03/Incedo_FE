@@ -1,5 +1,5 @@
 import axios from '../../../../services/index'
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Editor from "../../../../shared/Editor";
@@ -69,6 +69,16 @@ const Note = () => {
   const [canDelete, setDelete] = useState(false)
   const dispatch = useDispatch()
 
+  const mounted = useRef(false);
+
+  useEffect(() => {
+    mounted.current = true;
+
+    return () => {
+      mounted.current = false;
+    }
+  }, [])
+
   const handleDelete = () => {
     if (canDelete && note) {
       removeNote(dispatch, note.id)
@@ -76,13 +86,15 @@ const Note = () => {
     } else {
       setDelete(true)
       setTimeout(() => {
-        setDelete(false)
+        if (mounted.current) {
+          setDelete(false)
+        }
       }, 2000)
     }
   }
 
   const handleChange = useCallback((state: string) => {
-
+    
   }, [])
 
   if (!note) {
