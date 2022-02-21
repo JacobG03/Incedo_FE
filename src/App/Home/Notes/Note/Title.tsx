@@ -35,7 +35,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   padding: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: ${p => p.theme.text};
   border-radius: var(--border-radius);
 

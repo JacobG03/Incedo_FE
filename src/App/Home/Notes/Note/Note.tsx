@@ -9,7 +9,6 @@ import { ReactComponent as TrashSVG } from '../../../../assets/svg/trash.svg'
 import { ReactComponent as SaveSVG } from '../../../../assets/svg/tick-square.svg'
 import { Button } from '../../../../shared/styles';
 import { motion } from 'framer-motion';
-import { useEscape } from '../../hooks';
 import { INote } from "../../../../types";
 import Title from './Title';
 import { useDispatch } from 'react-redux';
@@ -48,21 +47,20 @@ const Section = styled.div`
 const ExitButton = styled(Button)`
   position: absolute;
   width: 4rem;
-  height: 3rem;
+  height: 2rem;
   left: 0.5rem;
   top: 0.5rem;
 `
 
 const RemoveButton = styled(Button)`
   position: absolute;
-  height: 3rem;
+  height: 2rem;
   width: fit-content;
   top: 0.5rem;
   right: 0.5rem;
 `
 
 const Note = () => {
-  useEscape('/notes')
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -75,6 +73,20 @@ const Note = () => {
   const mounted = useRef(false);
 
   const [body, setBody] = useState<string | null>(null)
+
+  useEffect(() => {
+    const handleKeys = (e: any) => {
+      if (e.keyCode === 27) {
+        if (note?.parent_id) {
+          navigate('/sections/' + note.parent_id)
+        } else {
+          navigate('/notes')
+        }
+      }
+    }
+    document.addEventListener('keydown', handleKeys)
+    return () => document.removeEventListener('keydown', handleKeys)
+  }, [navigate, note])
 
   useEffect(() => {
     mounted.current = true;
