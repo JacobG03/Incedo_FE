@@ -13,11 +13,15 @@ import Previews from "../Previews";
 import styled from 'styled-components';
 import { Button } from '../styles';
 import { motion } from 'framer-motion';
+import Title from './Title';
 
 
 const Top = styled.div`
   width: 100%;
   height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `
 
 const Section = () => {
@@ -101,6 +105,7 @@ const Section = () => {
         >
           <BackSVG />
         </Button>
+        <Title section={section} />
       </Top>
       <Create parent_id={section.id} selected={selected === 0 ? true : false} />
       <Dashboard selected={selected === 1 ? true : false} parent_id={section.id}>

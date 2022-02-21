@@ -1,0 +1,123 @@
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import styled from "styled-components";
+import FormError from "../../../../shared/FormError";
+import { ICruStatus, IFormData, INote, ISection, IState } from "../../../../types";
+import { ReactComponent as CancelSVG } from '../../../../assets/svg/close-square.svg'
+import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
+import { updateSection } from "../../../../redux/calls/sections_calls";
+
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 0.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const Form = styled.form`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+`
+
+const Input = styled.input`
+  flex-grow: 1;
+  margin-left: 2rem;
+  max-width: 80%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  color: ${p => p.theme.text};
+  border-radius: var(--border-radius);
+
+  &:focus {
+    outline: 1px solid ${p => p.theme.main};
+  }
+`
+
+const Cancel = styled.button`
+  background-color: ${p => p.theme.bg};
+  border-radius: var(--border-radius);
+  color: ${p => p.theme.main};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.7rem;
+`
+
+const Submit = styled.input`
+  display: none;
+`
+
+const Span = styled.span`
+  color: ${p => p.theme.sub};
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+`
+
+interface Props {
+  section: ISection
+}
+
+const Title = (props: Props) => {
+  const [edit, setEdit] = useState(false)
+  const [newName, setNewName] = useState<string | null>(null)
+  const { register, handleSubmit, setValue, setFocus, formState: { errors } } = useForm()
+  const dispatch = useDispatch()
+
+  const section_status = useSelector<IState, ICruStatus>(state => state.sections.updateSection)
+
+  const onSubmit = (data: IFormData) => {
+    updateSection(dispatch, {...props.section, name: data.title})
+    setNewName(data.title)
+  }
+
+  useEffect(() => {
+    if (edit) {
+      setValue('title', props.section.name)
+      setFocus('title')
+    }
+  }, [edit, setValue, setFocus, props.section])
+
+  useEffect(() => {
+    if (section_status.success) {
+      setEdit(false)
+    }
+  }, [section_status, edit])
+
+  return (
+    <Container>
+      {
+        edit
+          ? <Form onSubmit={handleSubmit(onSubmit)}>
+            <Input type='text' {...register('title')} />
+            <Cancel
+              as={motion.button}
+              whileHover={{ scale: 1.05, cursor: 'pointer' }}
+              whileTap={{ scale: 0.95 }}
+              type='button'
+              onClick={() => setEdit(!edit)}
+            >
+              <CancelSVG width={24} height={24} />
+            </Cancel>
+            <FormError id='note-update-title-error' error={errors.title} />
+            <Submit type='submit' />
+          </Form>
+          : <Span as={motion.span} whileHover={{ cursor: 'pointer' }} onClick={() => setEdit(!edit)}>{newName ? newName: props.section.name}</Span>
+      }
+    </Container>
+  )
+}
+
+export default Title;
